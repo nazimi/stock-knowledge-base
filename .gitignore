@@ -10,3 +10,6 @@ Thumbs.db
 
 # CodeBuddy
 .codebuddy/
+
+# 本地学习笔记（不提交）
+learn/
