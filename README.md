@@ -1,4 +1,4 @@
-# 个人股市知识库 — 项目设计文档
+# 个人股市知识库 — 项目说明文档
 
 > 创建日期：2026年8月31日
 > 目标：构建一个网页形式的个人股市知识库，包含基础金融概念、周期趋势框架、每日研报精选和低估值/顺周期推荐
@@ -13,8 +13,9 @@
 | **形式** | 单页 HTML 网页（self-contained，内联 CSS + JS） |
 | **主题** | 深色金融终端风格 |
 | **目标市场** | A股为主（沪深300/中证500/中证1000成分） |
-| **更新频率** | 每日更新（研报 + 推荐板块） |
+| **更新频率** | 每日 8:50 自动更新（研报 + 推荐板块） |
 | **内容深度** | 核心概念详细解释 + 速查表格，兼顾学习与查阅 |
+| **在线访问** | https://nazimi.github.io/stock-knowledge-base/ |
 
 ---
 
@@ -23,13 +24,15 @@
 ```
 knowledge-base/
 ├── README.md                    # 本文档 — 项目说明与设计规范
-├── docs/                        # 文档目录
+├── index.html                   # 主网页文件（所有内容内联，含动态数据块）
+├── .nojekyll                    # 禁用 GitHub Pages Jekyll 处理
+├── .gitignore                   # Git 忽略规则
+├── docs/                        # 设计文档目录
 │   └── design-spec.md           # 详细设计规范文档
-├── src/                         # 源码目录
-│   └── index.html              # 主网页文件（所有内容内联）
-└── data/                        # 数据目录（备份用，实际数据内联在HTML中）
-    ├── reports.json             # 每日研报数据备份
-    └── recommendations.json    # 推荐板块数据备份
+├── data/                        # 数据目录（备份用，实际数据内联在 HTML 中）
+│   └── reports.json             # 每日研报与推荐数据备份
+└── learn/                       # 本地学习笔记（不提交 Git，仅在本地保留）
+    └── git-pages-deployment-guide.md  # Git 授权与 GitHub Pages 部署流程详解
 ```
 
 ---
@@ -97,7 +100,65 @@ knowledge-base/
 
 ---
 
-## 六、每日更新机制
+## 六、GitHub Pages 部署
+
+### 仓库信息
+
+| 项目 | 内容 |
+|------|------|
+| **GitHub 仓库** | https://github.com/nazimi/stock-knowledge-base |
+| **部署方式** | GitHub Pages（Deploy from branch） |
+| **分支** | `main` |
+| **目录** | `/root`（根目录） |
+| **访问地址** | https://nazimi.github.io/stock-knowledge-base/ |
+| **Jekyll** | 已禁用（`.nojekyll` 文件） |
+
+### 部署原理
+
+```
+本地仓库                        GitHub 云端                    访客
+                                                       
+ index.html  ──git push──>  仓库 main 分支  ──Pages读取──>  网页
+ .nojekyll                   (根目录 index.html)              
+                                                       
+ gh 认证令牌  <──gh auth──   验证身份通过                    
+                                                       
+后续更新：只改 index.html → git push → Pages 自动重建发布
+```
+
+### Git 认证方式
+
+本项目使用 **GitHub CLI (`gh`)** 进行认证，认证令牌自动桥接给 Git 使用：
+
+```bash
+# 安装 GitHub CLI
+brew install gh
+
+# 登录认证（浏览器授权）
+gh auth login
+
+# 配置 Git 使用 gh 凭证
+gh auth setup-git
+```
+
+认证完成后，`git push` 无需再输入密码，Git 自动通过 `gh` 获取凭证。
+
+---
+
+## 七、每日自动更新机制
+
+### 概述
+
+本项目通过 **CodeBuddy 自动化任务** 实现每日定时更新，Agent 在每天早上 8:50 自动搜集最新市场数据、更新网页内容、推送到 GitHub，Pages 自动重建发布。
+
+### 任务配置
+
+| 项目 | 内容 |
+|------|------|
+| **任务名称** | 每日股市知识库更新 |
+| **执行时间** | 每天 08:50（A 股开盘前） |
+| **工作目录** | `knowledge-base/` |
+| **状态** | ACTIVE |
 
 ### 更新内容
 
@@ -109,32 +170,121 @@ knowledge-base/
 | 综合推荐 | 每日 | 综合以上分析 |
 | 静态知识库 | 按需 | 不定期补充 |
 
-### 更新流程
+### 数据更新流程
 
-1. Agent 获取最新宏观数据
-2. Agent 获取行业估值数据
-3. Agent 获取最新研报信息
-4. Agent 分析当前周期阶段
-5. Agent 筛选低估值板块
-6. Agent 整理综合推荐
-7. Agent 生成 JSON 数据块
-8. 替换网页中的数据区域
+```
+每天 08:50 自动触发
+    ↓
+① 获取最新市场数据
+   - 指数行情（上证指数/沪深300/中证500）
+   - 宏观指标（PMI/CPI/PPI/社融/M2/LPR）
+   - 券商研报（宏观策略/行业分析/个股研究）
+    ↓
+② 更新 index.html 中的 JSON 数据块
+   位置：<!-- DAILY_DATA_START --> 到 <!-- DAILY_DATA_END --> 之间
+   内容：date / reports / cyclePosition / lowValuation / recommendations
+    ↓
+③ 同步备份到 data/reports.json
+    ↓
+④ git commit & push → GitHub Pages 自动重建（1-2分钟）
+    ↓
+⑤ 输出今日市场要点总结
+```
+
+### 数据块结构
+
+`index.html` 中的动态数据以 JSON 格式嵌入在 `<script id="daily-data">` 标签中，包含以下字段：
+
+```json
+{
+  "date": "2026-08-31",           // 当天日期
+  "reports": [...],                // 研报列表（8篇）
+  "cyclePosition": {              // 周期定位
+    "stage": "复苏期（早期）",
+    "indicators": [...],           // 宏观指标列表
+    "favoredSectors": [...]        // 受益板块（green/yellow/red）
+  },
+  "lowValuation": [...],          // 低估值板块表（20个行业）
+  "recommendations": [...]        // 综合推荐（6个板块）
+}
+```
+
+### 数据源优先级
+
+1. **优先使用 finance-data 插件** — 通过自然语言描述需求，自动匹配数据源
+2. **finance-data 不覆盖时，使用 Web Search 兜底** — 搜索东方财富等财经网站获取补充信息
+
+### 财务数据时效性
+
+根据当前日期判断目标公司最新可获取的报告期次：
+
+- **中国 A 股**：一季报（4月底前）、中报（8月底前）、三季报（10月底前）、年报（次年4月底前）
+- **核心逻辑**：先确认"此刻能拿到的最新一期财报是什么"，再去获取数据
+
+### 注意事项
+
+- **IDE 需保持运行**：自动化任务依赖 CodeBuddy IDE 环境
+- **Git 推送已配置**：通过 `gh auth` 完成认证，Agent 可直接推送
+- **只更新动态部分**：静态知识内容（基础概念、周期框架）不会被修改
+- **JSON 格式严格正确**：更新时不得破坏 HTML 结构
 
 ---
 
-## 七、Agent 使用指南
+## 八、Agent 使用指南
 
 Agent 每日更新时的操作步骤：
 
-1. 读取 `src/index.html` 中的 `<!-- DAILY_DATA_START -->` 到 `<!-- DAILY_DATA_END -->` 之间的 JSON 数据块
+1. 读取 `index.html` 中的 `<!-- DAILY_DATA_START -->` 到 `<!-- DAILY_DATA_END -->` 之间的 JSON 数据块
 2. 获取最新市场数据，生成新的 JSON
-3. 替换该数据块
+3. 替换该数据块（保持字段结构不变）
 4. 更新页面显示的日期
+5. 同步更新 `data/reports.json` 备份文件
+6. 执行 `git add index.html data/reports.json && git commit -m "每日数据更新 - 日期" && git push`
+
+### 研报字段规范
+
+```json
+{
+  "id": "r001",                    // 唯一ID
+  "category": "宏观策略",           // 分类：宏观策略/行业分析/个股研究
+  "title": "研报标题",
+  "source": "中信证券",            // 来源券商
+  "rating": "买入",                // 评级：买入/增持/中性/减持
+  "summary": "研报摘要（100-200字）",
+  "keyPoints": ["要点1","要点2","要点3"],  // 3个核心要点
+  "tags": ["标签1","标签2"]        // 关键标签
+}
+```
 
 数据块格式参见 `docs/design-spec.md` 中的定义。
 
 ---
 
-## 八、免责声明
+## 九、手动更新方式
+
+如需手动触发更新（非定时任务），可直接在 CodeBuddy 中对话：
+
+```
+请执行个人股市知识库的每日数据更新任务
+```
+
+Agent 会按上述流程执行：获取数据 → 更新 HTML → 更新备份 → Git 推送。
+
+### 手动 Git 推送
+
+如需手动推送更新：
+
+```bash
+cd "/Users/stephen/Desktop/AI 学习笔记/Agent/stock-market-trends/knowledge-base"
+git add index.html data/reports.json
+git commit -m "每日数据更新 - $(date +%Y-%m-%d)"
+git push
+```
+
+推送后 1-2 分钟，GitHub Pages 自动重建，网页即更新。
+
+---
+
+## 十、免责声明
 
 本知识库仅供学习参考，不构成任何投资建议。投资有风险，入市需谨慎。所有数据和分析仅供参考，实际投资决策应结合个人风险承受能力和专业意见。
