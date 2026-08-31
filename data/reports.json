@@ -1,0 +1,65 @@
+{
+  "date": "2026-08-31",
+  "description": "每日研报与推荐板块数据备份 — Agent 更新 src/index.html 时同步更新此文件",
+  "reports": [
+    {"id":"r001","category":"宏观策略","title":"央行年内第三次降息 LPR下调25BP","source":"中信证券","rating":"买入","summary":"央行宣布1年期LPR下调25BP至3.10%，5年期下调25BP至3.60%，为年内第三次降息。本次降息幅度超市场预期，释放强烈稳增长信号，利好利率敏感型行业和高股息资产。","keyPoints":["LPR下调幅度超预期，货币政策进入实质性宽松阶段","稳增长信号明确，利好基建、地产、消费板块估值修复","高股息策略在低利率环境下吸引力进一步上升"],"tags":["降息","LPR","货币政策","稳增长"]},
+    {"id":"r002","category":"宏观策略","title":"8月制造业PMI回升至50.4 经济复苏动能增强","source":"中金公司","rating":"增持","summary":"8月制造业PMI回升至50.4%，重回扩张区间。新订单指数和新出口订单均改善，预示经济进入复苏早期阶段。","keyPoints":["PMI重回荣枯线上方","新订单指数回升1.2个百分点","原材料库存指数回升"],"tags":["PMI","经济复苏","周期股"]},
+    {"id":"r003","category":"行业分析","title":"有色金属行业：铜价突破万元关口 供需紧平衡延续","source":"华泰证券","rating":"增持","summary":"全球铜矿供给增速放缓，新能源转型拉动铜需求持续增长，铜价突破1万元/吨。","keyPoints":["全球铜矿新增产能有限","新能源车+电网投资拉动铜铝需求","行业PE分位值处于30%以下"],"tags":["有色金属","铜","铝","新能源"]},
+    {"id":"r004","category":"行业分析","title":"军工行业：十五五开局订单释放 产业链景气度上行","source":"申万宏源","rating":"买入","summary":"2026年作为十五五开局之年，军工装备采购订单逐步释放。多个重点型号进入批量生产阶段。","keyPoints":["十五五规划开局","无人化、智能化装备加速列装","合规整治进入尾声"],"tags":["军工","十五五","订单释放"]},
+    {"id":"r005","category":"行业分析","title":"机械工程行业：设备更新政策加码 工程机械销量回暖","source":"国泰君安","rating":"增持","summary":"大规模设备更新政策持续推进，8月挖掘机销量同比增长12%。","keyPoints":["设备更新政策驱动","海外市场份额提升","行业PB分位值处于15%左右低位"],"tags":["机械","设备更新","工程机械"]},
+    {"id":"r006","category":"个股研究","title":"某龙头铜企：资源储量丰富 量价齐升可期","source":"招商证券","rating":"买入","summary":"公司铜资源储量国内领先，当前PE仅8倍，股息率4.5%。","keyPoints":["铜矿储量行业领先","成本控制优秀","PE分位值约12%"],"tags":["铜","低估值","高股息"]},
+    {"id":"r007","category":"个股研究","title":"某军工电子龙头：订单确定性强 业绩拐点确认","source":"海通证券","rating":"买入","summary":"公司是军工电子元器件核心供应商，上半年新签订单同比增长35%。","keyPoints":["十五五开局军品订单释放","国产替代深入推进","预测PE 25倍"],"tags":["军工","电子","业绩拐点"]},
+    {"id":"r008","category":"宏观策略","title":"社融数据超预期 信用宽松周期确认","source":"广发证券","rating":"增持","summary":"8月社融新增4.2万亿，同比多增6000亿，超出市场预期。","keyPoints":["社融超预期多增","政府债加快发行","M2增速回升至10.8%"],"tags":["社融","信用宽松","流动性"]}
+  ],
+  "cyclePosition": {
+    "stage": "复苏期（早期）",
+    "indicators": [
+      {"name":"PMI","value":"50.4%","signal":"荣枯线上方","direction":"up"},
+      {"name":"CPI","value":"0.6%","signal":"低位温和","direction":"flat"},
+      {"name":"社融","value":"+6000亿","signal":"同比多增","direction":"up"},
+      {"name":"LPR(1Y)","value":"3.10%","signal":"下调25BP","direction":"down"},
+      {"name":"M2增速","value":"10.8%","signal":"持续回升","direction":"up"},
+      {"name":"10年国债","value":"2.15%","signal":"低位运行","direction":"down"}
+    ],
+    "favoredSectors": [
+      {"name":"有色金属（铜/铝）","status":"green","note":"全球复苏+美元走弱+供给约束"},
+      {"name":"机械工程","status":"green","note":"设备更新政策+投资复苏"},
+      {"name":"可选消费（家电/汽车）","status":"green","note":"政策刺激+消费回暖"},
+      {"name":"军工","status":"green","note":"十五五开局+装备批产周期"},
+      {"name":"TMT（电子/计算机）","status":"yellow","note":"流动性改善利好成长，但需关注外部风险"},
+      {"name":"券商","status":"yellow","note":"交易量回暖+降息利好"},
+      {"name":"银行","status":"yellow","note":"低估值+高股息，但息差承压"},
+      {"name":"必需消费/医药","status":"red","note":"当前复苏阶段暂不优先配置"}
+    ]
+  },
+  "lowValuation": [
+    {"sector":"银行","pe":5.2,"pePercentile":8.5,"pb":0.55,"pbPercentile":3.2,"dividendYield":5.8,"reason":"估值历史极低位，高股息防御属性突出"},
+    {"sector":"钢铁","pe":8.1,"pePercentile":12.0,"pb":0.85,"pbPercentile":8.5,"dividendYield":4.2,"reason":"PB破净，受益于复苏期需求回暖"},
+    {"sector":"有色金属","pe":9.5,"pePercentile":18.0,"pb":1.8,"pbPercentile":15.0,"dividendYield":3.5,"reason":"PE/PB分位值双低，铜铝价格上行利好"},
+    {"sector":"煤炭","pe":7.2,"pePercentile":10.5,"pb":1.2,"pbPercentile":12.0,"dividendYield":7.5,"reason":"高股息+低估值，关注能源转型长期影响"},
+    {"sector":"建筑装饰","pe":6.8,"pePercentile":5.0,"pb":0.62,"pbPercentile":2.5,"dividendYield":4.8,"reason":"估值极低，受益于基建投资发力"},
+    {"sector":"机械","pe":12.5,"pePercentile":15.0,"pb":1.5,"pbPercentile":10.0,"dividendYield":3.2,"reason":"设备更新政策驱动，周期底部确认"},
+    {"sector":"交通运输","pe":10.2,"pePercentile":20.0,"pb":1.1,"pbPercentile":8.0,"dividendYield":4.5,"reason":"航运周期上行，低估值+高股息"},
+    {"sector":"房地产","pe":12.8,"pePercentile":25.0,"pb":0.68,"pbPercentile":5.0,"dividendYield":3.8,"reason":"政策持续宽松，估值极低但基本面筑底"},
+    {"sector":"非银金融","pe":14.5,"pePercentile":22.0,"pb":1.3,"pbPercentile":10.5,"dividendYield":3.0,"reason":"券商受益于交易量回暖和降息"},
+    {"sector":"公用事业","pe":15.2,"pePercentile":28.0,"pb":1.4,"pbPercentile":18.0,"dividendYield":4.2,"reason":"利率下行利好，高股息防御属性"},
+    {"sector":"传媒","pe":22.5,"pePercentile":35.0,"pb":2.1,"pbPercentile":20.0,"dividendYield":1.5,"reason":"AI催化+估值合理偏低"},
+    {"sector":"电子","pe":28.5,"pePercentile":40.0,"pb":3.2,"pbPercentile":35.0,"dividendYield":0.8,"reason":"半导体周期复苏，估值中性偏低"},
+    {"sector":"食品饮料","pe":25.8,"pePercentile":55.0,"pb":5.5,"pbPercentile":50.0,"dividendYield":2.5,"reason":"估值中性，复苏期可选消费替代"},
+    {"sector":"医药生物","pe":30.2,"pePercentile":45.0,"pb":3.8,"pbPercentile":30.0,"dividendYield":1.2,"reason":"估值回落至中性偏低，长期成长逻辑不变"},
+    {"sector":"电力设备","pe":20.5,"pePercentile":30.0,"pb":2.5,"pbPercentile":25.0,"dividendYield":1.8,"reason":"新能源估值消化充分，关注拐点"},
+    {"sector":"计算机","pe":35.2,"pePercentile":50.0,"pb":3.5,"pbPercentile":40.0,"dividendYield":0.5,"reason":"AI主题催化，估值中性"},
+    {"sector":"国防军工","pe":38.5,"pePercentile":42.0,"pb":3.0,"pbPercentile":35.0,"dividendYield":0.8,"reason":"十五五开局景气上行，预测PE更低"},
+    {"sector":"汽车","pe":18.5,"pePercentile":35.0,"pb":2.0,"pbPercentile":25.0,"dividendYield":2.2,"reason":"新能源车渗透率提升，估值合理"},
+    {"sector":"通信","pe":16.8,"pePercentile":25.0,"pb":1.8,"pbPercentile":15.0,"dividendYield":2.8,"reason":"5G/AI基建受益，估值偏低"},
+    {"sector":"农林牧渔","pe":15.5,"pePercentile":20.0,"pb":2.5,"pbPercentile":18.0,"dividendYield":2.0,"reason":"猪周期底部，关注反转信号"}
+  ],
+  "recommendations": [
+    {"rank":1,"sector":"有色金属（铜/铝）","logic":"全球复苏+美元走弱+供给约束+估值偏低","watchPoints":"大宗商品价格趋势、美元指数、全球PMI","riskLevel":"中"},
+    {"rank":2,"sector":"机械工程","logic":"设备更新政策+投资复苏+周期底部确认","watchPoints":"工程机械销量数据、基建投资增速","riskLevel":"中"},
+    {"rank":3,"sector":"军工","logic":"十五五开局+装备批产周期+地缘催化","watchPoints":"订单公告、产业链排产、军费预算","riskLevel":"低"},
+    {"rank":4,"sector":"可选消费（家电/汽车）","logic":"降息刺激+以旧换新政策+估值合理偏低","watchPoints":"社零数据、家电/汽车销量数据","riskLevel":"中"},
+    {"rank":5,"sector":"通信","logic":"AI基建受益+5G应用+估值偏低","watchPoints":"运营商资本开支、AI应用落地进度","riskLevel":"中"},
+    {"rank":6,"sector":"银行（高股息策略）","logic":"估值极低+高股息+利率下行利好","watchPoints":"息差变化、资产质量、分红率","riskLevel":"低"}
+  ]
+}

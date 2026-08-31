@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>个人股市知识库</title>
+  <style>
+/* === 全局变量与重置 === */
+:root {
+  --bg-main: #0d1117;
+  --bg-card: #161b22;
+  --bg-hover: #21262d;
+  --bg-code: #1c2128;
+  --text-primary: #c9d1d9;
+  --text-secondary: #8b949e;
+  --text-bright: #f0f6fc;
+  --color-up: #3fb950;
+  --color-down: #f85149;
+  --color-link: #58a6ff;
+  --color-accent: #d2a8ff;
+  --color-warn: #d29922;
+  --border-color: #30363d;
+  --radius: 8px;
+  --radius-sm: 4px;
+  --font-size: 15px;
+  --line-height: 1.75;
+  --sidebar-width: 260px;
+  --header-height: 56px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 76px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: var(--font-size);
+  line-height: var(--line-height);
+  color: var(--text-primary);
+  background: var(--bg-main);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--color-link); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--color-accent); }
+strong { color: var(--text-bright); }
+em { color: var(--color-accent); font-style: normal; }
+code { font-family: "SF Mono", "Fira Code", monospace; font-size: 13px; background: var(--bg-code); color: var(--color-accent); padding: 2px 6px; border-radius: 3px; }
+pre { background: var(--bg-code); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 16px; overflow-x: auto; margin: 12px 0; }
+pre code { background: none; padding: 0; font-size: 13px; line-height: 1.6; }
+ul, ol { margin: 8px 0 16px 20px; }
+li { margin-bottom: 4px; }
+p { margin-bottom: 12px; }
+
+/* === 顶部栏 === */
+.header { position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); background: rgba(22,27,34,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); display: flex; align-items: center; padding: 0 24px; z-index: 1000; }
+.header-title { font-size: 17px; font-weight: 600; color: var(--text-bright); white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+.header-title .icon { font-size: 20px; }
+.header-search { flex: 1; max-width: 400px; margin: 0 24px; position: relative; }
+.header-search input { width: 100%; height: 34px; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-primary); font-size: 13px; padding: 0 12px 0 36px; outline: none; transition: border-color 0.2s; }
+.header-search input:focus { border-color: var(--color-link); }
+.header-search input::placeholder { color: var(--text-secondary); }
+.header-search .search-icon { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); font-size: 14px; }
+.header-date { color: var(--text-secondary); font-size: 13px; white-space: nowrap; }
+
+/* === 布局 === */
+.layout { display: flex; margin-top: var(--header-height); min-height: calc(100vh - var(--header-height)); }
+
+/* === 侧边导航 === */
+.sidebar { width: var(--sidebar-width); position: fixed; top: var(--header-height); left: 0; bottom: 0; overflow-y: auto; background: var(--bg-card); border-right: 1px solid var(--border-color); padding: 16px 0; z-index: 900; }
+.sidebar::-webkit-scrollbar { width: 5px; }
+.sidebar::-webkit-scrollbar-track { background: transparent; }
+.sidebar::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 3px; }
+.nav-group { margin-bottom: 4px; }
+.nav-group-title { padding: 8px 20px; font-size: 13px; font-weight: 600; color: var(--text-bright); display: flex; align-items: center; gap: 6px; cursor: pointer; user-select: none; transition: background 0.15s; }
+.nav-group-title:hover { background: var(--bg-hover); }
+.nav-group-title .arrow { margin-left: auto; font-size: 10px; transition: transform 0.2s; color: var(--text-secondary); }
+.nav-group.collapsed .nav-group-title .arrow { transform: rotate(-90deg); }
+.nav-group.collapsed .nav-items { display: none; }
+.nav-items { padding: 2px 0; }
+.nav-item { display: block; padding: 6px 20px 6px 36px; font-size: 13px; color: var(--text-secondary); border-left: 2px solid transparent; transition: all 0.15s; cursor: pointer; }
+.nav-item:hover { color: var(--text-primary); background: var(--bg-hover); }
+.nav-item.active { color: var(--color-link); border-left-color: var(--color-link); background: rgba(88,166,255,0.08); }
+
+/* === 主内容区 === */
+.main { flex: 1; margin-left: var(--sidebar-width); padding: 32px 40px 80px; max-width: 1100px; }
+
+/* === 通用组件 === */
+.section { margin-bottom: 64px; }
+.section-header { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--border-color); }
+.section-header .section-icon { font-size: 22px; }
+.section-header h2 { font-size: 22px; font-weight: 700; color: var(--text-bright); }
+.section-header .section-sub { margin-left: auto; font-size: 13px; color: var(--text-secondary); }
+.subsection { margin-bottom: 40px; }
+.subsection > h3 { font-size: 18px; font-weight: 600; color: var(--text-bright); margin-bottom: 16px; padding-left: 12px; border-left: 3px solid var(--color-link); }
+.subsection > h4 { font-size: 15px; font-weight: 600; color: var(--color-accent); margin: 20px 0 10px; }
+
+/* 表格 */
+.table-wrap { overflow-x: auto; margin: 12px 0 20px; border: 1px solid var(--border-color); border-radius: var(--radius-sm); }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+thead { background: var(--bg-hover); }
+th { padding: 10px 14px; text-align: left; font-weight: 600; color: var(--text-bright); border-bottom: 1px solid var(--border-color); white-space: nowrap; cursor: pointer; user-select: none; position: relative; }
+th[data-sortable]::after { content: " ⇅"; margin-left: 4px; font-size: 11px; color: var(--text-secondary); opacity: 0.5; }
+th[data-sortable]:hover::after { opacity: 1; }
+td { padding: 8px 14px; border-bottom: 1px solid var(--border-color); color: var(--text-primary); }
+tbody tr:nth-child(even) { background: rgba(255,255,255,0.015); }
+tbody tr:hover { background: var(--bg-hover); }
+.text-up { color: var(--color-up); }
+.text-down { color: var(--color-down); }
+.text-warn { color: var(--color-warn); }
+
+/* 卡片 */
+.card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; transition: border-color 0.2s; }
+.card:hover { border-color: #444c56; }
+.card-title { font-size: 15px; font-weight: 600; color: var(--text-bright); margin-bottom: 10px; }
+
+/* 提示框 */
+.callout { border-left: 3px solid var(--color-link); background: rgba(88,166,255,0.06); padding: 12px 16px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: 12px 0; }
+.callout.warn { border-left-color: var(--color-warn); background: rgba(210,153,34,0.06); }
+.callout.danger { border-left-color: var(--color-down); background: rgba(248,81,73,0.06); }
+.callout.success { border-left-color: var(--color-up); background: rgba(63,185,80,0.06); }
+
+/* Tab */
+.tabs { display: flex; gap: 4px; border-bottom: 2px solid var(--border-color); margin-bottom: 24px; flex-wrap: wrap; }
+.tab { padding: 8px 18px; font-size: 14px; color: var(--text-secondary); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all 0.15s; border-radius: var(--radius-sm) var(--radius-sm) 0 0; }
+.tab:hover { color: var(--text-primary); background: var(--bg-hover); }
+.tab.active { color: var(--color-link); border-bottom-color: var(--color-link); font-weight: 600; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+/* 标签 */
+.tag { display: inline-block; padding: 2px 8px; font-size: 12px; border-radius: 10px; background: rgba(88,166,255,0.1); color: var(--color-link); margin: 2px 4px 2px 0; }
+.tag.green { background: rgba(63,185,80,0.1); color: var(--color-up); }
+.tag.red { background: rgba(248,81,73,0.1); color: var(--color-down); }
+.tag.yellow { background: rgba(210,153,34,0.1); color: var(--color-warn); }
+
+/* 徽章 */
+.badge { display: inline-block; padding: 1px 7px; font-size: 11px; border-radius: 3px; font-weight: 600; }
+.badge.buy { background: rgba(63,185,80,0.15); color: var(--color-up); }
+.badge.hold { background: rgba(210,153,34,0.15); color: var(--color-warn); }
+.badge.sell { background: rgba(248,81,73,0.15); color: var(--color-down); }
+
+/* 美林时钟 */
+.clock-wrap { display: flex; justify-content: center; margin: 24px 0; }
+.clock { width: 420px; height: 420px; position: relative; border-radius: 50%; border: 3px solid var(--border-color); background: radial-gradient(circle, var(--bg-card) 30%, var(--bg-main) 100%); }
+.clock-quadrant { position: absolute; width: 50%; height: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; transition: all 0.25s; cursor: pointer; }
+.clock-quadrant:hover { background: rgba(255,255,255,0.04); }
+.clock-quadrant .q-stage { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.clock-quadrant .q-desc { font-size: 11px; color: var(--text-secondary); margin-bottom: 6px; }
+.clock-quadrant .q-asset { font-size: 12px; font-weight: 600; }
+.clock-quadrant .q-sectors { font-size: 10px; color: var(--text-secondary); margin-top: 4px; }
+.clock-q1 { top: 0; left: 0; border-bottom: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-radius: 100% 0 0 0; }
+.clock-q2 { top: 0; right: 0; border-bottom: 1px solid var(--border-color); border-left: 1px solid var(--border-color); border-radius: 0 100% 0 0; }
+.clock-q3 { bottom: 0; right: 0; border-top: 1px solid var(--border-color); border-left: 1px solid var(--border-color); border-radius: 0 0 100% 0; }
+.clock-q4 { bottom: 0; left: 0; border-top: 1px solid var(--border-color); border-right: 1px solid var(--border-color); border-radius: 0 0 0 100%; }
+.clock-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 11px; color: var(--text-secondary); text-align: center; z-index: 2; background: var(--bg-card); border-radius: 50%; width: 70px; height: 70px; display: flex; align-items: center; justify-content: center; border: 2px solid var(--border-color); }
+.clock-q1 .q-stage { color: var(--color-up); }
+.clock-q2 .q-stage { color: var(--color-warn); }
+.clock-q3 .q-stage { color: var(--color-down); }
+.clock-q4 .q-stage { color: var(--color-link); }
+
+/* 研报区域 */
+.report-filters { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+.report-filter { padding: 4px 14px; font-size: 13px; border-radius: 16px; border: 1px solid var(--border-color); background: var(--bg-card); color: var(--text-secondary); cursor: pointer; transition: all 0.15s; }
+.report-filter:hover { border-color: #444c56; color: var(--text-primary); }
+.report-filter.active { background: var(--color-link); color: #fff; border-color: var(--color-link); }
+.report-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.report-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 18px; transition: border-color 0.2s; }
+.report-card:hover { border-color: #444c56; }
+.report-card .rc-header { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 10px; }
+.report-card .rc-category { font-size: 11px; padding: 2px 8px; border-radius: 3px; background: rgba(88,166,255,0.1); color: var(--color-link); white-space: nowrap; }
+.report-card .rc-title { font-size: 14px; font-weight: 600; color: var(--text-bright); flex: 1; }
+.report-card .rc-meta { font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; }
+.report-card .rc-summary { font-size: 13px; color: var(--text-primary); margin-bottom: 10px; line-height: 1.65; }
+.report-card .rc-points { margin: 0 0 10px 16px; font-size: 12.5px; color: var(--text-secondary); }
+.report-card .rc-points li { margin-bottom: 3px; }
+.report-card .rc-tags { display: flex; flex-wrap: wrap; }
+
+/* 周期定位卡片 */
+.cycle-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 24px; margin-bottom: 24px; }
+.cycle-card .cc-stage { font-size: 20px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+.cycle-indicators { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 20px; }
+.cycle-ind { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--bg-main); border-radius: var(--radius-sm); border: 1px solid var(--border-color); }
+.cycle-ind .ci-name { font-size: 12px; color: var(--text-secondary); }
+.cycle-ind .ci-value { font-size: 16px; font-weight: 700; color: var(--text-bright); }
+.cycle-ind .ci-signal { font-size: 12px; margin-left: auto; }
+.ci-arrow { font-size: 16px; }
+.ci-arrow.up { color: var(--color-up); }
+.ci-arrow.down { color: var(--color-down); }
+.ci-arrow.flat { color: var(--text-secondary); }
+.favored-list { display: flex; flex-direction: column; gap: 8px; }
+.favored-item { display: flex; align-items: center; gap: 10px; padding: 8px 14px; border-radius: var(--radius-sm); font-size: 14px; }
+.favored-item.green { background: rgba(63,185,80,0.08); border: 1px solid rgba(63,185,80,0.2); }
+.favored-item.yellow { background: rgba(210,153,34,0.08); border: 1px solid rgba(210,153,34,0.2); }
+.favored-item.red { background: rgba(248,81,73,0.08); border: 1px solid rgba(248,81,73,0.2); }
+.favored-item .fi-status { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.favored-item.green .fi-status { background: var(--color-up); }
+.favored-item.yellow .fi-status { background: var(--color-warn); }
+.favored-item.red .fi-status { background: var(--color-down); }
+.favored-item .fi-name { font-weight: 600; color: var(--text-bright); }
+.favored-item .fi-note { color: var(--text-secondary); font-size: 13px; }
+
+/* 回到顶部 */
+.scroll-top { position: fixed; bottom: 30px; right: 30px; width: 42px; height: 42px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-secondary); font-size: 18px; cursor: pointer; opacity: 0; transition: all 0.3s; z-index: 800; display: flex; align-items: center; justify-content: center; }
+.scroll-top.visible { opacity: 1; }
+.scroll-top:hover { background: var(--bg-hover); color: var(--text-bright); border-color: #444c56; }
+
+/* 底部 */
+.footer { padding: 24px 40px; border-top: 1px solid var(--border-color); text-align: center; color: var(--text-secondary); font-size: 12px; margin-left: var(--sidebar-width); }
+.footer p { margin-bottom: 4px; }
+
+/* 搜索过滤 */
+.search-hidden { display: none !important; }
+
+/* 响应式 */
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .main { margin-left: 0; padding: 24px 20px 60px; }
+  .footer { margin-left: 0; }
+  .header-search { display: none; }
+  .report-grid { grid-template-columns: 1fr; }
+  .cycle-indicators { grid-template-columns: 1fr; }
+  .clock { width: 320px; height: 320px; }
+}
+  </style>
+</head>
+<body>
+<!-- 顶部栏 -->
+<header class="header">
+  <div class="header-title"><span class="icon">📊</span><span>个人股市知识库</span></div>
+  <div class="header-search"><span class="search-icon">🔍</span><input type="text" id="search-input" placeholder="搜索知识库内容..."></div>
+  <div class="header-date" id="header-date">加载中...</div>
+</header>
+
+<div class="layout">
+  <!-- 侧边导航 -->
+  <nav class="sidebar" id="sidebar">
+    <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>📚</span><span>基础金融概念库</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#basics-market">股票市场基础</a><a class="nav-item" data-target="#basics-valuation">估值方法论</a><a class="nav-item" data-target="#basics-finance">财务分析基础</a><a class="nav-item" data-target="#basics-tech">技术分析基础</a><a class="nav-item" data-target="#basics-strategy">投资策略</a></div></div>
+    <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>🔄</span><span>周期趋势框架</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#cycle-clock">美林投资时钟</a><a class="nav-item" data-target="#cycle-china">中国特色周期</a><a class="nav-item" data-target="#cycle-guide">顺周期操作指南</a><a class="nav-item" data-target="#cycle-case">行业分析范例</a></div></div>
+    <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>📰</span><span>每日研报精选</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#reports">研报列表</a></div></div>
+    <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>🎯</span><span>板块推荐</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#recommend-low">低估值筛选</a><a class="nav-item" data-target="#recommend-cycle">顺周期定位</a><a class="nav-item" data-target="#recommend-summary">综合推荐</a></div></div>
+  </nav>
+
+  <!-- 主内容区 -->
+  <main class="main" id="main-content">
+    <!-- === 模块一：基础金融概念库 === -->
+    <section class="section" id="basics">
+      <div class="section-header"><span class="section-icon">📚</span><h2>基础金融概念库</h2><span class="section-sub">核心概念详解 + 速查表格</span></div>
+      <div class="tabs" id="basics-tabs">
+        <div class="tab active" data-tab="basics-market">股票市场基础</div>
+        <div class="tab" data-tab="basics-valuation">估值方法论</div>
+        <div class="tab" data-tab="basics-finance">财务分析基础</div>
+        <div class="tab" data-tab="basics-tech">技术分析基础</div>
+        <div class="tab" data-tab="basics-strategy">投资策略</div>
+      </div>
+
+      <!-- Tab: 股票市场基础 -->
+      <div class="tab-panel active" id="panel-basics-market">
+        <div class="subsection" id="basics-market">
+          <h3>股票市场基础</h3>
+          <h4>A股交易制度</h4>
+          <p><strong>T+1 交易制度</strong>：A股实行 T+1 交收制度，即当天买入的股票次日才能卖出。这与港股、美股的 T+0 交易不同，限制了日内交易频率，但也降低了过度投机风险。</p>
+          <p><strong>涨跌停板</strong>：主板涨跌停为 ±10%，ST 股为 ±5%；创业板和科创板放宽至 ±20%；新股上市前5个交易日不设涨跌幅限制。涨跌停板制度是A股区别于成熟市场的重要特征。</p>
+          <p><strong>集合竞价</strong>：9:15-9:25 为开盘集合竞价，14:57-15:00 为收盘集合竞价。集合竞价采用最大成交量原则确定开盘/收盘价。</p>
+          <p><strong>交易时间</strong>：周一至周五，9:30-11:30（上午）、13:00-15:00（下午），法定节假日休市。</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>板块</th><th>代码前缀</th><th>涨跌停</th><th>交易制度</th><th>准入门槛</th></tr></thead>
+            <tbody>
+              <tr><td>沪市主板</td><td>60xxxx</td><td>±10%</td><td>T+1</td><td>无</td></tr>
+              <tr><td>深市主板</td><td>00xxxx</td><td>±10%</td><td>T+1</td><td>无</td></tr>
+              <tr><td>创业板</td><td>30xxxx</td><td>±20%</td><td>T+1</td><td>2年经验+10万资产</td></tr>
+              <tr><td>科创板</td><td>688xxx</td><td>±20%</td><td>T+1</td><td>2年经验+50万资产</td></tr>
+              <tr><td>北交所</td><td>8xxxxx</td><td>±30%</td><td>T+1</td><td>2年经验+50万资产</td></tr>
+              <tr><td>ST/*ST</td><td>—</td><td>±5%</td><td>T+1</td><td>风险警示板</td></tr>
+            </tbody>
+          </table></div>
+
+          <h4>指数体系</h4>
+          <p><strong>上证指数</strong>：全称上证综合指数，以上海证券交易所全部上市股票为样本，反映沪市整体走势。由于包含大量传统行业大盘股，常被视为"大盘风向标"。</p>
+          <p><strong>沪深300</strong>：由沪深两市中市值最大、流动性最好的300只股票组成，是A股最重要的蓝筹基准指数，也是机构业绩对标的主要基准。</p>
+          <p><strong>中证500</strong>：剔除沪深300成分后，市值排名301-800的500只股票，代表中盘成长风格，行业分布更均匀，周期性更强。</p>
+          <p><strong>中证1000</strong>：市值排名801-1800的1000只小盘股，代表小盘弹性风格，波动更大，适合风险偏好较高的投资者。</p>
+          <p><strong>科创50</strong>：科创板中市值最大、流动性最好的50只股票，代表硬科技方向（半导体、生物医药、新能源等）。</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>指数</th><th>代码</th><th>成分数</th><th>代表风格</th><th>市值区间</th></tr></thead>
+            <tbody>
+              <tr><td>上证指数</td><td>000001</td><td>全部</td><td>综合</td><td>全市场</td></tr>
+              <tr><td>沪深300</td><td>000300</td><td>300</td><td>大盘蓝筹</td><td>&gt;500亿</td></tr>
+              <tr><td>中证500</td><td>000905</td><td>500</td><td>中盘成长</td><td>100-500亿</td></tr>
+              <tr><td>中证1000</td><td>000852</td><td>1000</td><td>小盘弹性</td><td>50-100亿</td></tr>
+              <tr><td>科创50</td><td>000688</td><td>50</td><td>硬科技</td><td>不限</td></tr>
+            </tbody>
+          </table></div>
+
+          <h4>资金面观察</h4>
+          <p><strong>北向资金</strong>：通过沪深港通从香港流入A股的资金，被视为"外资风向标"。北向资金偏好大盘蓝筹和消费、科技龙头，其净流入/流出常被用作市场情绪参考指标。</p>
+          <p><strong>融资融券</strong>：融资买入（加杠杆做多）和融券卖出（做空）的余额，反映杠杆交易情绪。融资余额持续上升通常表示市场做多情绪升温。</p>
+          <p><strong>公募基金持仓</strong>：公募基金每季报披露前十大持仓，可跟踪机构调仓方向。偏股型基金仓位高低也是市场情绪指标之一。</p>
+          <p><strong>ETF 净申赎</strong>：宽基ETF和行业ETF的净流入/流出反映资金对不同风格的配置意愿，是观察资金结构流向的领先指标。</p>
+          <div class="callout"><strong>投资提示</strong>：资金面是短期市场波动的重要驱动因素，但不应单独使用。建议结合估值水平和周期定位综合判断。</div>
+        </div>
+      </div>
+
+      <!-- Tab: 估值方法论 -->
+      <div class="tab-panel" id="panel-basics-valuation">
+        <div class="subsection" id="basics-valuation">
+          <h3>估值方法论</h3>
+          <h4>相对估值法</h4>
+          <p><strong>PE（市盈率）</strong>：股价 / 每股收益。衡量"以当前价格买入，多少年能通过盈利回本"。<em>静态PE</em>用上一年度净利润，<em>滚动PE(TTM)</em>用最近12个月净利润（最常用），<em>预测PE</em>用分析师预测的当年/次年净利润。适用：盈利相对稳定的成熟行业。</p>
+          <p><strong>PB（市净率）</strong>：股价 / 每股净资产。衡量"股价相对账面价值的溢价程度"。PB&lt;1称为"破净"。适用：重资产行业（银行、地产、钢铁等），以及盈利波动大、PE失真的周期股。</p>
+          <p><strong>PS（市销率）</strong>：股价 / 每股营收。适用于尚未盈利但收入高增长的公司（如创新药、SaaS），或在行业周期底部利润为负时作为替代估值。</p>
+          <p><strong>PEG</strong>：PE / 盈利增速。考虑了成长性后的PE，PEG&lt;1通常被视为低估。适用：高成长股估值，但需注意增速预测的可靠性。</p>
+          <p><strong>EV/EBITDA</strong>：企业价值 / 息税折旧摊销前利润。剔除资本结构和税率差异的影响，便于跨公司比较。适用：重资产、高负债行业。</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>行业</th><th>首选估值</th><th>次选估值</th><th>原因</th></tr></thead>
+            <tbody>
+              <tr><td>银行</td><td>PB</td><td>PE</td><td>资产驱动利润，表外业务多</td></tr>
+              <tr><td>地产</td><td>NAV</td><td>PB</td><td>项目结算周期，资产重估</td></tr>
+              <tr><td>消费（食饮/零售）</td><td>PE(TTM)</td><td>PEG</td><td>盈利稳定，现金流可预测</td></tr>
+              <tr><td>医药</td><td>PE(TTM)</td><td>PS/PE(预测)</td><td>创新药管线未盈利需PS</td></tr>
+              <tr><td>科技成长（半导体/AI）</td><td>PS/PEG</td><td>PE(预测)</td><td>可能尚未盈利或高增长</td></tr>
+              <tr><td>周期股（有色/化工/航运）</td><td>PB</td><td>EV/EBITDA</td><td>盈利波动大，PE失真</td></tr>
+              <tr><td>公用事业</td><td>EV/EBITDA</td><td>PE</td><td>资本结构差异大</td></tr>
+              <tr><td>军工</td><td>PE(预测)</td><td>PS</td><td>订单周期驱动，预测PE更准</td></tr>
+            </tbody>
+          </table></div>
+
+          <h4>绝对估值法</h4>
+          <p><strong>DCF（现金流折现）</strong>：预测企业未来自由现金流，以一定折现率（通常用 WACC）折算为现值。理论上最严谨，但对增长率和折现率假设极其敏感，适合稳定增长的成熟企业。</p>
+          <p><strong>DDM（股利折现）</strong>：以未来股利的现值定价，适用于稳定分红的成熟公司（如银行、公用事业、高速公路）。</p>
+
+          <h4>估值分位值</h4>
+          <p>估值分位值是判断"高估/低估"的核心工具。它衡量当前估值在历史区间中的相对位置。</p>
+          <p><strong>计算方法</strong>：取过去N年（通常5年或10年）的每日估值数据排序，当前估值所处分位即为百分位值。如 PE 分位值 20%，意味着当前 PE 仅高于历史 20% 的时间，属于偏低估水平。</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>分位值区间</th><th>估值判断</th><th>操作参考</th></tr></thead>
+            <tbody>
+              <tr><td>&lt; 20%</td><td class="text-up">极低（深度低估）</td><td class="text-up">关注买入机会</td></tr>
+              <tr><td>20%-40%</td><td>偏低</td><td>可逐步配置</td></tr>
+              <tr><td>40%-60%</td><td>中性</td><td>合理区间，持有为主</td></tr>
+              <tr><td>60%-80%</td><td class="text-warn">偏高</td><td class="text-warn">谨慎追高</td></tr>
+              <tr><td>&gt; 80%</td><td class="text-down">极高（高估）</td><td class="text-down">考虑减仓</td></tr>
+            </tbody>
+          </table></div>
+          <div class="callout warn"><strong>注意</strong>：低分位不等于一定涨，高估值不等于立刻跌。估值分位值是"长期均值回归"的锚，但短期市场可能长期偏离。需结合行业基本面变化和催化剂判断。</div>
+        </div>
+      </div>
+
+      <!-- Tab: 财务分析基础 -->
+      <div class="tab-panel" id="panel-basics-finance">
+        <div class="subsection" id="basics-finance">
+          <h3>财务分析基础</h3>
+          <h4>三大报表及勾稽关系</h4>
+          <p><strong>利润表</strong>：反映一定期间的经营成果，从营业收入到净利润的过程。核心公式：净利润 = 营业收入 - 营业成本 - 期间费用 - 税费 + 其他收益。</p>
+          <p><strong>资产负债表</strong>：反映某一时点的财务状况，资产 = 负债 + 所有者权益。左侧是资产配置（钱花在哪），右侧是资金来源（钱从哪来）。</p>
+          <p><strong>现金流量表</strong>：反映一定期间现金的流入流出，分为经营、投资、筹资三大活动。现金流是最难操纵的指标，是验证利润质量的"试金石"。</p>
+          <div class="callout"><strong>勾稽核心</strong>：利润表净利润 → 经折旧/营运资本调整后 → 经营活动现金流（差异过大需警惕）。利润表净利润 → 累计入资产负债表的未分配利润。资产负债表货币资金的期末-期初 = 现金流量表净增加额。三大报表互为印证，任何断裂都是红旗信号。</div>
+
+          <h4>核心财务指标</h4>
+          <p><strong>ROE（净资产收益率）</strong>：净利润 / 平均净资产，衡量股东每投入1元获得的回报。巴菲特最看重的指标，连续5年ROE&gt;15%为优质公司。<em>杜邦分解</em>：ROE = 净利率 × 资产周转率 × 权益乘数。</p>
+          <p><strong>ROIC（投入资本回报率）</strong>：息前税后利润 / 投入资本，衡量不论融资方式的企业真实盈利能力，比ROE更少受杠杆影响。ROIC &gt; WACC 说明企业创造价值。</p>
+          <p><strong>毛利率</strong>：毛利 / 营收，反映产品的核心竞争力。高毛利率通常意味着品牌壁垒、技术壁垒或垄断地位。</p>
+          <p><strong>自由现金流（FCF）</strong>：经营现金流 - 资本开支，衡量企业在维持正常运营后真正可自由支配的现金。持续为正且增长的FCF是优质公司的标志。</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>指标</th><th>优秀</th><th>合格</th><th>警惕</th><th>说明</th></tr></thead>
+            <tbody>
+              <tr><td>ROE</td><td class="text-up">&gt;15%</td><td>8-15%</td><td class="text-down">&lt;8%</td><td>连续5年稳定为佳</td></tr>
+              <tr><td>毛利率</td><td class="text-up">&gt;40%</td><td>20-40%</td><td class="text-down">&lt;20%</td><td>看行业，与同行比</td></tr>
+              <tr><td>净利率</td><td class="text-up">&gt;15%</td><td>5-15%</td><td class="text-down">&lt;5%</td><td>反映费用管控能力</td></tr>
+              <tr><td>资产负债率</td><td class="text-up">&lt;40%</td><td>40-60%</td><td class="text-down">&gt;70%</td><td>金融/地产行业例外</td></tr>
+              <tr><td>经营现金流/净利润</td><td class="text-up">&gt;1.0</td><td>0.5-1.0</td><td class="text-down">&lt;0.5</td><td>利润质量核心指标</td></tr>
+              <tr><td>自由现金流</td><td class="text-up">持续为正</td><td>波动为正</td><td class="text-down">持续为负</td><td>成长期企业可能为负</td></tr>
+            </tbody>
+          </table></div>
+
+          <h4>财务质量识别要点</h4>
+          <ul>
+            <li><strong>应收账款增速 &gt; 营收增速</strong>：可能通过放宽信用政策虚增收入，回款质量下降</li>
+            <li><strong>存货异常堆积</strong>：存货增速远超营收增速，可能面临跌价风险或渠道压货</li>
+            <li><strong>经营现金流持续为负但利润为正</strong>：利润可能停留在"纸面上"，有操纵嫌疑</li>
+            <li><strong>频繁更换审计师</strong>：可能因审计意见分歧而更换，需高度警惕</li>
+            <li><strong>非经常性损益占比高</strong>：靠政府补贴、资产处置等维持盈利，不可持续</li>
+            <li><strong>关联交易频繁</strong>：利益输送风险，需关注交易价格是否公允</li>
+            <li><strong>商誉占净资产比例高</strong>：并购形成的大额商誉有减值风险</li>
+          </ul>
+          <div class="callout danger"><strong>红旗信号</strong>：以上任何一条单独出现不一定代表问题，但如果多条同时出现，需高度警惕，深入研究后再做决策。</div>
+        </div>
+      </div>
+
+      <!-- Tab: 技术分析基础 -->
+      <div class="tab-panel" id="panel-basics-tech">
+        <div class="subsection" id="basics-tech">
+          <h3>技术分析基础</h3>
+          <h4>均线系统</h4>
+          <p><strong>均线（MA）</strong>：一定周期内的收盘价平均值连线，反映趋势方向。常用均线：MA5/MA10（短期）、MA20/MA60（中期）、MA120/MA250（长期，又称半年线/年线）。</p>
+          <p><strong>多头排列</strong>：MA5 &gt; MA10 &gt; MA20 &gt; MA60，短期均线在上、长期均线在下，表示上升趋势确立，持股为主。</p>
+          <p><strong>空头排列</strong>：MA5 &lt; MA10 &lt; MA20 &lt; MA60，短期在下、长期在上，表示下降趋势，空仓或观望。</p>
+          <p><strong>金叉/死叉</strong>：短期均线上穿长期均线为金叉（偏多信号），下穿为死叉（偏空信号）。MA5与MA20的交叉是常用的短期择时信号。</p>
+
+          <h4>量价关系</h4>
+          <p>量价关系是技术分析的核心，量在价先——成交量的变化往往领先于价格。</p>
+          <div class="table-wrap"><table>
+            <thead><tr><th>量价组合</th><th>含义</th><th>操作参考</th></tr></thead>
+            <tbody>
+              <tr><td>放量上涨</td><td>资金积极买入，上涨动力充足</td><td class="text-up">健康上涨，持股/买入</td></tr>
+              <tr><td>缩量上涨</td><td>上涨动力不足，跟风资金少</td><td class="text-warn">需谨慎，可能见顶信号</td></tr>
+              <tr><td>放量下跌</td><td>抛压沉重，资金出逃</td><td class="text-down">偏空，减仓/观望</td></tr>
+              <tr><td>缩量下跌</td><td>抛压减弱，下跌接近尾声</td><td>关注企稳信号</td></tr>
+              <tr><td>地量地价</td><td>成交极度萎缩，估值底部区域</td><td class="text-up">底部信号，中长线布局</td></tr>
+              <tr><td>天量天价</td><td>成交创纪录，估值高位</td><td class="text-down">见顶信号，注意风险</td></tr>
+            </tbody>
+          </table></div>
+
+          <h4>关键技术形态</h4>
+          <ul>
+            <li><strong>趋势线</strong>：连接两个以上低点画上升趋势线（支撑线），连接高点画下降趋势线（压力线）。突破趋势线是趋势反转的初步信号。</li>
+            <li><strong>支撑位/压力位</strong>：前期低点/高点、整数关口、重要均线位置常构成支撑或压力。突破压力位后压力变支撑，反之亦然。</li>
+            <li><strong>头肩顶/底</strong>：经典反转形态。头肩顶出现在上升趋势末端，是见顶信号；头肩底出现在下降趋势末端，是见底信号。</li>
+            <li><strong>双顶（M顶）/双底（W底）</strong>：两次冲击同一价位未突破，形成反转信号。双顶看跌，双底看涨。</li>
+            <li><strong>旗形/三角形整理</strong>：趋势途中的中继形态，突破后通常延续原趋势。</li>
+          </ul>
+          <div class="callout warn"><strong>使用原则</strong>：技术分析是概率工具而非确定性预测。建议作为择时辅助手段，与基本面分析和估值判断结合使用，不应单独作为买卖依据。</div>
+        </div>
+      </div>
+
+      <!-- Tab: 投资策略 -->
+      <div class="tab-panel" id="panel-basics-strategy">
+        <div class="subsection" id="basics-strategy">
+          <h3>投资策略</h3>
+          <h4>价值投资</h4>
+          <p>以低于内在价值的价格买入优质资产并长期持有。核心理念来自格雷厄姆和巴菲特：<strong>"好公司 + 好价格"</strong>。赚的是企业成长和价值回归的钱，与时间为友。</p>
+          <p><strong>关键要素</strong>：① 选好公司（护城河、盈利能力强、管理层优秀）；② 算内在价值（DCF、相对估值）；③ 等好价格（估值分位值低于30%）；④ 长期持有（以年为单位）；⑤ 在明显高估时卖出。</p>
+
+          <h4>趋势投资</h4>
+          <p>顺势而为，右侧交易。核心是<strong>"识别趋势 + 纪律止损"</strong>。赚的是市场情绪和趋势延续的钱，需要灵活和纪律。</p>
+          <p><strong>关键要素</strong>：① 识别趋势方向（均线系统、趋势线）；② 确认入场信号（突破、金叉）；③ 设定止损（跌破关键支撑/均线）；④ 顺势加仓；⑤ 趋势结束信号时离场。</p>
+
+          <h4>顺周期操作</h4>
+          <p>判断当前经济周期阶段，配置该阶段受益的行业板块。核心是<strong>"周期定位 + 行业轮动"</strong>。这是本知识库的核心策略，详见"周期趋势框架"模块。</p>
+          <p><strong>关键要素</strong>：① 判断宏观周期阶段（美林时钟）；② 识别受益行业；③ 在受益行业中选标的；④ 周期信号变化时调仓换股。</p>
+
+          <h4>逆周期/防御</h4>
+          <p>在经济下行期配置与宏观弱相关甚至负相关的行业，如公用事业、必需消费、医药、军工等。核心是<strong>"避开下行 + 博弈政策对冲"</strong>。</p>
+          <p><strong>关键要素</strong>：① 识别经济下行信号；② 配置防御性行业；③ 关注政策对冲方向（货币宽松、财政刺激、产业政策）；④ 在经济企稳后切换到顺周期品种。</p>
+
+          <div class="table-wrap"><table>
+            <thead><tr><th>策略</th><th>持有周期</th><th>收益来源</th><th>能力要求</th><th>适合人群</th></tr></thead>
+            <tbody>
+              <tr><td>价值投资</td><td>1-5年+</td><td>企业成长+价值回归</td><td>基本面分析</td><td>耐心型、长线资金</td></tr>
+              <tr><td>趋势投资</td><td>数周-数月</td><td>趋势延续+情绪波动</td><td>技术分析+纪律</td><td>灵活型、有盯盘时间</td></tr>
+              <tr><td>顺周期操作</td><td>数月-1-2年</td><td>周期上行+行业轮动</td><td>宏观分析+行业判断</td><td>中等频率</td></tr>
+              <tr><td>逆周期/防御</td><td>经济下行期</td><td>避跌+政策博弈</td><td>宏观判断+风控</td><td>稳健型、回撤敏感</td></tr>
+            </tbody>
+          </table></div>
+          <div class="callout success"><strong>策略组合建议</strong>：以上策略并非互斥，可组合使用。典型方案：核心仓位（50-60%）做价值投资，卫星仓位（20-30%）做顺周期/趋势，防御仓位（10-20%）做逆周期。根据个人风险偏好和市场周期阶段动态调整比例。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === 模块二：周期趋势框架 === -->
+    <section class="section" id="cycle">
+      <div class="section-header"><span class="section-icon">🔄</span><h2>周期趋势框架</h2><span class="section-sub">把握周期 · 顺势而为</span></div>
+
+      <!-- 美林投资时钟 -->
+      <div class="subsection" id="cycle-clock">
+        <h3>美林投资时钟</h3>
+        <p>美林投资时钟将经济周期按<strong>增长（GDP）</strong>和<strong>通胀（CPI）</strong>两个维度分为四个阶段，每个阶段有不同的最优资产配置和受益行业。这是顺周期操作的核心框架。</p>
+        <div class="clock-wrap">
+          <div class="clock">
+            <div class="clock-quadrant clock-q1"><div class="q-stage">复苏期</div><div class="q-desc">GDP↑ 通胀↓</div><div class="q-asset">股票 &gt; 商品 &gt; 债券</div><div class="q-sectors">周期股/可选消费/TMT</div></div>
+            <div class="clock-quadrant clock-q2"><div class="q-stage">过热期</div><div class="q-desc">GDP↑ 通胀↑</div><div class="q-asset">商品 &gt; 股票 &gt; 现金</div><div class="q-sectors">资源品/金融/地产链</div></div>
+            <div class="clock-quadrant clock-q3"><div class="q-stage">滞胀期</div><div class="q-desc">GDP↓ 通胀↑</div><div class="q-asset">现金 &gt; 商品 &gt; 债券</div><div class="q-sectors">必需消费/医药/公用事业</div></div>
+            <div class="clock-quadrant clock-q4"><div class="q-stage">衰退期</div><div class="q-desc">GDP↓ 通胀↓</div><div class="q-asset">债券 &gt; 现金 &gt; 股票</div><div class="q-sectors">利率敏感/高股息</div></div>
+            <div class="clock-center">美林<br>时钟</div>
+          </div>
+        </div>
+
+        <h4>四阶段详解</h4>
+        <div class="card"><div class="card-title text-up">① 复苏期 — 最佳股票配置窗口</div>
+          <p><strong>经济特征</strong>：经济从底部回升，GDP 增速上行，但通胀仍处低位。货币宽松延续，企业盈利开始改善。</p>
+          <p><strong>最优资产</strong>：股票 &gt; 商品 &gt; 债券 &gt; 现金。低利率 + 盈利改善 = 估值和业绩双升（戴维斯双击）。</p>
+          <p><strong>受益行业（A股）</strong>：周期股（有色金属、化工、机械）、可选消费（家电、汽车、家居）、TMT（电子、计算机、传媒）、券商。</p>
+          <p><strong>关键信号</strong>：PMI 回升至荣枯线上方、社融同比多增、PPI 触底回升、M2 增速 &gt; 名义GDP增速。</p>
+        </div>
+        <div class="card"><div class="card-title text-warn">② 过热期 — 商品为王，股票后段</div>
+          <p><strong>经济特征</strong>：经济过热，GDP 增速高位甚至见顶，通胀持续上行至高位。央行开始收紧货币，利率上行。</p>
+          <p><strong>最优资产</strong>：商品 &gt; 股票 &gt; 现金 &gt; 债券。大宗商品受益于高通胀和供需紧张。</p>
+          <p><strong>受益行业（A股）</strong>：资源品（有色金属、煤炭、钢铁、石化）、金融（银行、保险受益利率上行）、地产链。</p>
+          <p><strong>关键信号</strong>：CPI 突破3%、央行开始加息/提高准备金率、PPI 大幅正增长、商品价格暴涨。</p>
+        </div>
+        <div class="card"><div class="card-title text-down">③ 滞胀期 — 最危险阶段，现金为王</div>
+          <p><strong>经济特征</strong>：经济增速下滑但通胀仍高，企业盈利恶化但央行无法放松货币（通胀制约）。股票和债券均承压。</p>
+          <p><strong>最优资产</strong>：现金 &gt; 商品 &gt; 债券 &gt; 股票。持有现金等待机会，或配置防御性资产。</p>
+          <p><strong>受益行业（A股）</strong>：必需消费（食品饮料、超市）、医药（防御性）、公用事业（电力、水务）、黄金（避险）。</p>
+          <p><strong>关键信号</strong>：GDP 增速下行 + CPI 仍 &gt;3%、PMI 跌破荣枯线但通胀未回落、企业盈利大幅下滑。</p>
+        </div>
+        <div class="card"><div class="card-title" style="color:var(--color-link);">④ 衰退期 — 债券为王，酝酿复苏</div>
+          <p><strong>经济特征</strong>：经济持续下行，通胀从高位回落。央行开始宽松货币（降息降准），利率下行，债券受益。</p>
+          <p><strong>最优资产</strong>：债券 &gt; 现金 &gt; 股票 &gt; 商品。利率下行推动债券价格上涨，股票仍在下跌但底部渐近。</p>
+          <p><strong>受益行业（A股）</strong>：利率敏感型行业（公用事业、高股息股）、债券基金。股票端逐步关注成长股（对利率敏感）。</p>
+          <p><strong>关键信号</strong>：央行连续降息降准、CPI 回落至2%以下、十年期国债收益率大幅下行、社融见底迹象。</p>
+        </div>
+        <div class="callout"><strong>如何判断当前周期阶段</strong>：使用以下指标组合判断 —— ① <strong>PMI</strong>（&gt;50为扩张）；② <strong>CPI/PPI</strong>（通胀水平）；③ <strong>社融增速</strong>（信用扩张/收缩）；④ <strong>十年期国债收益率</strong>（利率趋势）；⑤ <strong>M2增速</strong>（货币供应）。</div>
+      </div>
+
+      <!-- 中国特色周期 -->
+      <div class="subsection" id="cycle-china">
+        <h3>中国特色周期因素</h3>
+        <p>中国市场有其独特的周期驱动因素，简单套用美林时钟效果有限。以下五大中国特色周期叠加在美林时钟之上，共同决定A股的实际运行节奏。</p>
+
+        <h4>① 政策周期（五年规划驱动）</h4>
+        <p>中国的<strong>五年规划</strong>是最重要的中长期政策周期。每个五年规划开局之年通常伴随新方向的资源倾斜和项目落地，对应资本市场结构性机会。</p>
+        <p><strong>当前定位</strong>：2026年是"十五五"规划开局年，新周期启动。重点关注新一代信息技术、高端装备、新能源、军工、生物医药等战略新兴方向。</p>
+        <div class="callout success"><strong>周期规律</strong>：规划初期（第1-2年）预算下达、项目立项→订单释放；规划中期（第3年）批量生产交付→业绩高峰；规划末期（第4-5年）冲刺交付+新规划酝酿→景气衔接。</div>
+
+        <h4>② 货币周期（降息降准周期）</h4>
+        <p>中国央行的货币政策周期对A股估值有决定性影响。宽货币→利率下行→估值提升；宽信用→社融回升→经济回暖。</p>
+        <p><strong>当前定位</strong>：处于低利率环境，LPR 持续下调。货币端偏宽松，信用端正在从底部回升。</p>
+        <p><strong>关键指标</strong>：MLF 利率、LPR 报价、社融同比增速、M2 增速、银行间回购利率（DR007）。</p>
+
+        <h4>③ 房地产周期</h4>
+        <p>房地产是中国经济的重要支柱，其周期波动对上下游产业链影响极广（建材、家电、银行、地方财政等）。</p>
+        <p><strong>当前定位</strong>：政策持续宽松（限购放开、房贷利率下调），销售数据筑底。处于政策底→市场底的过渡阶段。</p>
+        <p><strong>关键指标</strong>：70城房价指数、商品房销售面积/销售额、房地产开发投资完成额。</p>
+
+        <h4>④ 出口周期</h4>
+        <p>出口导向型行业直接受海外需求周期影响，也与汇率和贸易政策密切相关。</p>
+        <p><strong>当前定位</strong>：全球需求弱复苏，贸易摩擦持续，出口结构向新兴市场转移。</p>
+        <p><strong>关键指标</strong>：进出口总额同比、PMI 新出口订单、人民币汇率、美国/欧盟 PMI。</p>
+
+        <h4>⑤ 产业升级周期</h4>
+        <p>中国正经历从"制造大国"向"制造强国"的产业升级，政策驱动的结构性机会层出不穷。</p>
+        <p><strong>当前主线</strong>：人工智能（AI）、半导体自主可控、新能源（锂电/光伏/风电）、军工、高端装备、生物医药。</p>
+        <p><strong>关键指标</strong>：重大技术突破事件、政策补贴文件、行业渗透率拐点、产业链龙头企业订单/产能数据。</p>
+
+        <div class="table-wrap"><table>
+          <thead><tr><th>周期类型</th><th>周期长度</th><th>当前阶段（2026）</th><th>关键观察指标</th></tr></thead>
+          <tbody>
+            <tr><td>政策周期</td><td>5年</td><td class="text-up">十五五开局，新周期启动</td><td>五年规划纲要、重大产业政策</td></tr>
+            <tr><td>货币周期</td><td>2-3年</td><td class="text-up">低利率，货币宽松</td><td>LPR、MLF、社融、M2</td></tr>
+            <tr><td>房地产周期</td><td>3-5年</td><td class="text-warn">政策宽松，筑底中</td><td>房价、销售面积、开发投资</td></tr>
+            <tr><td>出口周期</td><td>2-3年</td><td class="text-warn">弱复苏，结构转型</td><td>进出口数据、海外PMI、汇率</td></tr>
+            <tr><td>产业升级</td><td>5-10年</td><td class="text-up">AI/半导体/新能源主线</td><td>技术突破、渗透率、政策</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- 顺周期操作指南 -->
+      <div class="subsection" id="cycle-guide">
+        <h3>顺周期操作指南</h3>
+        <h4>决策流程</h4>
+        <pre><code>Step 1: 判断宏观周期阶段（美林时钟 + 中国特色周期）
+         ↓
+Step 2: 确认该阶段受益行业板块
+         ↓
+Step 3: 在受益行业中筛选低估值标的（PE/PB分位值 &lt; 30%）
+         ↓
+Step 4: 技术面确认（趋势向上 + 量价配合）
+         ↓
+Step 5: 分批建仓 + 设定止损位
+         ↓
+Step 6: 周期信号变化时调仓换股</code></pre>
+
+        <h4>行业周期属性分类</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>周期属性</th><th>代表行业</th><th>适用阶段</th><th>核心驱动</th></tr></thead>
+          <tbody>
+            <tr><td class="text-up">强周期</td><td>有色金属、煤炭、钢铁、化工、航运</td><td>复苏→过热</td><td>全球需求+大宗商品价格</td></tr>
+            <tr><td class="text-up">中周期</td><td>地产、建材、家电、机械</td><td>复苏→过热</td><td>地产周期+投资</td></tr>
+            <tr><td>弱周期</td><td>食品饮料、医药、零售</td><td>滞胀→衰退（防御）</td><td>刚需+消费</td></tr>
+            <tr><td class="text-warn">逆周期</td><td>军工、公用事业、黄金</td><td>衰退/地缘动荡</td><td>政策+避险</td></tr>
+            <tr><td>成长</td><td>半导体、AI、新能源、医药创新</td><td>全周期（结构性）</td><td>技术突破+渗透率</td></tr>
+            <tr><td>金融</td><td>银行、券商、保险</td><td>复苏→过热</td><td>利率+交易量+资产质量</td></tr>
+          </tbody>
+        </table></div>
+
+        <h4>各阶段配置建议</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>阶段</th><th>超配</th><th>标配</th><th>低配</th><th>仓位建议</th></tr></thead>
+          <tbody>
+            <tr><td class="text-up">复苏期</td><td>周期股、可选消费、TMT、券商</td><td>金融</td><td>必需消费、公用事业</td><td>高仓位 70-80%</td></tr>
+            <tr><td class="text-warn">过热期</td><td>资源品、金融</td><td>周期股</td><td>成长股、债券</td><td>中高仓位 50-60%</td></tr>
+            <tr><td class="text-down">滞胀期</td><td>必需消费、医药、黄金</td><td>公用事业</td><td>周期股、金融、成长</td><td>低仓位 20-30%</td></tr>
+            <tr><td>衰退期</td><td>债券、公用事业、高股息</td><td>医药</td><td>周期股、资源品</td><td>低仓位 20-30%</td></tr>
+          </tbody>
+        </table></div>
+        <div class="callout warn"><strong>纪律要求</strong>：顺周期操作的核心不是预测，而是<strong>跟随</strong>。当周期信号明确变化时，即使浮亏也要执行调仓纪律。最大的风险不是判断失误，而是"知行不一"。</div>
+      </div>
+
+      <!-- 行业分析范例 -->
+      <div class="subsection" id="cycle-case">
+        <h3>行业分析范例：军工行业周期性分析</h3>
+        <p>以下以军工行业为例，展示如何运用六维分析框架做行业周期定位。完整分析报告详见同目录下 <code>军工行业周期性影响因素分析报告.md</code>。</p>
+        <div class="card">
+          <div class="card-title">行业基本特征</div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>特征维度</th><th>具体表现</th></tr></thead>
+            <tbody>
+              <tr><td><strong>强计划性</strong></td><td>需求源自国家战略意志，计划属性强于市场属性</td></tr>
+              <tr><td><strong>弱周期性（宏观）</strong></td><td>与GDP增速相关性低，具备"抗周期、逆周期"防御特征</td></tr>
+              <tr><td><strong>强周期性（微观）</strong></td><td>存在采办周期、订单周期、装备更新周期等结构性周期波动</td></tr>
+              <tr><td><strong>资本与技术密集</strong></td><td>研发投入大、技术门槛高、认证周期长</td></tr>
+              <tr><td><strong>政府主导</strong></td><td>核心客户为各国国防部，采购决策受国家战略驱动</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <div class="card">
+          <div class="card-title">六维分析框架</div>
+          <div class="table-wrap"><table>
+            <thead><tr><th>影响因素</th><th>作用机制</th><th>周期长度</th><th>当前定位（2026年）</th></tr></thead>
+            <tbody>
+              <tr><td><strong>军费预算</strong></td><td>五年规划驱动，决定行业需求总量</td><td>5年</td><td class="text-up">十五五开局，新周期启动</td></tr>
+              <tr><td><strong>装备更新</strong></td><td>装备研制→批产→列装→替换</td><td>10-15年</td><td class="text-up">新型号集中批产，替换高峰</td></tr>
+              <tr><td><strong>地缘政治</strong></td><td>安全威胁催化军费与装备需求</td><td>突发性</td><td class="text-up">全球地缘紧张加剧</td></tr>
+              <tr><td><strong>技术升级</strong></td><td>新技术驱动装备换代与研发投入</td><td>研发周期</td><td class="text-up">无人化、智能化加速突破</td></tr>
+              <tr><td><strong>产业链改革</strong></td><td>采购改革与合规整治影响订单节奏</td><td>政策叠加</td><td class="text-up">整治尾声，订单恢复</td></tr>
+              <tr><td><strong>军贸出口</strong></td><td>国际军贸需求变化影响出口订单</td><td>国际政治</td><td class="text-up">全球军贸需求旺盛</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <div class="card">
+          <div class="card-title">2026年行业周期综合判断</div>
+          <p><strong>核心判断：军工行业正处于新一轮景气周期的起点。</strong></p>
+          <ul>
+            <li><strong>"十五五"规划开局</strong>（2026-2030）——政策周期启动</li>
+            <li><strong>全球军费持续扩张</strong>——需求周期上行（2025年全球军费2.887万亿美元，连续11年增长）</li>
+            <li><strong>地缘政治持续紧张</strong>——催化周期活跃（冲突覆盖49国）</li>
+            <li><strong>装备更新换代节点</strong>——产品周期共振</li>
+            <li><strong>合规整治尾声</strong>——制度周期修复</li>
+          </ul>
+        </div>
+        <div class="callout"><strong>投资提示</strong>：军工行业的"逆周期"属性使其在宏观经济下行期具备配置价值，而其内部的采办周期、订单周期、装备周期为投资提供了可追踪的节奏线索。</div>
+      </div>
+    </section>
+
+    <!-- === 模块三：每日研报精选 === -->
+    <section class="section" id="reports">
+      <div class="section-header"><span class="section-icon">📰</span><h2>每日研报精选</h2><span class="section-sub" id="reports-date">加载中...</span></div>
+      <div class="report-filters" id="report-filters">
+        <div class="report-filter active" data-filter="all">全部</div>
+        <div class="report-filter" data-filter="宏观策略">宏观策略</div>
+        <div class="report-filter" data-filter="行业分析">行业分析</div>
+        <div class="report-filter" data-filter="个股研究">个股研究</div>
+      </div>
+      <div class="report-grid" id="report-grid"><div style="color:var(--text-secondary);text-align:center;padding:40px;">研报数据加载中...</div></div>
+    </section>
+
+    <!-- === 模块四：板块推荐 === -->
+    <section class="section" id="recommend">
+      <div class="section-header"><span class="section-icon">🎯</span><h2>板块推荐</h2><span class="section-sub" id="recommend-date">加载中...</span></div>
+
+      <div class="subsection" id="recommend-low">
+        <h3>低估值筛选</h3>
+        <p>以下为A股主要行业当前估值水平及历史分位值，分位值越低表示越被低估。数据每日更新。</p>
+        <div class="table-wrap"><table id="low-valuation-table">
+          <thead><tr><th data-sortable data-key="sector">行业</th><th data-sortable data-key="pe">PE(TTM)</th><th data-sortable data-key="pePercentile">PE分位</th><th data-sortable data-key="pb">PB</th><th data-sortable data-key="pbPercentile">PB分位</th><th data-sortable data-key="dividendYield">股息率</th><th>推荐逻辑</th></tr></thead>
+          <tbody id="low-valuation-body"><tr><td colspan="7" style="text-align:center;color:var(--text-secondary);padding:24px;">数据加载中...</td></tr></tbody>
+        </table></div>
+        <p style="font-size:12px;color:var(--text-secondary);">点击表头可排序。绿色=低估，黄色=中性，红色=高估。</p>
+      </div>
+
+      <div class="subsection" id="recommend-cycle">
+        <h3>顺周期定位</h3>
+        <p>基于宏观经济指标组合，判断当前所处的周期阶段及受益行业。</p>
+        <div class="cycle-card" id="cycle-card">
+          <div class="cc-stage" id="cycle-stage">加载中...</div>
+          <div class="cycle-indicators" id="cycle-indicators"></div>
+          <h4 style="margin-bottom:10px;">当前阶段受益行业</h4>
+          <div class="favored-list" id="favored-list"></div>
+        </div>
+      </div>
+
+      <div class="subsection" id="recommend-summary">
+        <h3>综合推荐</h3>
+        <p>综合低估值筛选和顺周期定位，本期推荐以下板块供参考。</p>
+        <div class="table-wrap"><table id="recommend-table">
+          <thead><tr><th data-sortable data-key="rank">排名</th><th data-sortable data-key="sector">推荐板块</th><th>推荐逻辑</th><th>关注要点</th><th data-sortable data-key="riskLevel">风险等级</th></tr></thead>
+          <tbody id="recommend-body"><tr><td colspan="5" style="text-align:center;color:var(--text-secondary);padding:24px;">数据加载中...</td></tr></tbody>
+        </table></div>
+        <div class="callout danger"><strong>⚠️ 风险提示</strong>：以上推荐仅为周期分析参考，<strong>不构成任何投资建议</strong>。投资有风险，入市需谨慎。实际操作需结合个人风险承受能力、资金属性和专业意见综合判断。</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- 回到顶部 -->
+<button class="scroll-top" id="scroll-top" onclick="scrollToTop()" title="回到顶部">↑</button>
+
+<!-- 底部 -->
+<footer class="footer"><p>📊 个人股市知识库 — 仅供学习参考，不构成投资建议</p><p>数据来源：公开市场数据 · 券商研报 · finance-data 插件 | 最后更新：<span id="footer-date">加载中...</span></p></footer>
+
+<!-- DAILY_DATA_START -->
+<script id="daily-data" type="application/json">
+{
+  "date": "2026-08-31",
+  "reports": [
+    {"id":"r001","category":"宏观策略","title":"央行年内第三次降息 LPR下调25BP","source":"中信证券","rating":"买入","summary":"央行宣布1年期LPR下调25BP至3.10%，5年期下调25BP至3.60%，为年内第三次降息。本次降息幅度超市场预期，释放强烈稳增长信号，利好利率敏感型行业和高股息资产。","keyPoints":["LPR下调幅度超预期，货币政策进入实质性宽松阶段","稳增长信号明确，利好基建、地产、消费板块估值修复","高股息策略在低利率环境下吸引力进一步上升"],"tags":["降息","LPR","货币政策","稳增长"]},
+    {"id":"r002","category":"宏观策略","title":"8月制造业PMI回升至50.4 经济复苏动能增强","source":"中金公司","rating":"增持","summary":"8月制造业PMI回升至50.4%（前值49.8%），重回扩张区间。新订单指数和新出口订单均改善，预示经济进入复苏早期阶段。建议超配周期股和可选消费。","keyPoints":["PMI重回荣枯线上方，经济复苏动能增强","新订单指数回升1.2个百分点，内需回暖","原材料库存指数回升，企业补库存信号初现"],"tags":["PMI","经济复苏","周期股"]},
+    {"id":"r003","category":"行业分析","title":"有色金属行业：铜价突破万元关口 供需紧平衡延续","source":"华泰证券","rating":"增持","summary":"全球铜矿供给增速放缓，新能源转型拉动铜需求持续增长，铜价突破1万元/吨。铝价受产能约束支撑，行业景气度高位运行。建议关注资源储量丰富、成本低廉的头部企业。","keyPoints":["全球铜矿新增产能有限，供给端约束明显","新能源车+电网投资拉动铜铝长期需求","行业PE分位值处于30%以下，估值仍偏低"],"tags":["有色金属","铜","铝","新能源"]},
+    {"id":"r004","category":"行业分析","title":"军工行业：十五五开局订单释放 产业链景气度上行","source":"申万宏源","rating":"买入","summary":"2026年作为十五五开局之年，军工装备采购订单逐步释放。多个重点型号进入批量生产阶段，上游材料和元器件企业订单率先好转。行业处于新一轮景气周期起点。","keyPoints":["十五五规划开局，新一轮装备采购周期启动","无人化、智能化装备加速列装","合规整治进入尾声，前期推迟订单恢复释放"],"tags":["军工","十五五","订单释放"]},
+    {"id":"r005","category":"行业分析","title":"机械工程行业：设备更新政策加码 工程机械销量回暖","source":"国泰君安","rating":"增持","summary":"大规模设备更新政策持续推进，8月挖掘机销量同比增长12%，国内需求回暖明显。叠加海外出口稳健，工程机械行业周期底部确认。","keyPoints":["设备更新政策驱动，国内销量连续3个月正增长","海外市场份额提升，出口保持稳健","行业PB分位值处于15%左右低位"],"tags":["机械","设备更新","工程机械"]},
+    {"id":"r006","category":"个股研究","title":"某龙头铜企：资源储量丰富 量价齐升可期","source":"招商证券","rating":"买入","summary":"公司铜资源储量国内领先，新增产能逐步释放。受益于铜价上涨和产量增长，业绩有望量价齐升。当前PE仅8倍，股息率4.5%，估值显著低于历史中枢。","keyPoints":["铜矿储量行业领先，未来3年产量复合增速10%","成本控制优秀，完全成本低于行业均值","PE分位值约12%，PB分位值约8%，估值极低"],"tags":["铜","低估值","高股息"]},
+    {"id":"r007","category":"个股研究","title":"某军工电子龙头：订单确定性强 业绩拐点确认","source":"海通证券","rating":"买入","summary":"公司是军工电子元器件核心供应商，十五五开局订单释放，上半年新签订单同比增长35%。业绩拐点确认，预计全年净利润增长40%以上。","keyPoints":["十五五开局军品订单释放，增长确定性高","国产替代深入推进，市占率持续提升","预测PE 25倍，低于行业均值"],"tags":["军工","电子","业绩拐点"]},
+    {"id":"r008","category":"宏观策略","title":"社融数据超预期 信用宽松周期确认","source":"广发证券","rating":"增持","summary":"8月社融新增4.2万亿，同比多增6000亿，超出市场预期。政府债和企业债为主要拉动项，信用宽松周期确认。M2增速回升至10.8%，流动性环境持续改善。","keyPoints":["社融超预期多增，信用宽松周期确认","政府债加快发行，财政政策协同发力","M2增速回升，流动性环境持续改善利好股市"],"tags":["社融","信用宽松","流动性"]}
+  ],
+  "cyclePosition": {
+    "stage": "复苏期（早期）",
+    "indicators": [
+      {"name":"PMI","value":"50.4%","signal":"荣枯线上方","direction":"up"},
+      {"name":"CPI","value":"0.6%","signal":"低位温和","direction":"flat"},
+      {"name":"社融","value":"+6000亿","signal":"同比多增","direction":"up"},
+      {"name":"LPR(1Y)","value":"3.10%","signal":"下调25BP","direction":"down"},
+      {"name":"M2增速","value":"10.8%","signal":"持续回升","direction":"up"},
+      {"name":"10年国债","value":"2.15%","signal":"低位运行","direction":"down"}
+    ],
+    "favoredSectors": [
+      {"name":"有色金属（铜/铝）","status":"green","note":"全球复苏+美元走弱+供给约束"},
+      {"name":"机械工程","status":"green","note":"设备更新政策+投资复苏"},
+      {"name":"可选消费（家电/汽车）","status":"green","note":"政策刺激+消费回暖"},
+      {"name":"军工","status":"green","note":"十五五开局+装备批产周期"},
+      {"name":"TMT（电子/计算机）","status":"yellow","note":"流动性改善利好成长，但需关注外部风险"},
+      {"name":"券商","status":"yellow","note":"交易量回暖+降息利好"},
+      {"name":"银行","status":"yellow","note":"低估值+高股息，但息差承压"},
+      {"name":"必需消费/医药","status":"red","note":"当前复苏阶段暂不优先配置"}
+    ]
+  },
+  "lowValuation": [
+    {"sector":"银行","pe":5.2,"pePercentile":8.5,"pb":0.55,"pbPercentile":3.2,"dividendYield":5.8,"reason":"估值历史极低位，高股息防御属性突出"},
+    {"sector":"钢铁","pe":8.1,"pePercentile":12.0,"pb":0.85,"pbPercentile":8.5,"dividendYield":4.2,"reason":"PB破净，受益于复苏期需求回暖"},
+    {"sector":"有色金属","pe":9.5,"pePercentile":18.0,"pb":1.8,"pbPercentile":15.0,"dividendYield":3.5,"reason":"PE/PB分位值双低，铜铝价格上行利好"},
+    {"sector":"煤炭","pe":7.2,"pePercentile":10.5,"pb":1.2,"pbPercentile":12.0,"dividendYield":7.5,"reason":"高股息+低估值，关注能源转型长期影响"},
+    {"sector":"建筑装饰","pe":6.8,"pePercentile":5.0,"pb":0.62,"pbPercentile":2.5,"dividendYield":4.8,"reason":"估值极低，受益于基建投资发力"},
+    {"sector":"机械","pe":12.5,"pePercentile":15.0,"pb":1.5,"pbPercentile":10.0,"dividendYield":3.2,"reason":"设备更新政策驱动，周期底部确认"},
+    {"sector":"交通运输","pe":10.2,"pePercentile":20.0,"pb":1.1,"pbPercentile":8.0,"dividendYield":4.5,"reason":"航运周期上行，低估值+高股息"},
+    {"sector":"房地产","pe":12.8,"pePercentile":25.0,"pb":0.68,"pbPercentile":5.0,"dividendYield":3.8,"reason":"政策持续宽松，估值极低但基本面筑底"},
+    {"sector":"非银金融","pe":14.5,"pePercentile":22.0,"pb":1.3,"pbPercentile":10.5,"dividendYield":3.0,"reason":"券商受益于交易量回暖和降息"},
+    {"sector":"公用事业","pe":15.2,"pePercentile":28.0,"pb":1.4,"pbPercentile":18.0,"dividendYield":4.2,"reason":"利率下行利好，高股息防御属性"},
+    {"sector":"传媒","pe":22.5,"pePercentile":35.0,"pb":2.1,"pbPercentile":20.0,"dividendYield":1.5,"reason":"AI催化+估值合理偏低，关注结构性机会"},
+    {"sector":"电子","pe":28.5,"pePercentile":40.0,"pb":3.2,"pbPercentile":35.0,"dividendYield":0.8,"reason":"半导体周期复苏，估值中性偏低"},
+    {"sector":"食品饮料","pe":25.8,"pePercentile":55.0,"pb":5.5,"pbPercentile":50.0,"dividendYield":2.5,"reason":"估值中性，复苏期可选消费替代"},
+    {"sector":"医药生物","pe":30.2,"pePercentile":45.0,"pb":3.8,"pbPercentile":30.0,"dividendYield":1.2,"reason":"估值回落至中性偏低，长期成长逻辑不变"},
+    {"sector":"电力设备","pe":20.5,"pePercentile":30.0,"pb":2.5,"pbPercentile":25.0,"dividendYield":1.8,"reason":"新能源估值消化充分，关注拐点"},
+    {"sector":"计算机","pe":35.2,"pePercentile":50.0,"pb":3.5,"pbPercentile":40.0,"dividendYield":0.5,"reason":"AI主题催化，估值中性"},
+    {"sector":"国防军工","pe":38.5,"pePercentile":42.0,"pb":3.0,"pbPercentile":35.0,"dividendYield":0.8,"reason":"十五五开局景气上行，预测PE更低"},
+    {"sector":"汽车","pe":18.5,"pePercentile":35.0,"pb":2.0,"pbPercentile":25.0,"dividendYield":2.2,"reason":"新能源车渗透率提升，估值合理"},
+    {"sector":"通信","pe":16.8,"pePercentile":25.0,"pb":1.8,"pbPercentile":15.0,"dividendYield":2.8,"reason":"5G/AI基建受益，估值偏低"},
+    {"sector":"农林牧渔","pe":15.5,"pePercentile":20.0,"pb":2.5,"pbPercentile":18.0,"dividendYield":2.0,"reason":"猪周期底部，关注反转信号"}
+  ],
+  "recommendations": [
+    {"rank":1,"sector":"有色金属（铜/铝）","logic":"全球复苏+美元走弱+供给约束+估值偏低","watchPoints":"大宗商品价格趋势、美元指数、全球PMI","riskLevel":"中"},
+    {"rank":2,"sector":"机械工程","logic":"设备更新政策+投资复苏+周期底部确认","watchPoints":"工程机械销量数据、基建投资增速","riskLevel":"中"},
+    {"rank":3,"sector":"军工","logic":"十五五开局+装备批产周期+地缘催化","watchPoints":"订单公告、产业链排产、军费预算","riskLevel":"低"},
+    {"rank":4,"sector":"可选消费（家电/汽车）","logic":"降息刺激+以旧换新政策+估值合理偏低","watchPoints":"社零数据、家电/汽车销量数据","riskLevel":"中"},
+    {"rank":5,"sector":"通信","logic":"AI基建受益+5G应用+估值偏低","watchPoints":"运营商资本开支、AI应用落地进度","riskLevel":"中"},
+    {"rank":6,"sector":"银行（高股息策略）","logic":"估值极低+高股息+利率下行利好","watchPoints":"息差变化、资产质量、分红率","riskLevel":"低"}
+  ]
+}
+</script>
+<!-- DAILY_DATA_END -->
+
+<!-- SCRIPT_PLACEHOLDER -->
+<script>
+(function() {
+  'use strict';
+
+  // === 读取每日数据 ===
+  var dailyData = {};
+  try {
+    dailyData = JSON.parse(document.getElementById('daily-data').textContent);
+  } catch(e) { console.error('数据解析失败', e); }
+
+  // === 更新日期 ===
+  var dateStr = dailyData.date || '未知日期';
+  document.getElementById('header-date').textContent = '\u{1F4C5} ' + dateStr;
+  document.getElementById('reports-date').textContent = '更新于 ' + dateStr;
+  document.getElementById('recommend-date').textContent = '更新于 ' + dateStr;
+  document.getElementById('footer-date').textContent = dateStr;
+
+  // === 侧边导航折叠 ===
+  window.toggleNavGroup = function(el) { el.parentElement.classList.toggle('collapsed'); };
+
+  // === 侧边导航点击 ===
+  document.querySelectorAll('.nav-item').forEach(function(item) {
+    item.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = item.getAttribute('data-target');
+      if (!target) return;
+      // 如果是basics子节，先切换tab
+      var parts = target.replace('#','').split('-');
+      if (parts[0] === 'basics' && parts.length >= 2) {
+        var tabName = parts[0] + '-' + parts[1];
+        switchTab(tabName);
+      }
+      setTimeout(function() {
+        var el = document.querySelector(target);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    });
+  });
+
+  // === 滚动高亮 ===
+  var allSections = document.querySelectorAll('.section[id], .subsection[id]');
+  function updateNavHighlight() {
+    var scrollY = window.scrollY + 80;
+    var current = null;
+    allSections.forEach(function(sec) {
+      if (sec.offsetTop <= scrollY) current = sec;
+    });
+    if (current) {
+      var id = current.getAttribute('id');
+      document.querySelectorAll('.nav-item').forEach(function(item) {
+        item.classList.toggle('active', item.getAttribute('data-target') === '#' + id);
+      });
+    }
+  }
+  window.addEventListener('scroll', updateNavHighlight, { passive: true });
+
+  // === Tab 切换 ===
+  function switchTab(tabName) {
+    document.querySelectorAll('#basics-tabs .tab').forEach(function(t) {
+      t.classList.toggle('active', t.getAttribute('data-tab') === tabName);
+    });
+    document.querySelectorAll('.tab-panel').forEach(function(p) {
+      p.classList.toggle('active', p.id === 'panel-' + tabName);
+    });
+  }
+  window.switchTab = switchTab;
+  document.querySelectorAll('#basics-tabs .tab').forEach(function(tab) {
+    tab.addEventListener('click', function() { switchTab(tab.getAttribute('data-tab')); });
+  });
+
+  // === 研报渲染 ===
+  var reportGrid = document.getElementById('report-grid');
+  var currentFilter = 'all';
+
+  function renderReports() {
+    var reports = dailyData.reports || [];
+    if (reports.length === 0) {
+      reportGrid.innerHTML = '<div style="color:var(--text-secondary);text-align:center;padding:40px;grid-column:1/-1;">暂无研报数据</div>';
+      return;
+    }
+    var filtered = currentFilter === 'all' ? reports : reports.filter(function(r) { return r.category === currentFilter; });
+    if (filtered.length === 0) {
+      reportGrid.innerHTML = '<div style="color:var(--text-secondary);text-align:center;padding:40px;grid-column:1/-1;">该分类暂无研报</div>';
+      return;
+    }
+    reportGrid.innerHTML = filtered.map(function(r) {
+      var rc = '';
+      if (r.rating && (r.rating.indexOf('买') >= 0 || r.rating.indexOf('增') >= 0)) rc = 'buy';
+      else if (r.rating && r.rating.indexOf('中') >= 0) rc = 'hold';
+      else if (r.rating && r.rating.indexOf('减') >= 0) rc = 'sell';
+      var pts = r.keyPoints ? '<ul class="rc-points">' + r.keyPoints.map(function(p) { return '<li>' + p + '</li>'; }).join('') + '</ul>' : '';
+      var tags = r.tags ? '<div class="rc-tags">' + r.tags.map(function(t) { return '<span class="tag">' + t + '</span>'; }).join('') + '</div>' : '';
+      return '<div class="report-card"><div class="rc-header"><span class="rc-category">' + r.category + '</span><span class="rc-title">' + r.title + '</span></div><div class="rc-meta">' + r.source + (r.rating ? ' \u00b7 <span class="badge ' + rc + '">' + r.rating + '</span>' : '') + '</div><div class="rc-summary">' + r.summary + '</div>' + pts + tags + '</div>';
+    }).join('');
+  }
+
+  document.querySelectorAll('.report-filter').forEach(function(f) {
+    f.addEventListener('click', function() {
+      document.querySelectorAll('.report-filter').forEach(function(x) { x.classList.remove('active'); });
+      f.classList.add('active');
+      currentFilter = f.getAttribute('data-filter');
+      renderReports();
+    });
+  });
+  renderReports();
+
+  // === 低估值表格 ===
+  function percentileClass(p) {
+    if (p < 30) return 'text-up';
+    if (p > 70) return 'text-down';
+    if (p > 50) return 'text-warn';
+    return '';
+  }
+
+  function renderLowValuation(data, sortKey, sortAsc) {
+    var rows = data.slice();
+    if (sortKey) {
+      rows.sort(function(a, b) {
+        var va = a[sortKey], vb = b[sortKey];
+        if (typeof va === 'string') return sortAsc ? va.localeCompare(vb, 'zh') : vb.localeCompare(va, 'zh');
+        return sortAsc ? va - vb : vb - va;
+      });
+    }
+    var body = document.getElementById('low-valuation-body');
+    if (rows.length === 0) { body.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--text-secondary);padding:24px;">暂无数据</td></tr>'; return; }
+    body.innerHTML = rows.map(function(d) {
+      return '<tr><td><strong>' + d.sector + '</strong></td>' +
+        '<td>' + d.pe.toFixed(1) + '</td>' +
+        '<td class="' + percentileClass(d.pePercentile) + '">' + d.pePercentile.toFixed(1) + '%</td>' +
+        '<td>' + d.pb.toFixed(2) + '</td>' +
+        '<td class="' + percentileClass(d.pbPercentile) + '">' + d.pbPercentile.toFixed(1) + '%</td>' +
+        '<td>' + d.dividendYield.toFixed(1) + '%</td>' +
+        '<td style="font-size:12px;">' + d.reason + '</td></tr>';
+    }).join('');
+  }
+
+  var lvData = dailyData.lowValuation || [];
+  renderLowValuation(lvData);
+
+  document.querySelectorAll('#low-valuation-table th[data-sortable]').forEach(function(th) {
+    th.addEventListener('click', function() {
+      var key = th.getAttribute('data-key');
+      var asc = th.getAttribute('data-dir') === '1';
+      th.setAttribute('data-dir', asc ? '0' : '1');
+      // 清除其他列方向标记
+      document.querySelectorAll('#low-valuation-table th').forEach(function(t) { if (t !== th) t.removeAttribute('data-dir'); });
+      renderLowValuation(lvData, key, !asc);
+    });
+  });
+
+  // === 顺周期定位 ===
+  var cp = dailyData.cyclePosition;
+  if (cp) {
+    document.getElementById('cycle-stage').innerHTML = '\u{1F4CD} 当前周期定位：' + cp.stage;
+    var indHtml = (cp.indicators || []).map(function(ind) {
+      var arrow = ind.direction === 'up' ? '\u2191' : (ind.direction === 'down' ? '\u2193' : '\u2192');
+      var cls = ind.direction === 'up' ? 'up' : (ind.direction === 'down' ? 'down' : 'flat');
+      return '<div class="cycle-ind"><div><div class="ci-name">' + ind.name + '</div><div class="ci-value">' + ind.value + '</div></div><span class="ci-arrow ' + cls + '">' + arrow + '</span><span class="ci-signal">' + ind.signal + '</span></div>';
+    }).join('');
+    document.getElementById('cycle-indicators').innerHTML = indHtml;
+
+    var favHtml = (cp.favoredSectors || []).map(function(f) {
+      return '<div class="favored-item ' + f.status + '"><span class="fi-status"></span><span class="fi-name">' + f.name + '</span><span class="fi-note">' + f.note + '</span></div>';
+    }).join('');
+    document.getElementById('favored-list').innerHTML = favHtml;
+  }
+
+  // === 综合推荐 ===
+  function renderRecommendations(data, sortKey, sortAsc) {
+    var rows = data.slice();
+    if (sortKey) {
+      rows.sort(function(a, b) {
+        var va = a[sortKey], vb = b[sortKey];
+        if (typeof va === 'string') return sortAsc ? va.localeCompare(vb, 'zh') : vb.localeCompare(va, 'zh');
+        return sortAsc ? va - vb : vb - va;
+      });
+    }
+    var body = document.getElementById('recommend-body');
+    if (rows.length === 0) { body.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-secondary);padding:24px;">暂无数据</td></tr>'; return; }
+    body.innerHTML = rows.map(function(d) {
+      var riskCls = d.riskLevel === '\u4f4e' ? 'text-up' : (d.riskLevel === '\u9ad8' ? 'text-down' : 'text-warn');
+      return '<tr><td>' + d.rank + '</td><td><strong>' + d.sector + '</strong></td><td style="font-size:12px;">' + d.logic + '</td><td style="font-size:12px;">' + d.watchPoints + '</td><td class="' + riskCls + '">' + d.riskLevel + '</td></tr>';
+    }).join('');
+  }
+
+  var recData = dailyData.recommendations || [];
+  renderRecommendations(recData);
+
+  document.querySelectorAll('#recommend-table th[data-sortable]').forEach(function(th) {
+    th.addEventListener('click', function() {
+      var key = th.getAttribute('data-key');
+      var asc = th.getAttribute('data-dir') === '1';
+      th.setAttribute('data-dir', asc ? '0' : '1');
+      document.querySelectorAll('#recommend-table th').forEach(function(t) { if (t !== th) t.removeAttribute('data-dir'); });
+      renderRecommendations(recData, key, !asc);
+    });
+  });
+
+  // === 回到顶部 ===
+  var scrollBtn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', function() {
+    scrollBtn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+  window.scrollToTop = function() { window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
+  // === 搜索 ===
+  var searchInput = document.getElementById('search-input');
+  searchInput.addEventListener('input', function() {
+    var q = searchInput.value.trim().toLowerCase();
+    if (!q) {
+      document.querySelectorAll('.search-hidden').forEach(function(el) { el.classList.remove('search-hidden'); });
+      return;
+    }
+    // 搜索 subsection 级别
+    document.querySelectorAll('.subsection, .report-card, .card').forEach(function(el) {
+      var text = el.textContent.toLowerCase();
+      el.classList.toggle('search-hidden', text.indexOf(q) === -1);
+    });
+  });
+})();
+</script>
+</body>
+</html>
