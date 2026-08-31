@@ -196,6 +196,29 @@ tbody tr:hover { background: var(--bg-hover); }
 .favored-item .fi-name { font-weight: 600; color: var(--text-bright); }
 .favored-item .fi-note { color: var(--text-secondary); font-size: 13px; }
 
+/* 市场观察面板 */
+.market-overview { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 16px; margin-bottom: 20px; }
+.market-summary { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 20px; }
+.market-summary .ms-title { font-size: 18px; font-weight: 700; color: var(--text-bright); margin-bottom: 8px; }
+.market-summary .ms-meta { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 12px; }
+.market-summary .ms-conclusion { font-size: 14px; color: var(--text-primary); line-height: 1.7; }
+.market-factors { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+.market-factors ul { margin-bottom: 0; font-size: 13px; color: var(--text-secondary); }
+.metric-group { margin-bottom: 18px; }
+.metric-group h4 { margin: 0 0 10px; color: var(--color-accent); }
+.metric-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.metric-card { background: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px; }
+.metric-card .mc-name { font-size: 12px; color: var(--text-secondary); }
+.metric-card .mc-value { font-size: 16px; font-weight: 700; color: var(--text-bright); margin: 3px 0; }
+.metric-card .mc-signal { font-size: 12px; color: var(--text-primary); }
+.metric-card .mc-source { font-size: 11px; color: var(--text-secondary); margin-top: 6px; }
+.quality-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.quality-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 12px 14px; }
+.quality-card .qc-source { font-weight: 600; color: var(--text-bright); }
+.quality-card .qc-usage { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+.evidence-list { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px; }
+.evidence-list .tag { font-size: 11px; }
+
 /* 回到顶部 */
 .scroll-top { position: fixed; bottom: 30px; right: 30px; width: 42px; height: 42px; border-radius: 50%; background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-secondary); font-size: 18px; cursor: pointer; opacity: 0; transition: all 0.3s; z-index: 800; display: flex; align-items: center; justify-content: center; }
 .scroll-top.visible { opacity: 1; }
@@ -216,6 +239,7 @@ tbody tr:hover { background: var(--bg-hover); }
   .header-search { display: none; }
   .report-grid { grid-template-columns: 1fr; }
   .cycle-indicators { grid-template-columns: 1fr; }
+  .market-overview, .market-factors, .metric-grid, .quality-grid { grid-template-columns: 1fr; }
   .clock { width: 320px; height: 320px; }
 }
   </style>
@@ -234,7 +258,7 @@ tbody tr:hover { background: var(--bg-hover); }
     <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>📚</span><span>基础金融概念库</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#basics-market">股票市场基础</a><a class="nav-item" data-target="#basics-valuation">估值方法论</a><a class="nav-item" data-target="#basics-finance">财务分析基础</a><a class="nav-item" data-target="#basics-tech">技术分析基础</a><a class="nav-item" data-target="#basics-strategy">投资策略</a></div></div>
     <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>🔄</span><span>周期趋势框架</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#cycle-clock">美林投资时钟</a><a class="nav-item" data-target="#cycle-china">中国特色周期</a><a class="nav-item" data-target="#cycle-guide">顺周期操作指南</a><a class="nav-item" data-target="#cycle-case">行业分析范例</a></div></div>
     <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>📰</span><span>每日研报精选</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#reports">研报列表</a></div></div>
-    <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>🎯</span><span>板块推荐</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#recommend-low">低估值筛选</a><a class="nav-item" data-target="#recommend-cycle">顺周期定位</a><a class="nav-item" data-target="#recommend-summary">综合推荐</a></div></div>
+    <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>🎯</span><span>板块推荐</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#recommend-dashboard">市场观察面板</a><a class="nav-item" data-target="#recommend-sources">数据源质量</a><a class="nav-item" data-target="#recommend-low">低估值筛选</a><a class="nav-item" data-target="#recommend-cycle">顺周期定位</a><a class="nav-item" data-target="#recommend-summary">综合推荐</a></div></div>
   </nav>
 
   <!-- 主内容区 -->
@@ -645,6 +669,25 @@ Step 6: 周期信号变化时调仓换股</code></pre>
     <section class="section" id="recommend">
       <div class="section-header"><span class="section-icon">🎯</span><h2>板块推荐</h2><span class="section-sub" id="recommend-date">加载中...</span></div>
 
+      <div class="subsection" id="recommend-dashboard">
+        <h3>市场观察面板</h3>
+        <p>整合宏观信用、资金流向、市场情绪、商品汇率等高频信息，辅助判断当前行情所处位置。</p>
+        <div class="market-overview">
+          <div class="market-summary" id="market-judgement-card"><div style="color:var(--text-secondary);">行情判断加载中...</div></div>
+          <div class="market-summary" id="signal-score-card"><div style="color:var(--text-secondary);">信号强度加载中...</div></div>
+        </div>
+        <div class="metric-group"><h4>宏观信用</h4><div class="metric-grid" id="macro-credit-grid"></div></div>
+        <div class="metric-group"><h4>资金流向</h4><div class="metric-grid" id="fund-flows-grid"></div></div>
+        <div class="metric-group"><h4>市场情绪</h4><div class="metric-grid" id="market-sentiment-grid"></div></div>
+        <div class="metric-group"><h4>商品与汇率</h4><div class="metric-grid" id="commodities-fx-grid"></div></div>
+      </div>
+
+      <div class="subsection" id="recommend-sources">
+        <h3>数据源质量</h3>
+        <p>优先采用官方数据、交易所数据和结构化金融数据，券商研报用于观点参考，普通新闻仅作为事件补充。</p>
+        <div class="quality-grid" id="source-quality-grid"></div>
+      </div>
+
       <div class="subsection" id="recommend-low">
         <h3>低估值筛选</h3>
         <p>以下为A股主要行业当前估值水平及历史分位值，分位值越低表示越被低估。数据每日更新。</p>
@@ -699,6 +742,50 @@ Step 6: 周期信号变化时调仓换股</code></pre>
     {"id":"r007","category":"个股研究","title":"某铜资源龙头：东吴证券看好量价齐升","source":"东吴证券","rating":"买入","summary":"公司铜资源储量国内领先，受益于铜价上涨和产量增长，业绩有望量价齐升。当前PE仅8倍，股息率4.5%，估值显著低于历史中枢。东吴证券看好未来两年铜价表现。","keyPoints":["铜矿储量行业领先，成本控制优秀","未来两年铜价上行确定性高","PE分位值约12%，PB分位值约8%，估值极低"],"tags":["铜","低估值","高股息"]},
     {"id":"r008","category":"宏观策略","title":"A股中报披露完毕 整体利润增长5800亿","source":"广发证券","rating":"增持","summary":"A股中报披露完毕，整体利润实现增长，较去年同期多赚约5800亿元。银行、有色金属、军工等行业业绩表现突出。中报数据验证经济复苏早期判断，利好顺周期板块。","keyPoints":["A股中报整体利润同比增长约5800亿","银行、有色金属、军工等行业业绩突出","中报数据验证复苏早期判断，利好顺周期配置"],"tags":["中报","业绩","复苏","顺周期"]}
   ],
+  "macroCredit": [
+    {"name":"PMI","value":"49.8%","signal":"环比+0.6pct，边际改善","direction":"up","source":"国家统计局/公开资讯"},
+    {"name":"CPI","value":"待更新","signal":"需结合最新通胀数据确认","direction":"flat","source":"国家统计局"},
+    {"name":"PPI","value":"待更新","signal":"观察工业品价格是否触底回升","direction":"flat","source":"国家统计局"},
+    {"name":"社融","value":"待更新","signal":"判断宽信用是否落地","direction":"flat","source":"央行"},
+    {"name":"M2","value":"待更新","signal":"观察货币供应与信用传导","direction":"flat","source":"央行"},
+    {"name":"LPR(1Y)","value":"3.10%","signal":"年内第三次降息后低位","direction":"down","source":"央行/全国银行间同业拆借中心"},
+    {"name":"10年国债","value":"2.15%","signal":"低位运行，支撑估值修复","direction":"down","source":"中债/公开行情"}
+  ],
+  "fundFlows": [
+    {"name":"北向资金","value":"待更新","signal":"观察外资连续净流入/流出方向","direction":"flat","source":"交易所/东方财富"},
+    {"name":"融资余额","value":"待更新","signal":"判断杠杆资金风险偏好","direction":"flat","source":"交易所/东方财富"},
+    {"name":"主力资金","value":"待更新","signal":"跟踪行业大单净流入主线","direction":"flat","source":"东方财富/同花顺"},
+    {"name":"ETF资金","value":"待更新","signal":"观察宽基与行业ETF净申赎","direction":"flat","source":"交易所/基金公告"}
+  ],
+  "marketSentiment": [
+    {"name":"上证指数","value":"3986.30","signal":"+0.86%，成交1.014万亿","direction":"up","source":"公开行情"},
+    {"name":"成交额","value":"1.014万亿","signal":"活跃度回升，需确认能否持续放量","direction":"up","source":"公开行情"},
+    {"name":"涨跌家数比","value":"待更新","signal":"判断市场上涨广度","direction":"flat","source":"交易所/行情数据"},
+    {"name":"涨跌停家数","value":"待更新","signal":"识别短线情绪过热或退潮","direction":"flat","source":"行情数据"},
+    {"name":"市场风格","value":"低估值占优","signal":"行情快速轮动，追高风险上升","direction":"flat","source":"券商策略/行情表现"}
+  ],
+  "commoditiesFx": [
+    {"name":"LME铜/沪铜","value":"待更新","signal":"有色金属和全球需求验证指标","direction":"flat","source":"公开商品行情"},
+    {"name":"原油","value":"待更新","signal":"通胀输入和上游周期验证指标","direction":"flat","source":"公开商品行情"},
+    {"name":"美元指数","value":"待更新","signal":"影响商品定价和外资风险偏好","direction":"flat","source":"公开外汇行情"},
+    {"name":"人民币汇率","value":"待更新","signal":"影响外资流向和出口链预期","direction":"flat","source":"外汇交易中心/公开行情"}
+  ],
+  "marketJudgement": {
+    "stage":"复苏期（早期）",
+    "signalScore":68,
+    "signalLevel":"偏积极",
+    "conclusion":"当前已采集指标显示经济边际改善、低利率环境延续、低估值风格占优，但资金流、通胀、信用和商品价格仍需进一步补齐验证。",
+    "supportingFactors":["PMI环比改善","LPR和国债收益率处于低位","中报利润改善","低估值策略占优"],
+    "riskFactors":["PMI仍未回到荣枯线上方","资金面指标待交叉验证","热点轮动较快，追高风险较高"],
+    "rules":["增长改善+通胀低位+信用扩张=复苏信号增强","资金连续流入+成交温和放大=风险偏好改善","估值低位+景气上行+资金确认=板块推荐优先级提升"]
+  },
+  "sourceQuality": [
+    {"source":"官方数据","level":"高","usage":"PMI、CPI、PPI、社融、M2、LPR等宏观指标","verified":true,"updatedAt":"按官方发布时间"},
+    {"source":"交易所/中债/外汇交易中心","level":"高","usage":"融资融券、沪深港通、债券收益率、汇率等市场数据","verified":true,"updatedAt":"交易日/工作日"},
+    {"source":"finance-data 插件","level":"高","usage":"指数行情、行业估值、财务和市场结构化数据","verified":true,"updatedAt":"自动任务执行时"},
+    {"source":"东方财富/同花顺/新浪财经","level":"中高","usage":"资金流、涨跌停、研报聚合、商品行情补充","verified":false,"updatedAt":"自动任务执行时交叉验证"},
+    {"source":"券商公开研报","level":"中","usage":"行业景气、策略观点和推荐逻辑参考","verified":false,"updatedAt":"按研报发布时间"}
+  ],
   "cyclePosition": {
     "stage": "复苏期（早期）",
     "indicators": [
@@ -743,12 +830,12 @@ Step 6: 周期信号变化时调仓换股</code></pre>
     {"sector":"农林牧渔","pe":15.2,"pePercentile":19.0,"pb":2.45,"pbPercentile":17.0,"dividendYield":2.1,"reason":"猪周期底部，关注反转信号"}
   ],
   "recommendations": [
-    {"rank":1,"sector":"银行（高股息策略）","logic":"信贷资产质量改善+PE分位值仅8%+股息率近6%+低估值策略占优","watchPoints":"信贷投放数据、资产质量变化、息差走势","riskLevel":"低"},
-    {"rank":2,"sector":"有色金属（铜/铝）","logic":"东吴证券看好两年铜价+供给约束+PE/PB分位值双低","watchPoints":"铜价走势、美元指数、全球PMI","riskLevel":"中"},
-    {"rank":3,"sector":"液冷/AI算力产业链","logic":"AI服务器需求暴涨260%+千亿产业提速+央视催化","watchPoints":"AI算力需求、液冷渗透率、龙头企业订单","riskLevel":"中"},
-    {"rank":4,"sector":"军工","logic":"十五五开局+装备批产周期+中报业绩突出","watchPoints":"订单公告、产业链排产、军费预算","riskLevel":"低"},
-    {"rank":5,"sector":"光模块","logic":"2026年业务快速放量+AI算力拉动+龙头技术领先","watchPoints":"光模块出货量、AI资本开支、技术迭代","riskLevel":"中"},
-    {"rank":6,"sector":"通信","logic":"AI基建受益+5G应用+估值偏低","watchPoints":"运营商资本开支、AI应用落地进度","riskLevel":"中"}
+    {"rank":1,"sector":"银行（高股息策略）","logic":"信贷资产质量改善+PE分位值仅8%+股息率近6%+低估值策略占优","watchPoints":"信贷投放数据、资产质量变化、息差走势","riskLevel":"低","evidence":{"valuation":"PE分位8%、PB分位3%","fund":"资金流待验证","cycle":"复苏早期+低利率","risk":"息差继续下行或资产质量反复"}},
+    {"rank":2,"sector":"有色金属（铜/铝）","logic":"东吴证券看好两年铜价+供给约束+PE/PB分位值双低","watchPoints":"铜价走势、美元指数、全球PMI","riskLevel":"中","evidence":{"valuation":"PE/PB分位值双低","fund":"关注北向和主力资金确认","cycle":"复苏期资源品弹性较高","risk":"美元走强或全球需求不及预期"}},
+    {"rank":3,"sector":"液冷/AI算力产业链","logic":"AI服务器需求暴涨260%+千亿产业提速+央视催化","watchPoints":"AI算力需求、液冷渗透率、龙头企业订单","riskLevel":"中","evidence":{"valuation":"估值需结合订单消化","fund":"短线资金活跃，需防追高","cycle":"产业升级独立景气","risk":"主题交易拥挤和业绩兑现压力"}},
+    {"rank":4,"sector":"军工","logic":"十五五开局+装备批产周期+中报业绩突出","watchPoints":"订单公告、产业链排产、军费预算","riskLevel":"低","evidence":{"valuation":"行业估值中性","fund":"资金确认待跟踪","cycle":"政策周期和装备周期共振","risk":"订单节奏和信息披露不确定"}},
+    {"rank":5,"sector":"光模块","logic":"2026年业务快速放量+AI算力拉动+龙头技术领先","watchPoints":"光模块出货量、AI资本开支、技术迭代","riskLevel":"中","evidence":{"valuation":"估值中性偏高需精选","fund":"关注机构资金持续性","cycle":"AI资本开支驱动","risk":"技术迭代和海外需求波动"}},
+    {"rank":6,"sector":"通信","logic":"AI基建受益+5G应用+估值偏低","watchPoints":"运营商资本开支、AI应用落地进度","riskLevel":"中","evidence":{"valuation":"估值偏低","fund":"资金流待验证","cycle":"AI基建和数字经济支撑","risk":"资本开支低于预期"}}
   ]
 }
 </script>
@@ -861,6 +948,61 @@ Step 6: 周期信号变化时调仓换股</code></pre>
   });
   renderReports();
 
+  // === 市场观察面板 ===
+  function textOrDash(v) { return (v === undefined || v === null || v === '') ? '暂无数据' : String(v); }
+  function statusClass(direction) {
+    if (direction === 'up') return 'up';
+    if (direction === 'down') return 'down';
+    return 'flat';
+  }
+  function statusArrow(direction) {
+    if (direction === 'up') return '&uarr;';
+    if (direction === 'down') return '&darr;';
+    return '&rarr;';
+  }
+  function renderMetricGrid(id, data) {
+    var box = document.getElementById(id);
+    if (!box) return;
+    var rows = data || [];
+    if (rows.length === 0) {
+      box.innerHTML = '<div class="metric-card"><div class="mc-signal">暂无数据</div></div>';
+      return;
+    }
+    box.innerHTML = rows.map(function(m) {
+      return '<div class="metric-card"><div class="mc-name">' + textOrDash(m.name) + '</div><div class="mc-value">' + textOrDash(m.value) + ' <span class="ci-arrow ' + statusClass(m.direction) + '">' + statusArrow(m.direction) + '</span></div><div class="mc-signal">' + textOrDash(m.signal) + '</div><div class="mc-source">来源：' + textOrDash(m.source) + '</div></div>';
+    }).join('');
+  }
+  function renderMarketJudgement() {
+    var mj = dailyData.marketJudgement || {};
+    var card = document.getElementById('market-judgement-card');
+    var scoreCard = document.getElementById('signal-score-card');
+    if (!card || !scoreCard) return;
+    var supports = (mj.supportingFactors || []).map(function(x) { return '<li>' + x + '</li>'; }).join('');
+    var risks = (mj.riskFactors || []).map(function(x) { return '<li>' + x + '</li>'; }).join('');
+    var rules = (mj.rules || []).map(function(x) { return '<span class="tag">' + x + '</span>'; }).join('');
+    card.innerHTML = '<div class="ms-title">' + textOrDash(mj.stage || (dailyData.cyclePosition && dailyData.cyclePosition.stage)) + '</div><div class="ms-meta"><span class="tag green">' + textOrDash(mj.signalLevel) + '</span><span class="tag">综合判断</span></div><div class="ms-conclusion">' + textOrDash(mj.conclusion) + '</div><div class="market-factors"><div><strong>支持因素</strong><ul>' + (supports || '<li>暂无数据</li>') + '</ul></div><div><strong>风险因素</strong><ul>' + (risks || '<li>暂无数据</li>') + '</ul></div></div>';
+    scoreCard.innerHTML = '<div class="ms-title">信号强度：' + textOrDash(mj.signalScore) + '/100</div><div class="ms-conclusion">判断规则</div><div class="evidence-list">' + (rules || '<span class="tag">暂无规则</span>') + '</div>';
+  }
+  function renderSourceQuality() {
+    var box = document.getElementById('source-quality-grid');
+    if (!box) return;
+    var rows = dailyData.sourceQuality || [];
+    if (rows.length === 0) {
+      box.innerHTML = '<div class="quality-card"><div class="qc-usage">暂无数据源说明</div></div>';
+      return;
+    }
+    box.innerHTML = rows.map(function(s) {
+      var cls = s.level === '高' ? 'green' : (s.level === '中' ? 'yellow' : '');
+      return '<div class="quality-card"><div class="qc-source">' + textOrDash(s.source) + ' <span class="tag ' + cls + '">' + textOrDash(s.level) + '</span></div><div class="qc-usage">' + textOrDash(s.usage) + '</div><div class="qc-usage">更新：' + textOrDash(s.updatedAt) + ' · 交叉验证：' + (s.verified ? '是' : '待验证') + '</div></div>';
+    }).join('');
+  }
+  renderMarketJudgement();
+  renderMetricGrid('macro-credit-grid', dailyData.macroCredit);
+  renderMetricGrid('fund-flows-grid', dailyData.fundFlows);
+  renderMetricGrid('market-sentiment-grid', dailyData.marketSentiment);
+  renderMetricGrid('commodities-fx-grid', dailyData.commoditiesFx);
+  renderSourceQuality();
+
   // === 低估值表格 ===
   function percentileClass(p) {
     if (p < 30) return 'text-up';
@@ -936,7 +1078,8 @@ Step 6: 周期信号变化时调仓换股</code></pre>
     if (rows.length === 0) { body.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-secondary);padding:24px;">暂无数据</td></tr>'; return; }
     body.innerHTML = rows.map(function(d) {
       var riskCls = d.riskLevel === '\u4f4e' ? 'text-up' : (d.riskLevel === '\u9ad8' ? 'text-down' : 'text-warn');
-      return '<tr><td>' + d.rank + '</td><td><strong>' + d.sector + '</strong></td><td style="font-size:12px;">' + d.logic + '</td><td style="font-size:12px;">' + d.watchPoints + '</td><td class="' + riskCls + '">' + d.riskLevel + '</td></tr>';
+      var evidence = d.evidence ? '<div class="evidence-list">' + Object.keys(d.evidence).map(function(k) { return '<span class="tag">' + d.evidence[k] + '</span>'; }).join('') + '</div>' : '';
+      return '<tr><td>' + d.rank + '</td><td><strong>' + d.sector + '</strong></td><td style="font-size:12px;">' + d.logic + evidence + '</td><td style="font-size:12px;">' + d.watchPoints + '</td><td class="' + riskCls + '">' + d.riskLevel + '</td></tr>';
     }).join('');
   }
 

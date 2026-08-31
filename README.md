@@ -164,10 +164,14 @@ gh auth setup-git
 
 | 更新项 | 频率 | 数据来源 |
 |--------|------|---------|
-| 每日研报精选 | 每日 | 券商公开研报 + 市场资讯 |
+| 每日研报精选 | 每日 | 券商公开研报 + 主流财经资讯 |
+| 宏观信用指标 | 每日/按发布时间 | 国家统计局、央行、finance-data |
+| 资金流向指标 | 每日 | 交易所、东方财富、finance-data |
+| 市场情绪指标 | 每日 | 行情数据、涨跌家数、涨跌停、成交额 |
+| 商品与汇率 | 每日 | 公开商品/外汇行情 |
 | 低估值筛选表 | 每日 | finance-data 插件获取行业估值 |
-| 顺周期定位 | 每日 | 宏观数据（PMI/CPI/社融/LPR等） |
-| 综合推荐 | 每日 | 综合以上分析 |
+| 顺周期定位 | 每日 | 宏观 + 资金 + 情绪 + 商品信号 |
+| 综合推荐 | 每日 | 估值、资金、景气、政策、风险交叉验证 |
 | 静态知识库 | 按需 | 不定期补充 |
 
 ### 数据更新流程
@@ -175,20 +179,21 @@ gh auth setup-git
 ```
 每天 08:50 自动触发
     ↓
-① 获取最新市场数据
-   - 指数行情（上证指数/沪深300/中证500）
-   - 宏观指标（PMI/CPI/PPI/社融/M2/LPR）
-   - 券商研报（宏观策略/行业分析/个股研究）
+① 按优先级获取并交叉验证市场数据
+   - 官方/交易所数据：PMI、CPI、PPI、社融、M2、LPR、融资融券等
+   - finance-data：指数行情、行业估值、财务和结构化市场数据
+   - 主流财经网站：资金流、涨跌停、商品、研报聚合等补充信息
+   - 券商研报：策略观点、行业景气、推荐逻辑参考
     ↓
 ② 更新 index.html 中的 JSON 数据块
    位置：<!-- DAILY_DATA_START --> 到 <!-- DAILY_DATA_END --> 之间
-   内容：date / reports / cyclePosition / lowValuation / recommendations
+   内容：date / reports / macroCredit / fundFlows / marketSentiment / commoditiesFx / marketJudgement / sourceQuality / cyclePosition / lowValuation / recommendations
     ↓
 ③ 同步备份到 data/reports.json
     ↓
 ④ git commit & push → GitHub Pages 自动重建（1-2分钟）
     ↓
-⑤ 输出今日市场要点总结
+⑤ 输出今日市场要点、数据源质量、行情判断和推荐变化
 ```
 
 ### 数据块结构
@@ -199,20 +204,26 @@ gh auth setup-git
 {
   "date": "2026-08-31",           // 当天日期
   "reports": [...],                // 研报列表（8篇）
-  "cyclePosition": {              // 周期定位
-    "stage": "复苏期（早期）",
-    "indicators": [...],           // 宏观指标列表
-    "favoredSectors": [...]        // 受益板块（green/yellow/red）
-  },
-  "lowValuation": [...],          // 低估值板块表（20个行业）
-  "recommendations": [...]        // 综合推荐（6个板块）
+  "macroCredit": [...],            // 宏观信用：PMI/CPI/PPI/社融/M2/LPR/国债
+  "fundFlows": [...],              // 资金流：北向/融资/主力/ETF
+  "marketSentiment": [...],        // 情绪：成交额/涨跌比/涨跌停/风格
+  "commoditiesFx": [...],          // 商品汇率：铜/原油/美元/人民币
+  "marketJudgement": { ... },      // 行情阶段、信号强度、支持和风险因素
+  "sourceQuality": [...],          // 数据源质量、用途、更新口径
+  "cyclePosition": { ... },        // 周期定位和受益板块
+  "lowValuation": [...],           // 低估值板块表（20个行业）
+  "recommendations": [...]         // 综合推荐（含 evidence 交叉验证）
 }
 ```
 
 ### 数据源优先级
 
-1. **优先使用 finance-data 插件** — 通过自然语言描述需求，自动匹配数据源
-2. **finance-data 不覆盖时，使用 Web Search 兜底** — 搜索东方财富等财经网站获取补充信息
+1. **官方/交易所数据** — 国家统计局、央行、交易所、中债、外汇交易中心，作为宏观和市场事实的最高优先级。
+2. **finance-data 插件** — 获取指数行情、行业估值、财务和资金类结构化数据。
+3. **主流财经网站** — 东方财富、同花顺、新浪财经等，用于资金流、涨跌停、商品行情和研报聚合补充。
+4. **券商公开研报** — 用于观点、行业景气和推荐逻辑参考，不直接替代事实数据。
+
+若数据无法确认，字段值写为 `待更新`，并在 `signal` 或 `source` 中标注口径，不编造具体数值。
 
 ### 财务数据时效性
 
@@ -235,11 +246,12 @@ gh auth setup-git
 Agent 每日更新时的操作步骤：
 
 1. 读取 `index.html` 中的 `<!-- DAILY_DATA_START -->` 到 `<!-- DAILY_DATA_END -->` 之间的 JSON 数据块
-2. 获取最新市场数据，生成新的 JSON
-3. 替换该数据块（保持字段结构不变）
-4. 更新页面显示的日期
-5. 同步更新 `data/reports.json` 备份文件
-6. 执行 `git add index.html data/reports.json && git commit -m "每日数据更新 - 日期" && git push`
+2. 按数据源优先级获取最新市场数据，并对关键指标做交叉验证
+3. 生成新的 JSON，保持 `reports`、`cyclePosition`、`lowValuation`、`recommendations` 兼容，并补齐 `macroCredit`、`fundFlows`、`marketSentiment`、`commoditiesFx`、`marketJudgement`、`sourceQuality`
+4. 替换该数据块，确保 JSON 格式合法、缺失数据用 `待更新` 标注
+5. 更新页面显示的日期
+6. 同步更新 `data/reports.json` 备份文件
+7. 执行 `git add index.html data/reports.json && git commit -m "每日数据更新 - 日期" && git push`
 
 ### 研报字段规范
 

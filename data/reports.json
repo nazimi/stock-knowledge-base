@@ -1,65 +1,705 @@
 {
+  "description": "每日研报、市场观察与推荐板块数据备份 — Agent 更新 index.html 时同步更新此文件",
   "date": "2026-08-31",
-  "description": "每日研报与推荐板块数据备份 — Agent 更新 index.html 时同步更新此文件",
   "reports": [
-    {"id":"r001","category":"宏观策略","title":"8月PMI回升至49.8% 经济边际改善信号显现","source":"中信证券","rating":"买入","summary":"国家统计局公布8月制造业PMI为49.8%，比上月上升0.6个百分点，虽仍处荣枯线下方，但边际改善明显。新订单指数回升，预示经济企稳复苏动能增强。叠加货币政策宽松，利好周期股和低估值板块。","keyPoints":["PMI环比回升0.6个百分点，经济边际改善","新订单指数回升，内需企稳信号初现","低估值策略当前明显占优，券商建议关注防御+周期方向"],"tags":["PMI","经济复苏","低估值策略"]},
-    {"id":"r002","category":"宏观策略","title":"十大券商策略：行情快速轮动 低估值策略明显占优","source":"东方财富","rating":"增持","summary":"十大券商最新策略观点认为，当前A股行情快速轮动，低估值策略明显占优。A股有望延续反弹，短期再平衡或加速。建议关注银行、有色金属、光模块等方向。","keyPoints":["行情快速轮动，低估值策略占优","A股有望延续反弹，短期再平衡加速","银行房地产贷款投放增量空间，资产质量改善预期强"],"tags":["券商策略","低估值","反弹"]},
-    {"id":"r003","category":"行业分析","title":"有色金属：东吴证券看好未来两年铜价表现","source":"东吴证券","rating":"买入","summary":"东吴证券发布研报看好未来两年铜价表现，认为全球铜矿供给增速放缓，新能源转型拉动需求增长，建议优先配置资源标的享受利润增长。行业PE分位值处于30%以下，估值仍偏低。","keyPoints":["看好未来两年铜价表现，资源标的优先受益","全球铜矿新增产能有限，供给端约束明显","新能源车+电网投资拉动铜铝长期需求"],"tags":["有色金属","铜","低估值"]},
-    {"id":"r004","category":"行业分析","title":"液冷产业全面提速 千亿市场加速落地","source":"华泰证券","rating":"增持","summary":"央视报道释放重磅利好，引爆液冷概念。AI服务器需求暴涨260%，带动液冷散热需求爆发式增长。千亿产业全面提速，相关概念股出现直线封板。","keyPoints":["AI服务器需求暴涨260%，液冷散热需求爆发","央视重磅报道催化，千亿产业全面提速","覆铜板龙头年内第七次涨价，上游材料供应紧张"],"tags":["液冷","AI","散热","产业链"]},
-    {"id":"r005","category":"行业分析","title":"银行板块走强 房地产信贷新规利好资产质量改善","source":"中信证券","rating":"买入","summary":"银行板块在房地产信贷新规后首个交易日走强。中信证券预计银行房地产类贷款投放具备增量空间，资产质量迎来高确定性改善预期。当前银行PE仅5倍左右，股息率近6%，低估值+高股息配置价值突出。","keyPoints":["房地产信贷新规利好银行资产质量改善","贷款投放增量空间明确，高确定性改善预期","PE分位值约8%，股息率近6%，防御属性突出"],"tags":["银行","低估值","高股息","房地产信贷"]},
-    {"id":"r006","category":"个股研究","title":"光模块龙头：2026年业务快速放量 中信证券看好","source":"中信证券","rating":"买入","summary":"中信证券指出2026年以来国内龙头模拟公司光模块相关业务快速放量，AI算力需求持续拉动光模块产业链景气度。建议关注技术领先、产能充裕的头部企业。","keyPoints":["2026年光模块业务快速放量","AI算力需求拉动产业链景气度上行","龙头公司技术+产能优势明显"],"tags":["光模块","AI","算力"]},
-    {"id":"r007","category":"个股研究","title":"某铜资源龙头：东吴证券看好量价齐升","source":"东吴证券","rating":"买入","summary":"公司铜资源储量国内领先，受益于铜价上涨和产量增长，业绩有望量价齐升。当前PE仅8倍，股息率4.5%，估值显著低于历史中枢。东吴证券看好未来两年铜价表现。","keyPoints":["铜矿储量行业领先，成本控制优秀","未来两年铜价上行确定性高","PE分位值约12%，PB分位值约8%，估值极低"],"tags":["铜","低估值","高股息"]},
-    {"id":"r008","category":"宏观策略","title":"A股中报披露完毕 整体利润增长5800亿","source":"广发证券","rating":"增持","summary":"A股中报披露完毕，整体利润实现增长，较去年同期多赚约5800亿元。银行、有色金属、军工等行业业绩表现突出。中报数据验证经济复苏早期判断，利好顺周期板块。","keyPoints":["A股中报整体利润同比增长约5800亿","银行、有色金属、军工等行业业绩突出","中报数据验证复苏早期判断，利好顺周期配置"],"tags":["中报","业绩","复苏","顺周期"]}
+    {
+      "id": "r001",
+      "category": "宏观策略",
+      "title": "8月PMI回升至49.8% 经济边际改善信号显现",
+      "source": "中信证券",
+      "rating": "买入",
+      "summary": "国家统计局公布8月制造业PMI为49.8%，比上月上升0.6个百分点，虽仍处荣枯线下方，但边际改善明显。新订单指数回升，预示经济企稳复苏动能增强。叠加货币政策宽松，利好周期股和低估值板块。",
+      "keyPoints": [
+        "PMI环比回升0.6个百分点，经济边际改善",
+        "新订单指数回升，内需企稳信号初现",
+        "低估值策略当前明显占优，券商建议关注防御+周期方向"
+      ],
+      "tags": [
+        "PMI",
+        "经济复苏",
+        "低估值策略"
+      ]
+    },
+    {
+      "id": "r002",
+      "category": "宏观策略",
+      "title": "十大券商策略：行情快速轮动 低估值策略明显占优",
+      "source": "东方财富",
+      "rating": "增持",
+      "summary": "十大券商最新策略观点认为，当前A股行情快速轮动，低估值策略明显占优。A股有望延续反弹，短期再平衡或加速。建议关注银行、有色金属、光模块等方向。",
+      "keyPoints": [
+        "行情快速轮动，低估值策略占优",
+        "A股有望延续反弹，短期再平衡加速",
+        "银行房地产贷款投放增量空间，资产质量改善预期强"
+      ],
+      "tags": [
+        "券商策略",
+        "低估值",
+        "反弹"
+      ]
+    },
+    {
+      "id": "r003",
+      "category": "行业分析",
+      "title": "有色金属：东吴证券看好未来两年铜价表现",
+      "source": "东吴证券",
+      "rating": "买入",
+      "summary": "东吴证券发布研报看好未来两年铜价表现，认为全球铜矿供给增速放缓，新能源转型拉动需求增长，建议优先配置资源标的享受利润增长。行业PE分位值处于30%以下，估值仍偏低。",
+      "keyPoints": [
+        "看好未来两年铜价表现，资源标的优先受益",
+        "全球铜矿新增产能有限，供给端约束明显",
+        "新能源车+电网投资拉动铜铝长期需求"
+      ],
+      "tags": [
+        "有色金属",
+        "铜",
+        "低估值"
+      ]
+    },
+    {
+      "id": "r004",
+      "category": "行业分析",
+      "title": "液冷产业全面提速 千亿市场加速落地",
+      "source": "华泰证券",
+      "rating": "增持",
+      "summary": "央视报道释放重磅利好，引爆液冷概念。AI服务器需求暴涨260%，带动液冷散热需求爆发式增长。千亿产业全面提速，相关概念股出现直线封板。",
+      "keyPoints": [
+        "AI服务器需求暴涨260%，液冷散热需求爆发",
+        "央视重磅报道催化，千亿产业全面提速",
+        "覆铜板龙头年内第七次涨价，上游材料供应紧张"
+      ],
+      "tags": [
+        "液冷",
+        "AI",
+        "散热",
+        "产业链"
+      ]
+    },
+    {
+      "id": "r005",
+      "category": "行业分析",
+      "title": "银行板块走强 房地产信贷新规利好资产质量改善",
+      "source": "中信证券",
+      "rating": "买入",
+      "summary": "银行板块在房地产信贷新规后首个交易日走强。中信证券预计银行房地产类贷款投放具备增量空间，资产质量迎来高确定性改善预期。当前银行PE仅5倍左右，股息率近6%，低估值+高股息配置价值突出。",
+      "keyPoints": [
+        "房地产信贷新规利好银行资产质量改善",
+        "贷款投放增量空间明确，高确定性改善预期",
+        "PE分位值约8%，股息率近6%，防御属性突出"
+      ],
+      "tags": [
+        "银行",
+        "低估值",
+        "高股息",
+        "房地产信贷"
+      ]
+    },
+    {
+      "id": "r006",
+      "category": "个股研究",
+      "title": "光模块龙头：2026年业务快速放量 中信证券看好",
+      "source": "中信证券",
+      "rating": "买入",
+      "summary": "中信证券指出2026年以来国内龙头模拟公司光模块相关业务快速放量，AI算力需求持续拉动光模块产业链景气度。建议关注技术领先、产能充裕的头部企业。",
+      "keyPoints": [
+        "2026年光模块业务快速放量",
+        "AI算力需求拉动产业链景气度上行",
+        "龙头公司技术+产能优势明显"
+      ],
+      "tags": [
+        "光模块",
+        "AI",
+        "算力"
+      ]
+    },
+    {
+      "id": "r007",
+      "category": "个股研究",
+      "title": "某铜资源龙头：东吴证券看好量价齐升",
+      "source": "东吴证券",
+      "rating": "买入",
+      "summary": "公司铜资源储量国内领先，受益于铜价上涨和产量增长，业绩有望量价齐升。当前PE仅8倍，股息率4.5%，估值显著低于历史中枢。东吴证券看好未来两年铜价表现。",
+      "keyPoints": [
+        "铜矿储量行业领先，成本控制优秀",
+        "未来两年铜价上行确定性高",
+        "PE分位值约12%，PB分位值约8%，估值极低"
+      ],
+      "tags": [
+        "铜",
+        "低估值",
+        "高股息"
+      ]
+    },
+    {
+      "id": "r008",
+      "category": "宏观策略",
+      "title": "A股中报披露完毕 整体利润增长5800亿",
+      "source": "广发证券",
+      "rating": "增持",
+      "summary": "A股中报披露完毕，整体利润实现增长，较去年同期多赚约5800亿元。银行、有色金属、军工等行业业绩表现突出。中报数据验证经济复苏早期判断，利好顺周期板块。",
+      "keyPoints": [
+        "A股中报整体利润同比增长约5800亿",
+        "银行、有色金属、军工等行业业绩突出",
+        "中报数据验证复苏早期判断，利好顺周期配置"
+      ],
+      "tags": [
+        "中报",
+        "业绩",
+        "复苏",
+        "顺周期"
+      ]
+    }
+  ],
+  "macroCredit": [
+    {
+      "name": "PMI",
+      "value": "49.8%",
+      "signal": "环比+0.6pct，边际改善",
+      "direction": "up",
+      "source": "国家统计局/公开资讯"
+    },
+    {
+      "name": "CPI",
+      "value": "待更新",
+      "signal": "需结合最新通胀数据确认",
+      "direction": "flat",
+      "source": "国家统计局"
+    },
+    {
+      "name": "PPI",
+      "value": "待更新",
+      "signal": "观察工业品价格是否触底回升",
+      "direction": "flat",
+      "source": "国家统计局"
+    },
+    {
+      "name": "社融",
+      "value": "待更新",
+      "signal": "判断宽信用是否落地",
+      "direction": "flat",
+      "source": "央行"
+    },
+    {
+      "name": "M2",
+      "value": "待更新",
+      "signal": "观察货币供应与信用传导",
+      "direction": "flat",
+      "source": "央行"
+    },
+    {
+      "name": "LPR(1Y)",
+      "value": "3.10%",
+      "signal": "年内第三次降息后低位",
+      "direction": "down",
+      "source": "央行/全国银行间同业拆借中心"
+    },
+    {
+      "name": "10年国债",
+      "value": "2.15%",
+      "signal": "低位运行，支撑估值修复",
+      "direction": "down",
+      "source": "中债/公开行情"
+    }
+  ],
+  "fundFlows": [
+    {
+      "name": "北向资金",
+      "value": "待更新",
+      "signal": "观察外资连续净流入/流出方向",
+      "direction": "flat",
+      "source": "交易所/东方财富"
+    },
+    {
+      "name": "融资余额",
+      "value": "待更新",
+      "signal": "判断杠杆资金风险偏好",
+      "direction": "flat",
+      "source": "交易所/东方财富"
+    },
+    {
+      "name": "主力资金",
+      "value": "待更新",
+      "signal": "跟踪行业大单净流入主线",
+      "direction": "flat",
+      "source": "东方财富/同花顺"
+    },
+    {
+      "name": "ETF资金",
+      "value": "待更新",
+      "signal": "观察宽基与行业ETF净申赎",
+      "direction": "flat",
+      "source": "交易所/基金公告"
+    }
+  ],
+  "marketSentiment": [
+    {
+      "name": "上证指数",
+      "value": "3986.30",
+      "signal": "+0.86%，成交1.014万亿",
+      "direction": "up",
+      "source": "公开行情"
+    },
+    {
+      "name": "成交额",
+      "value": "1.014万亿",
+      "signal": "活跃度回升，需确认能否持续放量",
+      "direction": "up",
+      "source": "公开行情"
+    },
+    {
+      "name": "涨跌家数比",
+      "value": "待更新",
+      "signal": "判断市场上涨广度",
+      "direction": "flat",
+      "source": "交易所/行情数据"
+    },
+    {
+      "name": "涨跌停家数",
+      "value": "待更新",
+      "signal": "识别短线情绪过热或退潮",
+      "direction": "flat",
+      "source": "行情数据"
+    },
+    {
+      "name": "市场风格",
+      "value": "低估值占优",
+      "signal": "行情快速轮动，追高风险上升",
+      "direction": "flat",
+      "source": "券商策略/行情表现"
+    }
+  ],
+  "commoditiesFx": [
+    {
+      "name": "LME铜/沪铜",
+      "value": "待更新",
+      "signal": "有色金属和全球需求验证指标",
+      "direction": "flat",
+      "source": "公开商品行情"
+    },
+    {
+      "name": "原油",
+      "value": "待更新",
+      "signal": "通胀输入和上游周期验证指标",
+      "direction": "flat",
+      "source": "公开商品行情"
+    },
+    {
+      "name": "美元指数",
+      "value": "待更新",
+      "signal": "影响商品定价和外资风险偏好",
+      "direction": "flat",
+      "source": "公开外汇行情"
+    },
+    {
+      "name": "人民币汇率",
+      "value": "待更新",
+      "signal": "影响外资流向和出口链预期",
+      "direction": "flat",
+      "source": "外汇交易中心/公开行情"
+    }
+  ],
+  "marketJudgement": {
+    "stage": "复苏期（早期）",
+    "signalScore": 68,
+    "signalLevel": "偏积极",
+    "conclusion": "当前已采集指标显示经济边际改善、低利率环境延续、低估值风格占优，但资金流、通胀、信用和商品价格仍需进一步补齐验证。",
+    "supportingFactors": [
+      "PMI环比改善",
+      "LPR和国债收益率处于低位",
+      "中报利润改善",
+      "低估值策略占优"
+    ],
+    "riskFactors": [
+      "PMI仍未回到荣枯线上方",
+      "资金面指标待交叉验证",
+      "热点轮动较快，追高风险较高"
+    ],
+    "rules": [
+      "增长改善+通胀低位+信用扩张=复苏信号增强",
+      "资金连续流入+成交温和放大=风险偏好改善",
+      "估值低位+景气上行+资金确认=板块推荐优先级提升"
+    ]
+  },
+  "sourceQuality": [
+    {
+      "source": "官方数据",
+      "level": "高",
+      "usage": "PMI、CPI、PPI、社融、M2、LPR等宏观指标",
+      "verified": true,
+      "updatedAt": "按官方发布时间"
+    },
+    {
+      "source": "交易所/中债/外汇交易中心",
+      "level": "高",
+      "usage": "融资融券、沪深港通、债券收益率、汇率等市场数据",
+      "verified": true,
+      "updatedAt": "交易日/工作日"
+    },
+    {
+      "source": "finance-data 插件",
+      "level": "高",
+      "usage": "指数行情、行业估值、财务和市场结构化数据",
+      "verified": true,
+      "updatedAt": "自动任务执行时"
+    },
+    {
+      "source": "东方财富/同花顺/新浪财经",
+      "level": "中高",
+      "usage": "资金流、涨跌停、研报聚合、商品行情补充",
+      "verified": false,
+      "updatedAt": "自动任务执行时交叉验证"
+    },
+    {
+      "source": "券商公开研报",
+      "level": "中",
+      "usage": "行业景气、策略观点和推荐逻辑参考",
+      "verified": false,
+      "updatedAt": "按研报发布时间"
+    }
   ],
   "cyclePosition": {
     "stage": "复苏期（早期）",
     "indicators": [
-      {"name":"PMI","value":"49.8%","signal":"环比+0.6pct，边际改善","direction":"up"},
-      {"name":"上证指数","value":"3986.30","signal":"+0.86%，成交1.014万亿","direction":"up"},
-      {"name":"中报利润","value":"+5800亿","signal":"同比正增长","direction":"up"},
-      {"name":"LPR(1Y)","value":"3.10%","signal":"年内第三次降息后低位","direction":"down"},
-      {"name":"10年国债","value":"2.15%","signal":"低位运行","direction":"down"},
-      {"name":"市场风格","value":"低估值占优","signal":"行情快速轮动","direction":"flat"}
+      {
+        "name": "PMI",
+        "value": "49.8%",
+        "signal": "环比+0.6pct，边际改善",
+        "direction": "up"
+      },
+      {
+        "name": "上证指数",
+        "value": "3986.30",
+        "signal": "+0.86%，成交1.014万亿",
+        "direction": "up"
+      },
+      {
+        "name": "中报利润",
+        "value": "+5800亿",
+        "signal": "同比正增长",
+        "direction": "up"
+      },
+      {
+        "name": "LPR(1Y)",
+        "value": "3.10%",
+        "signal": "年内第三次降息后低位",
+        "direction": "down"
+      },
+      {
+        "name": "10年国债",
+        "value": "2.15%",
+        "signal": "低位运行",
+        "direction": "down"
+      },
+      {
+        "name": "市场风格",
+        "value": "低估值占优",
+        "signal": "行情快速轮动",
+        "direction": "flat"
+      }
     ],
     "favoredSectors": [
-      {"name":"银行（高股息）","status":"green","note":"信贷改善+估值极低+股息率近6%"},
-      {"name":"有色金属（铜/铝）","status":"green","note":"铜价看好+供给约束+估值偏低"},
-      {"name":"液冷/AI算力","status":"green","note":"需求暴涨260%+千亿产业提速"},
-      {"name":"军工","status":"green","note":"十五五开局+中报业绩突出"},
-      {"name":"光模块","status":"yellow","note":"业务快速放量，但估值需关注"},
-      {"name":"传媒/短剧","status":"yellow","note":"热点活跃但题材属性强，注意追高风险"},
-      {"name":"券商","status":"yellow","note":"交易量回暖+反弹受益"},
-      {"name":"必需消费/医药","status":"red","note":"当前复苏阶段暂不优先配置"}
+      {
+        "name": "银行（高股息）",
+        "status": "green",
+        "note": "信贷改善+估值极低+股息率近6%"
+      },
+      {
+        "name": "有色金属（铜/铝）",
+        "status": "green",
+        "note": "铜价看好+供给约束+估值偏低"
+      },
+      {
+        "name": "液冷/AI算力",
+        "status": "green",
+        "note": "需求暴涨260%+千亿产业提速"
+      },
+      {
+        "name": "军工",
+        "status": "green",
+        "note": "十五五开局+中报业绩突出"
+      },
+      {
+        "name": "光模块",
+        "status": "yellow",
+        "note": "业务快速放量，但估值需关注"
+      },
+      {
+        "name": "传媒/短剧",
+        "status": "yellow",
+        "note": "热点活跃但题材属性强，注意追高风险"
+      },
+      {
+        "name": "券商",
+        "status": "yellow",
+        "note": "交易量回暖+反弹受益"
+      },
+      {
+        "name": "必需消费/医药",
+        "status": "red",
+        "note": "当前复苏阶段暂不优先配置"
+      }
     ]
   },
   "lowValuation": [
-    {"sector":"银行","pe":5.1,"pePercentile":8.0,"pb":0.54,"pbPercentile":3.0,"dividendYield":5.9,"reason":"信贷资产质量改善预期强，PE分位值仅8%，高股息防御突出"},
-    {"sector":"钢铁","pe":8.0,"pePercentile":11.5,"pb":0.82,"pbPercentile":8.0,"dividendYield":4.2,"reason":"PB破净，受益于复苏期需求回暖"},
-    {"sector":"煤炭","pe":7.0,"pePercentile":10.0,"pb":1.18,"pbPercentile":11.5,"dividendYield":7.6,"reason":"高股息+低估值，关注能源转型长期影响"},
-    {"sector":"有色金属","pe":9.2,"pePercentile":16.0,"pb":1.75,"pbPercentile":14.0,"dividendYield":3.6,"reason":"铜价看好两年表现，PE/PB分位值双低"},
-    {"sector":"建筑装饰","pe":6.7,"pePercentile":4.5,"pb":0.60,"pbPercentile":2.2,"dividendYield":4.9,"reason":"估值极低，受益于基建投资发力"},
-    {"sector":"机械","pe":12.2,"pePercentile":14.0,"pb":1.48,"pbPercentile":9.5,"dividendYield":3.3,"reason":"设备更新政策驱动，周期底部确认"},
-    {"sector":"交通运输","pe":10.0,"pePercentile":19.0,"pb":1.08,"pbPercentile":7.5,"dividendYield":4.6,"reason":"航运周期上行，低估值+高股息"},
-    {"sector":"房地产","pe":12.5,"pePercentile":24.0,"pb":0.65,"pbPercentile":4.5,"dividendYield":3.9,"reason":"信贷政策持续宽松，估值极低但基本面筑底"},
-    {"sector":"非银金融","pe":14.2,"pePercentile":21.0,"pb":1.28,"pbPercentile":10.0,"dividendYield":3.1,"reason":"券商受益于交易量回暖和降息"},
-    {"sector":"公用事业","pe":15.0,"pePercentile":27.0,"pb":1.38,"pbPercentile":17.0,"dividendYield":4.3,"reason":"利率下行利好，高股息防御属性"},
-    {"sector":"通信","pe":16.5,"pePercentile":24.0,"pb":1.75,"pbPercentile":14.0,"dividendYield":2.9,"reason":"5G/AI基建受益，估值偏低"},
-    {"sector":"传媒","pe":21.8,"pePercentile":33.0,"pb":2.05,"pbPercentile":19.0,"dividendYield":1.6,"reason":"AI+短剧催化活跃，但题材属性强需谨慎"},
-    {"sector":"电力设备","pe":20.2,"pePercentile":29.0,"pb":2.45,"pbPercentile":24.0,"dividendYield":1.9,"reason":"液冷/AI算力催化，关注拐点"},
-    {"sector":"汽车","pe":18.2,"pePercentile":34.0,"pb":1.98,"pbPercentile":24.0,"dividendYield":2.3,"reason":"新能源车渗透率提升，估值合理"},
-    {"sector":"电子","pe":27.8,"pePercentile":38.0,"pb":3.15,"pbPercentile":34.0,"dividendYield":0.9,"reason":"光模块/AI算力拉动，估值中性偏低"},
-    {"sector":"医药生物","pe":29.8,"pePercentile":44.0,"pb":3.75,"pbPercentile":29.0,"dividendYield":1.3,"reason":"估值回落至中性偏低，长期成长逻辑不变"},
-    {"sector":"食品饮料","pe":25.5,"pePercentile":54.0,"pb":5.4,"pbPercentile":49.0,"dividendYield":2.6,"reason":"估值中性，复苏期可选消费替代"},
-    {"sector":"计算机","pe":34.8,"pePercentile":49.0,"pb":3.45,"pbPercentile":39.0,"dividendYield":0.6,"reason":"AI主题催化，估值中性"},
-    {"sector":"国防军工","pe":38.0,"pePercentile":41.0,"pb":2.95,"pbPercentile":34.0,"dividendYield":0.9,"reason":"十五五开局景气上行，中报业绩突出"},
-    {"sector":"农林牧渔","pe":15.2,"pePercentile":19.0,"pb":2.45,"pbPercentile":17.0,"dividendYield":2.1,"reason":"猪周期底部，关注反转信号"}
+    {
+      "sector": "银行",
+      "pe": 5.1,
+      "pePercentile": 8.0,
+      "pb": 0.54,
+      "pbPercentile": 3.0,
+      "dividendYield": 5.9,
+      "reason": "信贷资产质量改善预期强，PE分位值仅8%，高股息防御突出"
+    },
+    {
+      "sector": "钢铁",
+      "pe": 8.0,
+      "pePercentile": 11.5,
+      "pb": 0.82,
+      "pbPercentile": 8.0,
+      "dividendYield": 4.2,
+      "reason": "PB破净，受益于复苏期需求回暖"
+    },
+    {
+      "sector": "煤炭",
+      "pe": 7.0,
+      "pePercentile": 10.0,
+      "pb": 1.18,
+      "pbPercentile": 11.5,
+      "dividendYield": 7.6,
+      "reason": "高股息+低估值，关注能源转型长期影响"
+    },
+    {
+      "sector": "有色金属",
+      "pe": 9.2,
+      "pePercentile": 16.0,
+      "pb": 1.75,
+      "pbPercentile": 14.0,
+      "dividendYield": 3.6,
+      "reason": "铜价看好两年表现，PE/PB分位值双低"
+    },
+    {
+      "sector": "建筑装饰",
+      "pe": 6.7,
+      "pePercentile": 4.5,
+      "pb": 0.6,
+      "pbPercentile": 2.2,
+      "dividendYield": 4.9,
+      "reason": "估值极低，受益于基建投资发力"
+    },
+    {
+      "sector": "机械",
+      "pe": 12.2,
+      "pePercentile": 14.0,
+      "pb": 1.48,
+      "pbPercentile": 9.5,
+      "dividendYield": 3.3,
+      "reason": "设备更新政策驱动，周期底部确认"
+    },
+    {
+      "sector": "交通运输",
+      "pe": 10.0,
+      "pePercentile": 19.0,
+      "pb": 1.08,
+      "pbPercentile": 7.5,
+      "dividendYield": 4.6,
+      "reason": "航运周期上行，低估值+高股息"
+    },
+    {
+      "sector": "房地产",
+      "pe": 12.5,
+      "pePercentile": 24.0,
+      "pb": 0.65,
+      "pbPercentile": 4.5,
+      "dividendYield": 3.9,
+      "reason": "信贷政策持续宽松，估值极低但基本面筑底"
+    },
+    {
+      "sector": "非银金融",
+      "pe": 14.2,
+      "pePercentile": 21.0,
+      "pb": 1.28,
+      "pbPercentile": 10.0,
+      "dividendYield": 3.1,
+      "reason": "券商受益于交易量回暖和降息"
+    },
+    {
+      "sector": "公用事业",
+      "pe": 15.0,
+      "pePercentile": 27.0,
+      "pb": 1.38,
+      "pbPercentile": 17.0,
+      "dividendYield": 4.3,
+      "reason": "利率下行利好，高股息防御属性"
+    },
+    {
+      "sector": "通信",
+      "pe": 16.5,
+      "pePercentile": 24.0,
+      "pb": 1.75,
+      "pbPercentile": 14.0,
+      "dividendYield": 2.9,
+      "reason": "5G/AI基建受益，估值偏低"
+    },
+    {
+      "sector": "传媒",
+      "pe": 21.8,
+      "pePercentile": 33.0,
+      "pb": 2.05,
+      "pbPercentile": 19.0,
+      "dividendYield": 1.6,
+      "reason": "AI+短剧催化活跃，但题材属性强需谨慎"
+    },
+    {
+      "sector": "电力设备",
+      "pe": 20.2,
+      "pePercentile": 29.0,
+      "pb": 2.45,
+      "pbPercentile": 24.0,
+      "dividendYield": 1.9,
+      "reason": "液冷/AI算力催化，关注拐点"
+    },
+    {
+      "sector": "汽车",
+      "pe": 18.2,
+      "pePercentile": 34.0,
+      "pb": 1.98,
+      "pbPercentile": 24.0,
+      "dividendYield": 2.3,
+      "reason": "新能源车渗透率提升，估值合理"
+    },
+    {
+      "sector": "电子",
+      "pe": 27.8,
+      "pePercentile": 38.0,
+      "pb": 3.15,
+      "pbPercentile": 34.0,
+      "dividendYield": 0.9,
+      "reason": "光模块/AI算力拉动，估值中性偏低"
+    },
+    {
+      "sector": "医药生物",
+      "pe": 29.8,
+      "pePercentile": 44.0,
+      "pb": 3.75,
+      "pbPercentile": 29.0,
+      "dividendYield": 1.3,
+      "reason": "估值回落至中性偏低，长期成长逻辑不变"
+    },
+    {
+      "sector": "食品饮料",
+      "pe": 25.5,
+      "pePercentile": 54.0,
+      "pb": 5.4,
+      "pbPercentile": 49.0,
+      "dividendYield": 2.6,
+      "reason": "估值中性，复苏期可选消费替代"
+    },
+    {
+      "sector": "计算机",
+      "pe": 34.8,
+      "pePercentile": 49.0,
+      "pb": 3.45,
+      "pbPercentile": 39.0,
+      "dividendYield": 0.6,
+      "reason": "AI主题催化，估值中性"
+    },
+    {
+      "sector": "国防军工",
+      "pe": 38.0,
+      "pePercentile": 41.0,
+      "pb": 2.95,
+      "pbPercentile": 34.0,
+      "dividendYield": 0.9,
+      "reason": "十五五开局景气上行，中报业绩突出"
+    },
+    {
+      "sector": "农林牧渔",
+      "pe": 15.2,
+      "pePercentile": 19.0,
+      "pb": 2.45,
+      "pbPercentile": 17.0,
+      "dividendYield": 2.1,
+      "reason": "猪周期底部，关注反转信号"
+    }
   ],
   "recommendations": [
-    {"rank":1,"sector":"银行（高股息策略）","logic":"信贷资产质量改善+PE分位值仅8%+股息率近6%+低估值策略占优","watchPoints":"信贷投放数据、资产质量变化、息差走势","riskLevel":"低"},
-    {"rank":2,"sector":"有色金属（铜/铝）","logic":"东吴证券看好两年铜价+供给约束+PE/PB分位值双低","watchPoints":"铜价走势、美元指数、全球PMI","riskLevel":"中"},
-    {"rank":3,"sector":"液冷/AI算力产业链","logic":"AI服务器需求暴涨260%+千亿产业提速+央视催化","watchPoints":"AI算力需求、液冷渗透率、龙头企业订单","riskLevel":"中"},
-    {"rank":4,"sector":"军工","logic":"十五五开局+装备批产周期+中报业绩突出","watchPoints":"订单公告、产业链排产、军费预算","riskLevel":"低"},
-    {"rank":5,"sector":"光模块","logic":"2026年业务快速放量+AI算力拉动+龙头技术领先","watchPoints":"光模块出货量、AI资本开支、技术迭代","riskLevel":"中"},
-    {"rank":6,"sector":"通信","logic":"AI基建受益+5G应用+估值偏低","watchPoints":"运营商资本开支、AI应用落地进度","riskLevel":"中"}
+    {
+      "rank": 1,
+      "sector": "银行（高股息策略）",
+      "logic": "信贷资产质量改善+PE分位值仅8%+股息率近6%+低估值策略占优",
+      "watchPoints": "信贷投放数据、资产质量变化、息差走势",
+      "riskLevel": "低",
+      "evidence": {
+        "valuation": "PE分位8%、PB分位3%",
+        "fund": "资金流待验证",
+        "cycle": "复苏早期+低利率",
+        "risk": "息差继续下行或资产质量反复"
+      }
+    },
+    {
+      "rank": 2,
+      "sector": "有色金属（铜/铝）",
+      "logic": "东吴证券看好两年铜价+供给约束+PE/PB分位值双低",
+      "watchPoints": "铜价走势、美元指数、全球PMI",
+      "riskLevel": "中",
+      "evidence": {
+        "valuation": "PE/PB分位值双低",
+        "fund": "关注北向和主力资金确认",
+        "cycle": "复苏期资源品弹性较高",
+        "risk": "美元走强或全球需求不及预期"
+      }
+    },
+    {
+      "rank": 3,
+      "sector": "液冷/AI算力产业链",
+      "logic": "AI服务器需求暴涨260%+千亿产业提速+央视催化",
+      "watchPoints": "AI算力需求、液冷渗透率、龙头企业订单",
+      "riskLevel": "中",
+      "evidence": {
+        "valuation": "估值需结合订单消化",
+        "fund": "短线资金活跃，需防追高",
+        "cycle": "产业升级独立景气",
+        "risk": "主题交易拥挤和业绩兑现压力"
+      }
+    },
+    {
+      "rank": 4,
+      "sector": "军工",
+      "logic": "十五五开局+装备批产周期+中报业绩突出",
+      "watchPoints": "订单公告、产业链排产、军费预算",
+      "riskLevel": "低",
+      "evidence": {
+        "valuation": "行业估值中性",
+        "fund": "资金确认待跟踪",
+        "cycle": "政策周期和装备周期共振",
+        "risk": "订单节奏和信息披露不确定"
+      }
+    },
+    {
+      "rank": 5,
+      "sector": "光模块",
+      "logic": "2026年业务快速放量+AI算力拉动+龙头技术领先",
+      "watchPoints": "光模块出货量、AI资本开支、技术迭代",
+      "riskLevel": "中",
+      "evidence": {
+        "valuation": "估值中性偏高需精选",
+        "fund": "关注机构资金持续性",
+        "cycle": "AI资本开支驱动",
+        "risk": "技术迭代和海外需求波动"
+      }
+    },
+    {
+      "rank": 6,
+      "sector": "通信",
+      "logic": "AI基建受益+5G应用+估值偏低",
+      "watchPoints": "运营商资本开支、AI应用落地进度",
+      "riskLevel": "中",
+      "evidence": {
+        "valuation": "估值偏低",
+        "fund": "资金流待验证",
+        "cycle": "AI基建和数字经济支撑",
+        "risk": "资本开支低于预期"
+      }
+    }
   ]
 }
