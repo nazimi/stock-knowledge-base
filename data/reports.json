@@ -713,5 +713,185 @@
         "risk": "科技股整体承压+主题交易拥挤"
       }
     }
+  ],
+  "stockEvaluations": [
+    {
+      "company": "SK海力士",
+      "code": "000660.KS",
+      "pool": "长期复利池",
+      "evalDate": "2026-09-02",
+      "totalScore": 86,
+      "fundamentalScore": 46,
+      "valuationScore": 30,
+      "sentimentScore": 10,
+      "decision": "进入观察池，逐步建仓",
+      "summary": "AI驱动HBM需求爆发，代际领先+LTA锁定10家大客户。Q2利润同比+557%，利润率76%历史新高。PE 7.44/远期PE 3.54/PEG 0.18明显低估，从52周高点回落46%提供介入窗口。管理层已批准回购。",
+      "keyIndicators": ["HBM收入占比", "DRAM合约价", "季度营收增速", "英伟达资本开支", "三星HBM竞争"]
+    },
+    {
+      "company": "巨化股份",
+      "code": "600160.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-09-02",
+      "totalScore": 70,
+      "fundamentalScore": 38,
+      "valuationScore": 20,
+      "sentimentScore": 12,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "配额红利释放+制冷剂价格高位，政策壁垒极强。H1利润同比+29%但营收原地踏步(+0.07%)。PE动态19.37合理偏低但PB 4.65偏高。主力净流出+股东户数激增175%散户化，短期承压。",
+      "keyIndicators": ["制冷剂价格", "配额执行情况", "Q3营收恢复", "经营现金流", "高端氟材料"]
+    },
+    {
+      "company": "腾讯",
+      "code": "00700.HK",
+      "pool": "长期复利池",
+      "evalDate": "2026-09-02",
+      "totalScore": 75,
+      "fundamentalScore": 40,
+      "valuationScore": 20,
+      "sentimentScore": 15,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "微信13亿月活网络效应极强，社交→支付→内容→云全链路闭环。PE 14.83/远期PE 12.95合理偏低，从52周高点回落36%。ROE 19.91%接近20%，净利润率30%优秀。但PEG 1.45偏高增长放缓，YTD -14.70%持续下跌，反垄断监管压制情绪。",
+      "keyIndicators": ["微信月活", "游戏收入增速", "金融科技收入", "腾讯云增速", "视频号商业化"]
+    },
+    {
+      "company": "微软",
+      "code": "MSFT",
+      "pool": "长期复利池",
+      "evalDate": "2026-09-02",
+      "totalScore": 67,
+      "fundamentalScore": 47,
+      "valuationScore": 10,
+      "sentimentScore": 10,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "全球最大软件公司，Azure+Office+AI(Copilot)生态极强。ROE 34%/净利润率40%/TTM营收3318亿美元极强盈利。但PE 27.71/PB 8.51估值偏高，YTD仅3.44%跑输大盘。基本面极强但估值是主要制约。",
+      "keyIndicators": ["Azure增速", "Copilot渗透率", "M365订阅收入", "AI收入占比", "资本开支回报"]
+    },
+    {
+      "company": "Meta",
+      "code": "META",
+      "pool": "长期复利池",
+      "evalDate": "2026-09-02",
+      "totalScore": 74,
+      "fundamentalScore": 44,
+      "valuationScore": 20,
+      "sentimentScore": 10,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "30亿+用户社交网络效应极强，广告+AI赋能。PE 22.41/远期PE 17.15/PEG 0.77合理偏低。ROE 29.85%/净利润率30%优秀。从52周高点回落25%，分析师目标+27%。TikTok竞争是主要风险。",
+      "keyIndicators": ["日活/月活增速", "ARPU", "Reels变现率", "AI广告效率", "Reality Labs亏损"]
+    },
+    {
+      "company": "Google",
+      "code": "GOOGL",
+      "pool": "长期复利池",
+      "evalDate": "2026-09-02",
+      "totalScore": 76,
+      "fundamentalScore": 46,
+      "valuationScore": 20,
+      "sentimentScore": 10,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "全球最大数字广告公司，搜索+YouTube+Cloud+AI(Gemini)全栈。PE 16.91/远期PE 16.56/PEG 0.92合理偏低。ROE 48.68%/净利润率55%极强。TTM营收4459亿美元。反垄断诉讼是主要催化剂，1年回报59.87%。",
+      "keyIndicators": ["搜索收入增速", "Google Cloud增速", "YouTube收入", "Gemini AI渗透", "反垄断裁决"]
+    },
+    {
+      "company": "苹果",
+      "code": "AAPL",
+      "pool": "长期复利池",
+      "evalDate": "2026-09-02",
+      "totalScore": 58,
+      "fundamentalScore": 43,
+      "valuationScore": 10,
+      "sentimentScore": 5,
+      "decision": "放弃",
+      "summary": "全球最强消费电子品牌+生态闭环。ROE 148.75%(回购效应)/净利润率28%优秀。但PE 37.32/PB 43.01估值偏高，硬件增长见顶，接近52周高点。Apple Intelligence落后竞品。评分58分不达70分门槛，从观察池移除。",
+      "keyIndicators": ["iPhone销量", "服务收入增速", "Apple Intelligence渗透", "毛利率", "印度市场"]
+    },
+    {
+      "company": "台积电",
+      "code": "TSM",
+      "pool": "长期复利池",
+      "evalDate": "2026-09-02",
+      "totalScore": 72,
+      "fundamentalScore": 47,
+      "valuationScore": 20,
+      "sentimentScore": 5,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "全球最大半导体代工，3nm/2nm独家量产+AI芯片核心供应链。ROE 40%/净利润率50%极强。PE 30.69/远期PE 24.63/PEG 0.99合理。基本面47分极高但AI主题热度极高(1年+81%)情绪偏热，台海地缘风险是长期变量。",
+      "keyIndicators": ["先进制程收入占比", "AI/HPC收入", "产能利用率", "CoWoS封装", "英伟达订单"]
+    },
+    {
+      "company": "亚马逊",
+      "code": "AMZN",
+      "pool": "长期复利池",
+      "evalDate": "2026-09-02",
+      "totalScore": 72,
+      "fundamentalScore": 42,
+      "valuationScore": 20,
+      "sentimentScore": 10,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "全球最大电商+AWS云计算。PE 20.49/PB 5.08合理偏低。ROE 30.56%/净利润率17.44%改善中。TTM营收7757亿美元。物流+AWS+Prime生态极强，但净利润率偏低+Beta 1.45波动大。",
+      "keyIndicators": ["AWS增速", "北美电商利润率", "广告收入增速", "Bedrock AI服务", "Prime会员数"]
+    },
+    {
+      "company": "伯克希尔",
+      "code": "BRK.B",
+      "pool": "长期复利池",
+      "evalDate": "2026-09-02",
+      "totalScore": 78,
+      "fundamentalScore": 33,
+      "valuationScore": 30,
+      "sentimentScore": 15,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "全球最大控股集团，保险浮存金+苹果/美银投资组合+BNSF铁路+BHE能源。PE 12.76/PB 1.44/Beta 0.61明显低估。现金3655亿创历史新高。但ROE 12.12%偏低(保险特性)，巴菲特退休是关键变量。接近80分建仓门槛。",
+      "keyIndicators": ["保险浮存金规模", "现金储备", "投资组合收益", "BNSF/BHE经营", "巴菲特接班计划"]
+    },
+    {
+      "company": "紫金矿业",
+      "code": "601899.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-09-02",
+      "totalScore": 73,
+      "fundamentalScore": 41,
+      "valuationScore": 20,
+      "sentimentScore": 12,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "全球性矿业巨头，铜金双轮驱动。PE 13.29/EV/EBITDA 7.14低估。ROE 36.56%极强，Q1净利润率20.39%高于TTM。从52周高点回落27%，分析师目标+46%。铜(AI+新能源)+金(避险)5年增长，但负债率60%偏高+金属价格周期性。",
+      "keyIndicators": ["铜价", "金价", "卡莫阿铜矿扩产", "铜金产量", "生产成本"]
+    },
+    {
+      "company": "中国神华",
+      "code": "601088.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-09-02",
+      "totalScore": 63,
+      "fundamentalScore": 33,
+      "valuationScore": 20,
+      "sentimentScore": 10,
+      "decision": "放弃",
+      "summary": "中国最大煤炭能源企业，煤电运化一体化协同。PE 17.80/PB 2.32/股息率4.16%合理。但双碳目标下5年煤炭需求平稳略缩，ROE 12.69%偏低，长期缺乏增长动力。评分63分不达70分门槛，从观察池移除。",
+      "keyIndicators": ["煤价", "长协比例", "发电量", "分红率", "新能源转型"]
+    }
+  ],
+  "watchlist": [
+    {
+      "poolName": "长期复利池",
+      "companies": [
+        {"company": "SK海力士", "code": "000660.KS", "status": "建仓", "latestScore": 86, "latestEvalDate": "2026-09-02"},
+        {"company": "腾讯", "code": "00700.HK", "status": "跟踪", "latestScore": 75, "latestEvalDate": "2026-09-02"},
+        {"company": "微软", "code": "MSFT", "status": "跟踪", "latestScore": 67, "latestEvalDate": "2026-09-02"},
+        {"company": "Meta", "code": "META", "status": "跟踪", "latestScore": 74, "latestEvalDate": "2026-09-02"},
+        {"company": "Google", "code": "GOOGL", "status": "跟踪", "latestScore": 76, "latestEvalDate": "2026-09-02"},
+        {"company": "台积电", "code": "TSM", "status": "跟踪", "latestScore": 72, "latestEvalDate": "2026-09-02"},
+        {"company": "亚马逊", "code": "AMZN", "status": "跟踪", "latestScore": 72, "latestEvalDate": "2026-09-02"},
+        {"company": "伯克希尔", "code": "BRK.B", "status": "跟踪", "latestScore": 78, "latestEvalDate": "2026-09-02"}
+      ]
+    },
+    {
+      "poolName": "周期增强池",
+      "companies": [
+        {"company": "巨化股份", "code": "600160.SH", "status": "跟踪", "latestScore": 70, "latestEvalDate": "2026-09-02"},
+        {"company": "紫金矿业", "code": "601899.SH", "status": "跟踪", "latestScore": 73, "latestEvalDate": "2026-09-02"}
+      ]
+    }
   ]
 }

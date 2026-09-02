@@ -231,6 +231,46 @@ tbody tr:hover { background: var(--bg-hover); }
 /* 搜索过滤 */
 .search-hidden { display: none !important; }
 
+/* 评分条 */
+.score-bar { height: 8px; background: var(--bg-main); border-radius: 4px; border: 1px solid var(--border-color); overflow: hidden; }
+.score-fill { height: 100%; border-radius: 3px; transition: width 0.3s ease; }
+
+/* 个股评估卡片 */
+.eval-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.eval-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 18px; transition: border-color 0.2s; }
+.eval-card:hover { border-color: #444c56; }
+.eval-card .ec-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+.eval-card .ec-title { font-size: 15px; font-weight: 600; color: var(--text-bright); }
+.eval-card .ec-code { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.eval-card .ec-score { font-size: 28px; font-weight: 700; line-height: 1; }
+.eval-card .ec-score.high { color: var(--color-up); }
+.eval-card .ec-score.mid { color: var(--color-warn); }
+.eval-card .ec-score.low { color: var(--color-down); }
+.eval-card .ec-score-label { font-size: 11px; color: var(--text-secondary); text-align: right; }
+.eval-card .ec-dims { display: flex; gap: 12px; margin: 12px 0; }
+.eval-card .ec-dim { flex: 1; }
+.eval-card .ec-dim-label { font-size: 11px; color: var(--text-secondary); display: flex; justify-content: space-between; margin-bottom: 4px; }
+.eval-card .ec-summary { font-size: 13px; color: var(--text-primary); margin-bottom: 10px; line-height: 1.65; }
+.eval-card .ec-keyindicators { display: flex; flex-wrap: wrap; gap: 4px; }
+.eval-card .ec-keyindicators .tag { font-size: 11px; }
+
+/* 观察池 */
+.watchlist-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.watchlist-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); padding: 18px; }
+.watchlist-card .wl-title { font-size: 16px; font-weight: 600; color: var(--text-bright); margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border-color); }
+.watchlist-card .wl-item { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(48,54,61,0.5); }
+.watchlist-card .wl-item:last-child { border-bottom: none; }
+.watchlist-card .wl-item .fi-status { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+.watchlist-card .wl-name { font-weight: 600; color: var(--text-bright); font-size: 14px; }
+.watchlist-card .wl-code { font-size: 12px; color: var(--text-secondary); }
+.watchlist-card .wl-score { font-size: 14px; font-weight: 700; margin-left: auto; }
+.watchlist-card .wl-score.high { color: var(--color-up); }
+.watchlist-card .wl-score.mid { color: var(--color-warn); }
+.watchlist-card .wl-score.low { color: var(--color-down); }
+.watchlist-card .wl-score.none { color: var(--text-secondary); }
+.watchlist-card .wl-date { font-size: 11px; color: var(--text-secondary); }
+.watchlist-card .wl-note { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
 /* 响应式 */
 @media (max-width: 900px) {
   .sidebar { display: none; }
@@ -241,6 +281,7 @@ tbody tr:hover { background: var(--bg-hover); }
   .cycle-indicators { grid-template-columns: 1fr; }
   .market-overview, .market-factors, .metric-grid, .quality-grid { grid-template-columns: 1fr; }
   .clock { width: 320px; height: 320px; }
+  .eval-grid, .watchlist-grid { grid-template-columns: 1fr; }
 }
   </style>
 </head>
@@ -255,10 +296,22 @@ tbody tr:hover { background: var(--bg-hover); }
 <div class="layout">
   <!-- 侧边导航 -->
   <nav class="sidebar" id="sidebar">
-    <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>📚</span><span>基础金融概念库</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#basics-market">股票市场基础</a><a class="nav-item" data-target="#basics-valuation">估值方法论</a><a class="nav-item" data-target="#basics-finance">财务分析基础</a><a class="nav-item" data-target="#basics-tech">技术分析基础</a><a class="nav-item" data-target="#basics-strategy">投资策略</a></div></div>
-    <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>🔄</span><span>周期趋势框架</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#cycle-clock">美林投资时钟</a><a class="nav-item" data-target="#cycle-china">中国特色周期</a><a class="nav-item" data-target="#cycle-guide">顺周期操作指南</a><a class="nav-item" data-target="#cycle-case">行业分析范例</a></div></div>
-    <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>📰</span><span>每日研报精选</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#reports">研报列表</a></div></div>
-    <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>🎯</span><span>板块推荐</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#recommend-dashboard">市场观察面板</a><a class="nav-item" data-target="#recommend-sources">数据源质量</a><a class="nav-item" data-target="#recommend-low">低估值筛选</a><a class="nav-item" data-target="#recommend-cycle">顺周期定位</a><a class="nav-item" data-target="#recommend-summary">综合推荐</a></div></div>
+    <!-- === 静态知识 === -->
+    <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>📖</span><span>静态知识</span><span class="arrow">▼</span></div>
+      <div class="nav-items">
+        <div class="nav-group" style="margin-bottom:0;"><div class="nav-group-title" onclick="toggleNavGroup(this)" style="font-size:12px;padding-left:36px;"><span>📚</span><span>基础金融概念库</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#basics-market">股票市场基础</a><a class="nav-item" data-target="#basics-valuation">估值方法论</a><a class="nav-item" data-target="#basics-finance">财务分析基础</a><a class="nav-item" data-target="#basics-tech">技术分析基础</a><a class="nav-item" data-target="#basics-strategy">投资策略</a></div></div>
+        <div class="nav-group" style="margin-bottom:0;"><div class="nav-group-title" onclick="toggleNavGroup(this)" style="font-size:12px;padding-left:36px;"><span>🔄</span><span>周期趋势框架</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#cycle-clock">美林投资时钟</a><a class="nav-item" data-target="#cycle-china">中国特色周期</a><a class="nav-item" data-target="#cycle-guide">顺周期操作指南</a><a class="nav-item" data-target="#cycle-case">行业分析范例</a></div></div>
+        <div class="nav-group" style="margin-bottom:0;"><div class="nav-group-title" onclick="toggleNavGroup(this)" style="font-size:12px;padding-left:36px;"><span>🧭</span><span>投资系统方法论</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#invest-decision">决策框架</a><a class="nav-item" data-target="#invest-scoring">评分体系</a><a class="nav-item" data-target="#invest-research">研究模板</a><a class="nav-item" data-target="#invest-discipline">投资纪律</a></div></div>
+      </div>
+    </div>
+    <!-- === 动态更新 === -->
+    <div class="nav-group"><div class="nav-group-title" onclick="toggleNavGroup(this)"><span>📡</span><span>动态更新</span><span class="arrow">▼</span></div>
+      <div class="nav-items">
+        <div class="nav-group" style="margin-bottom:0;"><div class="nav-group-title" onclick="toggleNavGroup(this)" style="font-size:12px;padding-left:36px;"><span>📰</span><span>每日研报精选</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#reports">研报列表</a></div></div>
+        <div class="nav-group" style="margin-bottom:0;"><div class="nav-group-title" onclick="toggleNavGroup(this)" style="font-size:12px;padding-left:36px;"><span>🎯</span><span>宏观板块趋势</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#recommend-dashboard">市场观察面板</a><a class="nav-item" data-target="#recommend-sources">数据源质量</a><a class="nav-item" data-target="#recommend-low">低估值筛选</a><a class="nav-item" data-target="#recommend-cycle">顺周期定位</a><a class="nav-item" data-target="#recommend-summary">综合推荐</a></div></div>
+        <div class="nav-group" style="margin-bottom:0;"><div class="nav-group-title" onclick="toggleNavGroup(this)" style="font-size:12px;padding-left:36px;"><span>💎</span><span>优质个股资源池</span><span class="arrow">▼</span></div><div class="nav-items"><a class="nav-item" data-target="#stock-eval">个股评估</a><a class="nav-item" data-target="#watchlist">观察池管理</a></div></div>
+      </div>
+    </div>
   </nav>
 
   <!-- 主内容区 -->
@@ -653,7 +706,175 @@ Step 6: 周期信号变化时调仓换股</code></pre>
       </div>
     </section>
 
-    <!-- === 模块三：每日研报精选 === -->
+    <!-- === 模块三：投资系统方法论（静态知识） === -->
+    <section class="section" id="invest-system">
+      <div class="section-header"><span class="section-icon">🧭</span><h2>投资系统方法论</h2><span class="section-sub">决策框架 · 评分体系 · 研究模板 · 投资纪律</span></div>
+
+      <!-- 决策框架 -->
+      <div class="subsection" id="invest-decision">
+        <h3>投资决策框架</h3>
+        <p>投资决策遵循严格的三层过滤体系，确保每笔投资都经过基本面、估值、情绪的层层验证，避免被单一因素主导决策。</p>
+
+        <h4>决策优先级</h4>
+        <div class="callout"><strong>核心原则</strong>：<em>基本面 &gt; 估值 &gt; 市场情绪</em>，而非市场情绪 &gt; 估值 &gt; 基本面。前者赚企业成长的钱，后者赚博弈的钱。</div>
+
+        <h4>三层过滤流程</h4>
+        <pre><code>Step 1: 基本面过滤 — 未来5年公司赚钱能力会不会更强？不明确 → 放弃
+         ↓
+Step 2: 估值过滤 — 便宜 / 合理 / 昂贵？现在是在买价值还是在买情绪？
+         ↓
+Step 3: 市场情绪过滤 — 趋势 / 成交量 / 恐慌程度？辅助择时，不作为核心依据</code></pre>
+
+        <div class="card">
+          <div class="card-title">第一层：基本面过滤</div>
+          <p><strong>核心问题</strong>：未来5年，公司赚钱能力会不会更强？</p>
+          <p>如果答案不明确，<strong>直接放弃</strong>，不进入后续流程。这一层确保只投资长期成长确定的公司。</p>
+        </div>
+        <div class="card">
+          <div class="card-title">第二层：估值过滤</div>
+          <p><strong>核心问题</strong>：现在是在买价值，还是在买情绪？</p>
+          <p>判断当前估值属于"便宜、合理、昂贵"中的哪一档。即使基本面优秀，如果估值过热也不急于买入。</p>
+        </div>
+        <div class="card">
+          <div class="card-title">第三层：市场情绪过滤</div>
+          <p><strong>作用</strong>：辅助择时，不作为核心依据。</p>
+          <p>观察趋势方向、成交量变化、市场恐慌程度。情绪极度恐慌时是买入窗口，极度狂热时需要谨慎。</p>
+        </div>
+      </div>
+
+      <!-- 评分体系 -->
+      <div class="subsection" id="invest-scoring">
+        <h3>个股评分体系（100分制）</h3>
+        <p>每只候选个股按统一评分体系打分，确保评估的客观性和一致性。评分维度分为基本面（50分）、估值（30分）、情绪（20分）三部分。</p>
+
+        <h4>评分构成</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>维度</th><th>项目</th><th>满分</th><th>评分标准</th></tr></thead>
+          <tbody>
+            <tr><td rowspan="3"><strong>基本面（50分）</strong></td><td>行业空间</td><td>10分</td><td>5年行业变大+9-10分；不变+5-8分；变小+0-4分</td></tr>
+            <tr><td>竞争优势</td><td>20分</td><td>护城河极强+16-20分；较强+10-15分；弱+0-9分</td></tr>
+            <tr><td>盈利能力</td><td>20分</td><td>ROE&gt;20%+16-20分；15-20%+12-15分；&lt;15%+0-11分</td></tr>
+            <tr><td rowspan="3"><strong>估值（30分）</strong></td><td>明显低估</td><td>30分</td><td>PE/PB分位&lt;20%或PEG&lt;0.5</td></tr>
+            <tr><td>合理</td><td>20分</td><td>PE/PB分位20-50%或PEG 0.5-1.0</td></tr>
+            <tr><td>略高/过热</td><td>10-0分</td><td>分位50-70%给10分；&gt;70%给0分</td></tr>
+            <tr><td rowspan="3"><strong>情绪（20分）</strong></td><td>市场恐慌</td><td>20分</td><td>大幅回调+恐慌性抛售+低位缩量</td></tr>
+            <tr><td>中性</td><td>10分</td><td>正常运行，无明显极端情绪</td></tr>
+            <tr><td>狂热</td><td>0分</td><td>连续大涨+天量成交+散户涌入</td></tr>
+          </tbody>
+        </table></div>
+
+        <h4>评分可视化</h4>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin:16px 0;">
+          <div style="flex:1;min-width:200px;">
+            <div style="font-size:13px;color:var(--text-secondary);margin-bottom:6px;">基本面 50分</div>
+            <div class="score-bar"><div class="score-fill" style="width:92%;background:var(--color-up);"></div></div>
+          </div>
+          <div style="flex:1;min-width:200px;">
+            <div style="font-size:13px;color:var(--text-secondary);margin-bottom:6px;">估值 30分</div>
+            <div class="score-bar"><div class="score-fill" style="width:100%;background:var(--color-up);"></div></div>
+          </div>
+          <div style="flex:1;min-width:200px;">
+            <div style="font-size:13px;color:var(--text-secondary);margin-bottom:6px;">情绪 20分</div>
+            <div class="score-bar"><div class="score-fill" style="width:50%;background:var(--color-warn);"></div></div>
+          </div>
+        </div>
+        <p style="font-size:12px;color:var(--text-secondary);">↑ 示例：某86分个股的三维评分分布（基本面46+估值30+情绪10）</p>
+
+        <h4>决策规则</h4>
+        <div class="table-wrap"><table>
+          <thead><tr><th>总分</th><th>决策</th><th>操作</th></tr></thead>
+          <tbody>
+            <tr><td class="text-up"><strong>90分以上</strong></td><td class="text-up">重点建仓</td><td>达到买入标准，可重点配置</td></tr>
+            <tr><td><strong>80~90分</strong></td><td>进入观察池</td><td>逐步建仓，控制节奏</td></tr>
+            <tr><td class="text-warn"><strong>70~80分</strong></td><td class="text-warn">持续跟踪</td><td>暂不买入，等待催化剂或估值改善</td></tr>
+            <tr><td class="text-down"><strong>70分以下</strong></td><td class="text-down">放弃</td><td>不纳入候选</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+
+      <!-- 研究模板 -->
+      <div class="subsection" id="invest-research">
+        <h3>个股研究模板（8步流程）</h3>
+        <p>研究任何公司必须按统一流程进行，确保分析的系统性和完整性。以下8个步骤从商业模式到买入备忘录，覆盖个股研究的全链路。</p>
+
+        <div class="card">
+          <div class="card-title">Step 1 · 商业模式</div>
+          <p><strong>核心问题</strong>：公司怎么赚钱？一句话解释清楚。</p>
+          <p><em>示例</em>：腾讯 — 通过微信生态、游戏、广告和金融科技赚钱。</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Step 2 · 护城河</div>
+          <p><strong>核心问题</strong>：如果我有100亿资金，能否复制这家公司？</p>
+          <p>护城河类型：品牌、网络效应、成本优势、转换成本、技术壁垒、政策壁垒。</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Step 3 · 行业空间</div>
+          <p><strong>核心问题</strong>：未来5年，行业会变大还是变小？</p>
+          <p>优先研究长期成长行业：AI、云计算、半导体、高端制造。</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Step 4 · 财务质量</div>
+          <p>重点关注：收入增长（持续增长）、利润增长（持续增长）、经营现金流（长期为正）、ROE（15%以上优秀，20%以上强）、负债情况（偿债风险）。</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Step 5 · 核心驱动指标</div>
+          <p>每家公司必须找到自己的关键指标。<em>示例</em>：海力士 — HBM收入占比、DRAM价格；巨化股份 — 制冷剂价格、配额执行情况。</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Step 6 · 估值分析</div>
+          <p>判断低估/合理/高估。<strong>核心问题</strong>：价格是否已经透支未来增长？</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Step 7 · 风险分析</div>
+          <p><strong>必须回答</strong>：为什么我可能错？<em>示例</em>：海力士 — AI需求下降、行业扩产；腾讯 — 游戏监管、广告放缓。</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Step 8 · 买入备忘录</div>
+          <p>每次买入前必须记录：公司、买入价格、买入原因、核心逻辑、关键跟踪指标、失效条件、计划持有周期。</p>
+        </div>
+      </div>
+
+      <!-- 投资纪律 -->
+      <div class="subsection" id="invest-discipline">
+        <h3>投资纪律</h3>
+        <p>纪律是投资系统的最后一道防线。以下规则不可违反，任何情绪驱动的偏离都可能导致不可逆的损失。</p>
+
+        <h4>禁止事项</h4>
+        <div class="callout danger">
+          <ul style="margin-bottom:0;">
+            <li><strong>禁止追热点</strong>：不因短期涨幅买入不理解的标的</li>
+            <li><strong>禁止频繁交易</strong>：每次交易必须有框架依据</li>
+            <li><strong>禁止满仓单一行业</strong>：单一行业仓位不超过30%</li>
+            <li><strong>禁止因短期波动改变长期逻辑</strong>：除非基本面或失效条件触发</li>
+          </ul>
+        </div>
+
+        <h4>坚持原则</h4>
+        <div class="callout success">
+          <ul style="margin-bottom:0;">
+            <li><strong>固定框架分析</strong>：每次评估都用8步研究+100分评分</li>
+            <li><strong>固定评分体系</strong>：基本面50+估值30+情绪20，标准不漂移</li>
+            <li><strong>固定复盘机制</strong>：定期回顾买入逻辑是否仍然成立</li>
+            <li><strong>长期持有优质资产</strong>：以年为单位持有，让复利发挥作用</li>
+          </ul>
+        </div>
+
+        <h4>AI 投资工作流</h4>
+        <p>AI 负责信息整理，而非投资决策。以下任务由自动化流程支持：</p>
+        <div class="table-wrap"><table>
+          <thead><tr><th>任务</th><th>输入</th><th>输出</th></tr></thead>
+          <tbody>
+            <tr><td>财报压缩</td><td>财报PDF</td><td>收入/利润/现金流变化 + 风险点 + 管理层观点</td></tr>
+            <tr><td>公司档案维护</td><td>定期研究</td><td>商业模式/护城河/风险/关键指标 → 企业数据库</td></tr>
+            <tr><td>财报对比</td><td>季度财报</td><td>本季 VS 上季 VS 去年同期</td></tr>
+            <tr><td>投资备忘录</td><td>交易记录</td><td>为什么买/为什么卖/逻辑是否变化</td></tr>
+          </tbody>
+        </table></div>
+        <div class="callout"><strong>持续优化方向</strong>：逐步增加自动财报分析、自动估值监控、自动观察池更新、自动投资备忘录、自动评分、自动风险预警 Agent，最终形成半自动化投资决策系统。</div>
+      </div>
+    </section>
+
+    <!-- === 模块四：每日研报精选 === -->
     <section class="section" id="reports">
       <div class="section-header"><span class="section-icon">📰</span><h2>每日研报精选</h2><span class="section-sub" id="reports-date">加载中...</span></div>
       <div class="report-filters" id="report-filters">
@@ -717,6 +938,21 @@ Step 6: 周期信号变化时调仓换股</code></pre>
           <tbody id="recommend-body"><tr><td colspan="5" style="text-align:center;color:var(--text-secondary);padding:24px;">数据加载中...</td></tr></tbody>
         </table></div>
         <div class="callout danger"><strong>⚠️ 风险提示</strong>：以上推荐仅为周期分析参考，<strong>不构成任何投资建议</strong>。投资有风险，入市需谨慎。实际操作需结合个人风险承受能力、资金属性和专业意见综合判断。</div>
+      </div>
+
+      <!-- 个股评估 -->
+      <div class="subsection" id="stock-eval">
+        <h3>个股评估</h3>
+        <p>基于个人投资系统V1.0框架（基本面50+估值30+情绪20=100分）对候选个股进行系统评估。每只个股按8步研究流程分析后打分，评分结果决定是否纳入观察池或建仓。</p>
+        <div class="eval-grid" id="stock-eval-grid"><div style="color:var(--text-secondary);text-align:center;padding:40px;grid-column:1/-1;">个股评估数据加载中...</div></div>
+      </div>
+
+      <!-- 观察池管理 -->
+      <div class="subsection" id="watchlist">
+        <h3>观察池管理</h3>
+        <p>观察池控制在20~30家公司以内，分为"长期复利池"（具备长期复利能力的优质公司）和"周期增强池"（受益于特定周期阶段的增强型公司）。每家公司记录最新评分与状态，定期复盘。</p>
+        <div class="watchlist-grid" id="watchlist-grid"><div style="color:var(--text-secondary);text-align:center;padding:40px;grid-column:1/-1;">观察池数据加载中...</div></div>
+        <div class="callout"><strong>池分类说明</strong>：<em>长期复利池</em> — 具备持续竞争优势和长期增长确定性的公司，持有周期3年以上；<em>周期增强池</em> — 受益于特定周期或政策驱动的公司，持有周期数月至1-2年。</div>
       </div>
     </section>
   </main>
@@ -837,6 +1073,36 @@ Step 6: 周期信号变化时调仓换股</code></pre>
     {"rank":4,"sector":"粮食概念/农林牧渔","logic":"逆市涨停潮+地缘风险催化粮食安全+PE分位19%偏低","watchPoints":"全球农产品价格、地缘局势、国内粮食政策","riskLevel":"中","evidence":{"valuation":"PE分位19%、PB分位17%偏低","fund":"逆市涨停潮资金涌入","cycle":"地缘风险+粮食安全主题","risk":"题材属性强，地缘缓和后回调"}},
     {"rank":5,"sector":"有色金属（铜/铝）","logic":"Q2盈利增速前五+油价上涨+PE/PB分位值双低，但全球流动性收紧构成压力","watchPoints":"铜价走势、美元指数、全球PMI、8月PPI","riskLevel":"中","evidence":{"valuation":"PE分位16%、PB分位14%","fund":"关注南向资金避险方向","cycle":"复苏期资源品弹性+美元走势待确认","risk":"全球流动性收紧压制商品需求"}},
     {"rank":6,"sector":"AI散热/培育钻石","logic":"逆势活跃+AI散热催生新蓝海+融资客提前埋伏+全固态电池技术突破","watchPoints":"AI散热渗透率、培育钻石需求、固态电池产业化进度","riskLevel":"中","evidence":{"valuation":"电力设备PE分位29%偏低","fund":"融资客提前埋伏9只个股","cycle":"AI产业高景气+技术突破催化","risk":"科技股整体承压+主题交易拥挤"}}
+  ],
+  "stockEvaluations": [
+    {"company":"SK海力士","code":"000660.KS","pool":"长期复利池","evalDate":"2026-09-02","totalScore":86,"fundamentalScore":46,"valuationScore":30,"sentimentScore":10,"decision":"进入观察池，逐步建仓","summary":"AI驱动HBM需求爆发，代际领先+LTA锁定10家大客户。Q2利润同比+557%，利润率76%历史新高。PE 7.44/远期PE 3.54/PEG 0.18明显低估，从52周高点回落46%提供介入窗口。管理层已批准回购。","keyIndicators":["HBM收入占比","DRAM合约价","季度营收增速","英伟达资本开支","三星HBM竞争"]},
+    {"company":"巨化股份","code":"600160.SH","pool":"周期增强池","evalDate":"2026-09-02","totalScore":70,"fundamentalScore":38,"valuationScore":20,"sentimentScore":12,"decision":"持续跟踪，暂不买入","summary":"配额红利释放+制冷剂价格高位，政策壁垒极强。H1利润同比+29%但营收原地踏步(+0.07%)。PE动态19.37合理偏低但PB 4.65偏高。主力净流出+股东户数激增175%散户化，短期承压。","keyIndicators":["制冷剂价格","配额执行情况","Q3营收恢复","经营现金流","高端氟材料"]},
+    {"company":"腾讯","code":"00700.HK","pool":"长期复利池","evalDate":"2026-09-02","totalScore":75,"fundamentalScore":40,"valuationScore":20,"sentimentScore":15,"decision":"持续跟踪，暂不买入","summary":"微信13亿月活网络效应极强，社交→支付→内容→云全链路闭环。PE 14.83/远期PE 12.95合理偏低，从52周高点回落36%。ROE 19.91%接近20%，净利润率30%优秀。但PEG 1.45偏高增长放缓，YTD -14.70%持续下跌，反垄断监管压制情绪。","keyIndicators":["微信月活","游戏收入增速","金融科技收入","腾讯云增速","视频号商业化"]},
+    {"company":"微软","code":"MSFT","pool":"长期复利池","evalDate":"2026-09-02","totalScore":67,"fundamentalScore":47,"valuationScore":10,"sentimentScore":10,"decision":"持续跟踪，暂不买入","summary":"全球最大软件公司，Azure+Office+AI(Copilot)生态极强。ROE 34%/净利润率40%/TTM营收3318亿美元极强盈利。但PE 27.71/PB 8.51估值偏高，YTD仅3.44%跑输大盘。基本面极强但估值是主要制约。","keyIndicators":["Azure增速","Copilot渗透率","M365订阅收入","AI收入占比","资本开支回报"]},
+    {"company":"Meta","code":"META","pool":"长期复利池","evalDate":"2026-09-02","totalScore":74,"fundamentalScore":44,"valuationScore":20,"sentimentScore":10,"decision":"持续跟踪，暂不买入","summary":"30亿+用户社交网络效应极强，广告+AI赋能。PE 22.41/远期PE 17.15/PEG 0.77合理偏低。ROE 29.85%/净利润率30%优秀。从52周高点回落25%，分析师目标+27%。TikTok竞争是主要风险。","keyIndicators":["日活/月活增速","ARPU","Reels变现率","AI广告效率","Reality Labs亏损"]},
+    {"company":"Google","code":"GOOGL","pool":"长期复利池","evalDate":"2026-09-02","totalScore":76,"fundamentalScore":46,"valuationScore":20,"sentimentScore":10,"decision":"持续跟踪，暂不买入","summary":"全球最大数字广告公司，搜索+YouTube+Cloud+AI(Gemini)全栈。PE 16.91/远期PE 16.56/PEG 0.92合理偏低。ROE 48.68%/净利润率55%极强。TTM营收4459亿美元。反垄断诉讼是主要催化剂，1年回报59.87%。","keyIndicators":["搜索收入增速","Google Cloud增速","YouTube收入","Gemini AI渗透","反垄断裁决"]},
+    {"company":"苹果","code":"AAPL","pool":"长期复利池","evalDate":"2026-09-02","totalScore":58,"fundamentalScore":43,"valuationScore":10,"sentimentScore":5,"decision":"放弃","summary":"全球最强消费电子品牌+生态闭环。ROE 148.75%(回购效应)/净利润率28%优秀。但PE 37.32/PB 43.01估值偏高，硬件增长见顶，接近52周高点。Apple Intelligence落后竞品。评分58分不达70分门槛，从观察池移除。","keyIndicators":["iPhone销量","服务收入增速","Apple Intelligence渗透","毛利率","印度市场"]},
+    {"company":"台积电","code":"TSM","pool":"长期复利池","evalDate":"2026-09-02","totalScore":72,"fundamentalScore":47,"valuationScore":20,"sentimentScore":5,"decision":"持续跟踪，暂不买入","summary":"全球最大半导体代工，3nm/2nm独家量产+AI芯片核心供应链。ROE 40%/净利润率50%极强。PE 30.69/远期PE 24.63/PEG 0.99合理。基本面47分极高但AI主题热度极高(1年+81%)情绪偏热，台海地缘风险是长期变量。","keyIndicators":["先进制程收入占比","AI/HPC收入","产能利用率","CoWoS封装","英伟达订单"]},
+    {"company":"亚马逊","code":"AMZN","pool":"长期复利池","evalDate":"2026-09-02","totalScore":72,"fundamentalScore":42,"valuationScore":20,"sentimentScore":10,"decision":"持续跟踪，暂不买入","summary":"全球最大电商+AWS云计算。PE 20.49/PB 5.08合理偏低。ROE 30.56%/净利润率17.44%改善中。TTM营收7757亿美元。物流+AWS+Prime生态极强，但净利润率偏低+Beta 1.45波动大。","keyIndicators":["AWS增速","北美电商利润率","广告收入增速","Bedrock AI服务","Prime会员数"]},
+    {"company":"伯克希尔","code":"BRK.B","pool":"长期复利池","evalDate":"2026-09-02","totalScore":78,"fundamentalScore":33,"valuationScore":30,"sentimentScore":15,"decision":"持续跟踪，暂不买入","summary":"全球最大控股集团，保险浮存金+苹果/美银投资组合+BNSF铁路+BHE能源。PE 12.76/PB 1.44/Beta 0.61明显低估。现金3655亿创历史新高。但ROE 12.12%偏低(保险特性)，巴菲特退休是关键变量。接近80分建仓门槛。","keyIndicators":["保险浮存金规模","现金储备","投资组合收益","BNSF/BHE经营","巴菲特接班计划"]},
+    {"company":"紫金矿业","code":"601899.SH","pool":"周期增强池","evalDate":"2026-09-02","totalScore":73,"fundamentalScore":41,"valuationScore":20,"sentimentScore":12,"decision":"持续跟踪，暂不买入","summary":"全球性矿业巨头，铜金双轮驱动。PE 13.29/EV/EBITDA 7.14低估。ROE 36.56%极强，Q1净利润率20.39%高于TTM。从52周高点回落27%，分析师目标+46%。铜(AI+新能源)+金(避险)5年增长，但负债率60%偏高+金属价格周期性。","keyIndicators":["铜价","金价","卡莫阿铜矿扩产","铜金产量","生产成本"]},
+    {"company":"中国神华","code":"601088.SH","pool":"周期增强池","evalDate":"2026-09-02","totalScore":63,"fundamentalScore":33,"valuationScore":20,"sentimentScore":10,"decision":"放弃","summary":"中国最大煤炭能源企业，煤电运化一体化协同。PE 17.80/PB 2.32/股息率4.16%合理。但双碳目标下5年煤炭需求平稳略缩，ROE 12.69%偏低，长期缺乏增长动力。评分63分不达70分门槛，从观察池移除。","keyIndicators":["煤价","长协比例","发电量","分红率","新能源转型"]}
+  ],
+  "watchlist": [
+    {"poolName":"长期复利池","companies":[
+      {"company":"SK海力士","code":"000660.KS","status":"建仓","latestScore":86,"latestEvalDate":"2026-09-02"},
+      {"company":"腾讯","code":"00700.HK","status":"跟踪","latestScore":75,"latestEvalDate":"2026-09-02"},
+      {"company":"微软","code":"MSFT","status":"跟踪","latestScore":67,"latestEvalDate":"2026-09-02"},
+      {"company":"Meta","code":"META","status":"跟踪","latestScore":74,"latestEvalDate":"2026-09-02"},
+      {"company":"Google","code":"GOOGL","status":"跟踪","latestScore":76,"latestEvalDate":"2026-09-02"},
+      {"company":"台积电","code":"TSM","status":"跟踪","latestScore":72,"latestEvalDate":"2026-09-02"},
+      {"company":"亚马逊","code":"AMZN","status":"跟踪","latestScore":72,"latestEvalDate":"2026-09-02"},
+      {"company":"伯克希尔","code":"BRK.B","status":"跟踪","latestScore":78,"latestEvalDate":"2026-09-02"}
+    ]},
+    {"poolName":"周期增强池","companies":[
+      {"company":"巨化股份","code":"600160.SH","status":"跟踪","latestScore":70,"latestEvalDate":"2026-09-02"},
+      {"company":"紫金矿业","code":"601899.SH","status":"跟踪","latestScore":73,"latestEvalDate":"2026-09-02"}
+    ]}
   ]
 }
 </script>
@@ -1096,6 +1362,59 @@ Step 6: 周期信号变化时调仓换股</code></pre>
       renderRecommendations(recData, key, !asc);
     });
   });
+
+  // === 个股评估渲染 ===
+  function scoreClass(score) {
+    if (score >= 80) return 'high';
+    if (score >= 70) return 'mid';
+    return 'low';
+  }
+
+  function renderStockEvaluations() {
+    var box = document.getElementById('stock-eval-grid');
+    if (!box) return;
+    var evals = dailyData.stockEvaluations || [];
+    if (evals.length === 0) {
+      box.innerHTML = '<div style="color:var(--text-secondary);text-align:center;padding:40px;grid-column:1/-1;">暂无个股评估数据</div>';
+      return;
+    }
+    box.innerHTML = evals.map(function(ev) {
+      var sc = scoreClass(ev.totalScore);
+      var dims = [
+        {label:'基本面', score:ev.fundamentalScore, max:50, pct:(ev.fundamentalScore/50)*100, color:'var(--color-up)'},
+        {label:'估值', score:ev.valuationScore, max:30, pct:(ev.valuationScore/30)*100, color:'var(--color-link)'},
+        {label:'情绪', score:ev.sentimentScore, max:20, pct:(ev.sentimentScore/20)*100, color:'var(--color-warn)'}
+      ];
+      var dimHtml = dims.map(function(d) {
+        return '<div class="ec-dim"><div class="ec-dim-label"><span>' + d.label + '</span><span>' + d.score + '/' + d.max + '</span></div><div class="score-bar"><div class="score-fill" style="width:' + d.pct + '%;background:' + d.color + ';"></div></div></div>';
+      }).join('');
+      var tags = (ev.keyIndicators || []).map(function(t) { return '<span class="tag">' + t + '</span>'; }).join('');
+      var decisionBadge = ev.decision ? '<span class="badge ' + (ev.decision.indexOf('建仓') >= 0 ? 'buy' : (ev.decision.indexOf('跟踪') >= 0 ? 'hold' : 'sell')) + '">' + ev.decision + '</span>' : '';
+      return '<div class="eval-card"><div class="ec-header"><div><div class="ec-title">' + textOrDash(ev.company) + '</div><div class="ec-code">' + textOrDash(ev.code) + ' · ' + textOrDash(ev.pool) + '</div></div><div style="text-align:right;"><div class="ec-score ' + sc + '">' + textOrDash(ev.totalScore) + '</div><div class="ec-score-label">总分/100</div></div></div><div class="ec-dims">' + dimHtml + '</div><div class="ec-summary">' + textOrDash(ev.summary) + '</div><div class="ec-keyindicators">' + (tags || '') + '</div><div style="margin-top:10px;display:flex;align-items:center;gap:8px;"><span style="font-size:12px;color:var(--text-secondary);">评估日期：' + textOrDash(ev.evalDate) + '</span>' + decisionBadge + '</div></div>';
+    }).join('');
+  }
+  renderStockEvaluations();
+
+  // === 观察池渲染 ===
+  function renderWatchlist() {
+    var box = document.getElementById('watchlist-grid');
+    if (!box) return;
+    var pools = dailyData.watchlist || [];
+    if (pools.length === 0) {
+      box.innerHTML = '<div style="color:var(--text-secondary);text-align:center;padding:40px;grid-column:1/-1;">暂无观察池数据</div>';
+      return;
+    }
+    box.innerHTML = pools.map(function(pool) {
+      var items = (pool.companies || []).map(function(c) {
+        var sc = c.latestScore ? scoreClass(c.latestScore) : 'none';
+        var scoreText = c.latestScore ? c.latestScore + '分' : '未评估';
+        var statusCls = c.status === '建仓' ? 'green' : (c.status === '持仓' ? 'yellow' : 'red');
+        return '<div class="wl-item"><span class="fi-status" style="background:var(--color-' + (c.status === '建仓' ? 'up' : (c.status === '持仓' ? 'warn' : 'down')) + ');"></span><div><div class="wl-name">' + textOrDash(c.company) + '</div><div class="wl-code">' + textOrDash(c.code) + '</div></div><div style="margin-left:auto;text-align:right;"><div class="wl-score ' + sc + '">' + scoreText + '</div><div class="wl-date">' + textOrDash(c.latestEvalDate) + '</div></div></div>';
+      }).join('');
+      return '<div class="watchlist-card"><div class="wl-title">' + textOrDash(pool.poolName) + ' <span class="tag" style="margin-left:8px;">' + (pool.companies || []).length + '家</span></div>' + items + '</div>';
+    }).join('');
+  }
+  renderWatchlist();
 
   // === 回到顶部 ===
   var scrollBtn = document.getElementById('scroll-top');
