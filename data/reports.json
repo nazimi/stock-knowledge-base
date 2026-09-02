@@ -717,16 +717,16 @@
   "stockEvaluations": [
     {
       "company": "SK海力士",
-      "code": "000660.KS",
+      "code": "SKHY",
       "pool": "长期复利池",
-      "evalDate": "2026-09-02",
+      "evalDate": "2026-09-03",
       "totalScore": 86,
       "fundamentalScore": 46,
       "valuationScore": 30,
       "sentimentScore": 10,
       "decision": "进入观察池，逐步建仓",
-      "summary": "AI驱动HBM需求爆发，代际领先+LTA锁定10家大客户。Q2利润同比+557%，利润率76%历史新高。PE 7.44/远期PE 3.54/PEG 0.18明显低估，从52周高点回落46%提供介入窗口。管理层已批准回购。",
-      "keyIndicators": ["HBM收入占比", "DRAM合约价", "季度营收增速", "英伟达资本开支", "三星HBM竞争"]
+      "summary": "AI驱动HBM需求爆发，代际领先+LTA锁定10家大客户。净利润率85.62%/ROE 92.68%历史新高。美股ADR(SKHY)2026年7月NASDAQ上市，PE 9.83/远期PE 6.18/PEG 0.18明显低估，从$194.80高点回落17%至$162.28。管理层已批准回购，13位分析师目标价$247.31(+52%)。",
+      "keyIndicators": ["HBM收入占比", "DRAM合约价", "季度营收增速", "英伟达资本开支", "ADR日均成交量"]
     },
     {
       "company": "巨化股份",
@@ -915,7 +915,7 @@
     {
       "poolName": "长期复利池",
       "companies": [
-        {"company": "SK海力士", "code": "000660.KS", "status": "建仓", "latestScore": 86, "latestEvalDate": "2026-09-02"},
+        {"company": "SK海力士", "code": "SKHY", "status": "建仓", "latestScore": 86, "latestEvalDate": "2026-09-03"},
         {"company": "腾讯", "code": "00700.HK", "status": "跟踪", "latestScore": 75, "latestEvalDate": "2026-09-02"},
         {"company": "微软", "code": "MSFT", "status": "跟踪", "latestScore": 67, "latestEvalDate": "2026-09-02"},
         {"company": "Meta", "code": "META", "status": "跟踪", "latestScore": 74, "latestEvalDate": "2026-09-02"},
