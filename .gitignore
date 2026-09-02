@@ -13,3 +13,9 @@ Thumbs.db
 
 # 本地学习笔记（不提交）
 learn/
+
+# 本地个人画像（不提交）
+local/
+
+# 评估报告（本地保留，不提交）
+evaluations/
