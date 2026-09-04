@@ -1108,6 +1108,25 @@
         "淘天CMR增速",
         "国际电商亏损收窄"
       ]
+    },
+    {
+      "company": "江西铜业",
+      "code": "600362.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-09-04",
+      "totalScore": 71,
+      "fundamentalScore": 30,
+      "valuationScore": 20,
+      "sentimentScore": 10,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "中国最大铜冶炼企业，自产矿资源壁垒+规模效应。2026中报营收3072亿(+19.5%)净利86亿(+107%)受益铜价上涨。PE动态9.36/PB 1.85低于行业均值。但毛利率5.82%/净利率3.09%代工天花板低，ROE 10.22%未达15%，利润弹性靠铜价非内生增长，扣非增速(+74%)低于归非(+107%)，负债率65%偏高。71分刚达跟踪门槛。",
+      "keyIndicators": [
+        "LME/SHFE铜价",
+        "自产铜精矿量",
+        "TC/RC加工费",
+        "毛利率变化",
+        "海外矿产进展"
+      ]
     }
   ],
   "watchlist": [
@@ -1188,6 +1207,13 @@
           "status": "跟踪",
           "latestScore": 73,
           "latestEvalDate": "2026-09-02"
+        },
+        {
+          "company": "江西铜业",
+          "code": "600362.SH",
+          "status": "跟踪",
+          "latestScore": 71,
+          "latestEvalDate": "2026-09-04"
         }
       ]
     }
