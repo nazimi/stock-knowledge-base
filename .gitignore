@@ -19,3 +19,6 @@ local/
 
 # 评估报告（本地保留，不提交）
 evaluations/
+
+# 宽指配置与仓位日志（本地保留，不提交）
+broad-index/

@@ -22,7 +22,9 @@
   "sourceQuality": [],
   "cyclePosition": {},
   "lowValuation": [],
-  "recommendations": []
+  "recommendations": [],
+  "stockEvaluations": [],
+  "watchlist": []
 }
 ```
 
@@ -109,6 +111,49 @@
 
 `evidence` 为新增可选字段；若旧数据缺失该字段，页面应正常显示。
 
+### 1.7 个股评估字段
+
+```json
+{
+  "company": "SK海力士",
+  "code": "000660.KS",
+  "pool": "长期复利池",
+  "evalDate": "2026-09-02",
+  "totalScore": 86,
+  "fundamentalScore": 46,
+  "valuationScore": 30,
+  "sentimentScore": 10,
+  "decision": "进入观察池，逐步建仓",
+  "summary": "评估摘要，3-5句话",
+  "keyIndicators": ["HBM收入占比", "DRAM合约价"]
+}
+```
+
+- `pool` 可选值：`长期复利池`、`周期增强池`。
+- `totalScore` = `fundamentalScore`(满分50) + `valuationScore`(满分30) + `sentimentScore`(满分20) = 满分100。
+- `decision` 可选值：`重点建仓`、`进入观察池，逐步建仓`、`持续跟踪，暂不买入`、`放弃`。
+
+### 1.8 观察池字段
+
+```json
+{
+  "poolName": "长期复利池",
+  "companies": [
+    {
+      "company": "SK海力士",
+      "code": "000660.KS",
+      "status": "建仓",
+      "latestScore": 86,
+      "latestEvalDate": "2026-09-02"
+    }
+  ]
+}
+```
+
+- `poolName` 可选值：`长期复利池`、`周期增强池`。
+- `status` 可选值：`跟踪`、`建仓`、`持仓`。
+- `latestScore` 为 null 时显示"未评估"。
+
 ---
 
 ## 2. 页面模块与渲染规则
@@ -125,8 +170,10 @@
 | 低估值筛选 | `lowValuation` | 表格展示并支持排序 |
 | 顺周期定位 | `cyclePosition` | 展示周期阶段、指标列表和受益行业 |
 | 综合推荐 | `recommendations` | 表格展示推荐逻辑、关注要点、风险等级和证据标签 |
+| 个股评估 | `stockEvaluations` | 卡片展示评分总分、三维评分条、决策标签和关键指标 |
+| 观察池管理 | `watchlist` | 按长期复利池/周期增强池分组展示公司列表、状态和最新评分 |
 
-所有新增模块必须支持安全降级：字段缺失时显示“暂无数据”，不能导致脚本报错。
+所有新增模块必须支持安全降级：字段缺失时显示"暂无数据"，不能导致脚本报错。
 
 ---
 
@@ -167,10 +214,17 @@
 | - 子节 | `#cycle-china` | 中国特色周期 |
 | - 子节 | `#cycle-guide` | 顺周期操作指南 |
 | - 子节 | `#cycle-case` | 行业分析范例 |
-| 模块三 | `#reports` | 每日研报精选 |
-| 模块四 | `#recommend` | 板块推荐 |
+| 模块三 | `#invest-system` | 投资系统方法论 |
+| - 子节 | `#invest-decision` | 决策框架 |
+| - 子节 | `#invest-scoring` | 评分体系 |
+| - 子节 | `#invest-research` | 研究模板 |
+| - 子节 | `#invest-discipline` | 投资纪律 |
+| 模块四 | `#reports` | 每日研报精选 |
+| 模块五 | `#recommend` | 板块推荐 |
 | - 子节 | `#recommend-dashboard` | 市场观察面板 |
 | - 子节 | `#recommend-sources` | 数据源质量 |
 | - 子节 | `#recommend-low` | 低估值筛选 |
 | - 子节 | `#recommend-cycle` | 顺周期定位 |
 | - 子节 | `#recommend-summary` | 综合推荐 |
+| - 子节 | `#stock-eval` | 个股评估 |
+| - 子节 | `#watchlist` | 观察池管理 |
