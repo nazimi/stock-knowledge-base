@@ -31,6 +31,11 @@ knowledge-base/
 │   └── design-spec.md           # 详细设计规范文档
 ├── data/                        # 数据目录（备份用，实际数据内联在 HTML 中）
 │   └── reports.json             # 每日研报与推荐数据备份
+├── local/                       # 本地个人数据（不提交 Git）
+│   ├── profile.md               # 投资者画像（隐私）
+│   ├── 持仓备忘录.md             # 个股持仓快照 + 买入备忘录 + 操作日志
+│   └── broad-index/             # 宽指配置模块（策略 / 评分 / 仓位日志）
+├── evaluations/                 # 个股评估报告（本地保留，不提交）
 └── learn/                       # 本地学习笔记（不提交 Git，仅在本地保留）
     └── git-pages-deployment-guide.md  # Git 授权与 GitHub Pages 部署流程详解
 ```
