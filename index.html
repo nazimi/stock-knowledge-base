@@ -3664,7 +3664,7 @@ Step 3: 市场情绪过滤 — 趋势 / 成交量 / 恐慌程度？辅助择时�
     document.getElementById('cycle-indicators').innerHTML = indHtml;
 
     var favHtml = (cp.favoredSectors || []).map(function(f) {
-      return '<div class="favored-item ' + f.status + '"><span class="fi-status"></span><span class="fi-name">' + f.name + '</span><span class="fi-note">' + f.note + '</span></div>';
+      return '<div class="favored-item ' + f.status + '"><span class="fi-status"></span><span class="fi-name">' + f.sector + '</span><span class="fi-note">' + f.reason + '</span></div>';
     }).join('');
     document.getElementById('favored-list').innerHTML = favHtml;
   }
