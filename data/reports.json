@@ -1203,12 +1203,12 @@
     },
     {
       "sector": "房地产",
-      "pe": "待更新（盈利不稳定，PE参考意义有限）",
+      "pe": "N/A",
       "pb": 0.65,
-      "pePercentile": "待更新",
+      "pePercentile": "N/A",
       "pbPercentile": 2,
       "dividendYield": 2.5,
-      "signal": "PB极低，但盈利不稳，基本面弱，结构性回避"
+      "signal": "PB极低（分位2%），但盈利不稳PE失真，基本面弱，结构性回避"
     },
     {
       "sector": "化工",

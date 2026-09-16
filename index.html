@@ -2171,12 +2171,12 @@ Step 3: 市场情绪过滤 — 趋势 / 成交量 / 恐慌程度？辅助择时�
     },
     {
       "sector": "房地产",
-      "pe": "待更新（盈利不稳定，PE参考意义有限）",
+      "pe": "N/A",
       "pb": 0.65,
-      "pePercentile": "待更新",
+      "pePercentile": "N/A",
       "pbPercentile": 2,
       "dividendYield": 2.5,
-      "signal": "PB极低，但盈利不稳，基本面弱，结构性回避"
+      "signal": "PB极低（分位2%），但盈利不稳PE失真，基本面弱，结构性回避"
     },
     {
       "sector": "化工",
@@ -3714,7 +3714,14 @@ Step 3: 市场情绪过滤 — 趋势 / 成交量 / 恐慌程度？辅助择时�
   renderSourceQuality();
 
   // === 低估值表格 ===
+  function fmtNum(v, digits) {
+    return (typeof v === 'number' && isFinite(v)) ? v.toFixed(digits) : textOrDash(v);
+  }
+  function fmtPct(v, digits) {
+    return (typeof v === 'number' && isFinite(v)) ? v.toFixed(digits) + '%' : textOrDash(v);
+  }
   function percentileClass(p) {
+    if (typeof p !== 'number' || !isFinite(p)) return '';
     if (p < 30) return 'text-up';
     if (p > 70) return 'text-down';
     if (p > 50) return 'text-warn';
@@ -3726,20 +3733,23 @@ Step 3: 市场情绪过滤 — 趋势 / 成交量 / 恐慌程度？辅助择时�
     if (sortKey) {
       rows.sort(function(a, b) {
         var va = a[sortKey], vb = b[sortKey];
-        if (typeof va === 'string') return sortAsc ? va.localeCompare(vb, 'zh') : vb.localeCompare(va, 'zh');
-        return sortAsc ? va - vb : vb - va;
+        var na = (typeof va === 'number' && isFinite(va));
+        var nb = (typeof vb === 'number' && isFinite(vb));
+        if (na && nb) return sortAsc ? va - vb : vb - va;
+        if (na !== nb) return na ? -1 : 1;
+        return sortAsc ? String(va).localeCompare(String(vb), 'zh') : String(vb).localeCompare(String(va), 'zh');
       });
     }
     var body = document.getElementById('low-valuation-body');
     if (rows.length === 0) { body.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--text-secondary);padding:24px;">暂无数据</td></tr>'; return; }
     body.innerHTML = rows.map(function(d) {
       return '<tr><td><strong>' + d.sector + '</strong></td>' +
-        '<td>' + d.pe.toFixed(1) + '</td>' +
-        '<td class="' + percentileClass(d.pePercentile) + '">' + d.pePercentile.toFixed(1) + '%</td>' +
-        '<td>' + d.pb.toFixed(2) + '</td>' +
-        '<td class="' + percentileClass(d.pbPercentile) + '">' + d.pbPercentile.toFixed(1) + '%</td>' +
-        '<td>' + d.dividendYield.toFixed(1) + '%</td>' +
-        '<td style="font-size:12px;">' + d.reason + '</td></tr>';
+        '<td>' + fmtNum(d.pe, 1) + '</td>' +
+        '<td class="' + percentileClass(d.pePercentile) + '">' + fmtPct(d.pePercentile, 1) + '</td>' +
+        '<td>' + fmtNum(d.pb, 2) + '</td>' +
+        '<td class="' + percentileClass(d.pbPercentile) + '">' + fmtPct(d.pbPercentile, 1) + '</td>' +
+        '<td>' + fmtPct(d.dividendYield, 1) + '</td>' +
+        '<td style="font-size:12px;">' + textOrDash(d.signal || d.reason) + '</td></tr>';
     }).join('');
   }
 
