@@ -2355,6 +2355,63 @@
         "分红率",
         "油煤价差"
       ]
+    },
+    {
+      "company": "博通",
+      "code": "AVGO",
+      "pool": "长期复利池",
+      "evalDate": "2026-09-16",
+      "totalScore": 82,
+      "fundamentalScore": 47,
+      "valuationScore": 25,
+      "sentimentScore": 10,
+      "decision": "进入观察池，逐步建仓",
+      "summary": "首次评估(82分；基本面47/估值25/情绪10)。AI定制ASIC+网络芯片+VMware软件三引擎。FY26Q3(9/2发布)营收$295.91亿(+85.5%)、AI半导体$167亿(+221%)、Non-GAAP EPS $3.32(+95%)、单季FCF $136.65亿(FCF率46%)；Q4指引$348亿(+93%)，电话会给FY27 AI收入约$1150亿、FY28约$2300亿(两年翻倍路径，供应已锁定)。现价约$367、市值$1.73万亿：FY26E PE约32倍、FY27E PE约20-22倍、PEG约0.4-0.5临界偏低。82分进入观察池逐步建仓；风险：AI客户高度集中、$290亿客户租赁付款兜底或有义务(循环融资敞口)、AI资本开支若减速则FY28路径证伪。",
+      "keyIndicators": [
+        "AI半导体收入(FY27E约$1150亿路径)",
+        "定制ASIC客户订单(谷歌/OpenAI/Meta)",
+        "Tomahawk/Jericho网络芯片份额",
+        "VMware软件收入与利润率",
+        "自由现金流与去杠杆"
+      ]
+    },
+    {
+      "company": "美光科技",
+      "code": "MU",
+      "pool": "长期复利池",
+      "evalDate": "2026-09-16",
+      "totalScore": 81,
+      "fundamentalScore": 46,
+      "valuationScore": 30,
+      "sentimentScore": 5,
+      "decision": "进入观察池，逐步建仓",
+      "summary": "首次评估(81分；基本面46/估值30/情绪5)。AI存储超级周期核心标的。FY26Q3(5月末)营收$414.6亿(+346%)、Non-GAAP毛利率84.9%创纪录、EPS $25.11(+1215%)；HBM收入$182亿(占44%)、良率超80%显著领先三星(50-60%)，FY26产能售罄、FY27已预售60%+且长协价高于现货15-20%；净现金$584亿、单季FCF $273亿、$100亿回购。Q4指引营收$490-510亿、EPS $30-32。现价$931.65(9/16)：FY26E PE约13倍、FY27E PE约8-9倍、PEG显著<0.5；但一年涨486%后自6月底高点$1255回撤约26%(HBM供给与三星竞争的定价担忧)，情绪从狂热降温故仅给5分。81分进入观察池逐步建仓(分批克制)；风险：存储周期本质、HBM价格见顶、84.9%毛利率属周期顶部特征、'周期顶低PE'陷阱(参照SK海力士操作)。",
+      "keyIndicators": [
+        "HBM合约价与预售进度",
+        "DRAM/NAND现货价",
+        "数据中心收入占比",
+        "FY27 LTA长协覆盖率",
+        "三星HBM良率追赶"
+      ]
+    },
+    {
+      "company": "Adobe",
+      "code": "ADBE",
+      "pool": "长期复利池",
+      "evalDate": "2026-09-16",
+      "totalScore": 80,
+      "fundamentalScore": 38,
+      "valuationScore": 30,
+      "sentimentScore": 12,
+      "decision": "进入观察池，逐步建仓",
+      "summary": "首次评估(80分；基本面38/估值30/情绪12)。创意软件垄断者遭AI悲观叙事深度错杀。FY26Q3(9/10发布)营收与调整后EPS双超预期，AI优先产品ARR +150%(Firefly商业化加速)，净利率约30%、ROE 30%+；市值仅约$1080亿。现价$257.76(9/16)：PE(TTM)14.74倍，较5年均值约35倍折价58%处历史极端低分位(此前从未低于20倍)；较2024年峰值回撤约56%，'生成式AI颠覆'叙事压制两年、财报超预期后仍下跌，深度悲观定价(情绪12)。80分压线进入观察池逐步建仓(轻仓试探)；风险：Sora等生成式AI真实替代、增长中枢降至约10%、TTM GAAP EPS下滑趋势。",
+      "keyIndicators": [
+        "AI产品ARR(+150%)",
+        "Digital Media净新ARR",
+        "Creative Cloud订阅留存率",
+        "生成式AI竞争格局(Sora等)",
+        "回购规模"
+      ]
     }
   ],
   "watchlist": [
@@ -2472,6 +2529,27 @@
           "status": "跟踪",
           "latestScore": 81,
           "latestEvalDate": "2026-09-15"
+        },
+        {
+          "company": "博通",
+          "code": "AVGO",
+          "status": "跟踪",
+          "latestScore": 82,
+          "latestEvalDate": "2026-09-16"
+        },
+        {
+          "company": "美光科技",
+          "code": "MU",
+          "status": "跟踪",
+          "latestScore": 81,
+          "latestEvalDate": "2026-09-16"
+        },
+        {
+          "company": "Adobe",
+          "code": "ADBE",
+          "status": "跟踪",
+          "latestScore": 80,
+          "latestEvalDate": "2026-09-16"
         }
       ]
     },
