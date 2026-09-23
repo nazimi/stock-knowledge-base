@@ -897,6 +897,8 @@ Step 3: 市场情绪过滤 — 趋势 / 成交量 / 恐慌程度？辅助择时�
           <div class="market-summary" id="market-judgement-card"><div style="color:var(--text-secondary);">行情判断加载中...</div></div>
           <div class="market-summary" id="signal-score-card"><div style="color:var(--text-secondary);">信号强度加载中...</div></div>
         </div>
+        <div class="metric-group"><h4>🇨🇳 中国政策焦点（十五五/央行/部委动态）</h4><div class="metric-grid" id="china-policy-grid"></div></div>
+        <div class="metric-group"><h4>🌍 国际宏观指标（美元/美债/原油/贵金属）</h4><div class="metric-grid" id="global-macro-grid"></div></div>
         <div class="metric-group"><h4>宏观信用</h4><div class="metric-grid" id="macro-credit-grid"></div></div>
         <div class="metric-group"><h4>资金流向</h4><div class="metric-grid" id="fund-flows-grid"></div></div>
         <div class="metric-group"><h4>市场情绪</h4><div class="metric-grid" id="market-sentiment-grid"></div></div>
@@ -3729,6 +3731,171 @@ Step 3: 市场情绪过滤 — 趋势 / 成交量 / 恐慌程度？辅助择时�
         }
       ]
     }
+  ],
+  "chinaPolicy": [
+    {
+      "name": "央行公开市场操作",
+      "value": "9/23第187/188号公告；9/22净投放350亿（7天期）",
+      "signal": "9/21启动14天逆回购，跨季+税期精准呵护，量足价稳",
+      "direction": "up",
+      "source": "央行官网 2026-09-23"
+    },
+    {
+      "name": "央行十五五改革发展规划",
+      "value": "规划+9份行动方案已印发",
+      "signal": "锚定金融强国六大核心要素，长期利好金融板块",
+      "direction": "up",
+      "source": "央行 2026-09-10"
+    },
+    {
+      "name": "金融强国建设十五五规划",
+      "value": "9/12正式落地（2026-2030）",
+      "signal": "改A股土壤方案：推动中长期资金入市、提升制度包容性",
+      "direction": "up",
+      "source": "国新办/证监会 2026-09-12"
+    },
+    {
+      "name": "中长期资金入市",
+      "value": "累计净买入超6000亿",
+      "signal": "社保/年金/保险持续增持，持有流通市值较2025年底+12.5%",
+      "direction": "up",
+      "source": "证监会 2026-09"
+    },
+    {
+      "name": "LPR报价",
+      "value": "1年期3.0% / 5年期3.5%，连续16个月不变",
+      "signal": "量宽价稳：流动性充裕但价格工具按兵不动，政策空间保留",
+      "direction": "flat",
+      "source": "央行 2026-09-20"
+    },
+    {
+      "name": "医药工业发展十五五规划",
+      "value": "国务院发布",
+      "signal": "创新药高质量发展、扩大医保覆盖、支持中医药，驱动医药板块",
+      "direction": "up",
+      "source": "国务院 2026-09-21"
+    },
+    {
+      "name": "绿色算力设施评选",
+      "value": "五部门联合启动",
+      "signal": "算力产业链再迎政策催化，利好算电协同/绿电",
+      "direction": "up",
+      "source": "发改委等 2026-09-22"
+    },
+    {
+      "name": "国常会算力网部署",
+      "value": "全国一体化算力网",
+      "signal": "算力基础设施顶层设计，利好IDC/电力/光模块",
+      "direction": "up",
+      "source": "国常会 2026-09"
+    },
+    {
+      "name": "房地产存量时代定调",
+      "value": "住建部：已步入存量时代",
+      "signal": "十五五推进住房公积金高质量发展，政策重构行业基础制度",
+      "direction": "flat",
+      "source": "住建部 2026-09-21"
+    },
+    {
+      "name": "中美元首会晤",
+      "value": "9/24-25华盛顿会晤（何立峰9/19-23先导磋商）",
+      "signal": "焦点：关税休战延长/AI技术限制/稀土供应/波音订单；9/25中秋休市需防节后跳空",
+      "direction": "up",
+      "source": "外交部/Reuters 2026-09-21"
+    },
+    {
+      "name": "券商整合批复",
+      "value": "中金吸收合并东兴/信达",
+      "signal": "金融供给侧改革推进，整合题材持续",
+      "direction": "up",
+      "source": "证监会 2026-09-15"
+    }
+  ],
+  "globalMacro": [
+    {
+      "name": "美元指数",
+      "value": "100.41",
+      "signal": "FOMC后自高位回调企稳，9/22小幅反弹+0.19%",
+      "direction": "flat",
+      "source": "ICE 2026-09-22"
+    },
+    {
+      "name": "美债10Y收益率",
+      "value": "4.996%",
+      "signal": "盘中触及5.039%创2007年以来新高，全球成长股估值天花板",
+      "direction": "up",
+      "source": "Bloomberg 2026-09-18"
+    },
+    {
+      "name": "美债2Y收益率",
+      "value": "4.743%",
+      "signal": "逼近2024年4月顶部，短端利率高企",
+      "direction": "up",
+      "source": "Bloomberg 2026-09-18"
+    },
+    {
+      "name": "中美10Y利差",
+      "value": "约-332bp",
+      "signal": "深度倒挂，外资流入依赖人民币升值与谈判缓和",
+      "direction": "down",
+      "source": "中债/Bloomberg 2026-09-22"
+    },
+    {
+      "name": "WTI原油",
+      "value": "约89.5美元/桶",
+      "signal": "9/22从93.8跳水跌破90美元，振幅超5%；地缘溢价回落+格雷厄姆法案扰动",
+      "direction": "down",
+      "source": "NYMEX 2026-09-22"
+    },
+    {
+      "name": "布伦特原油",
+      "value": "约96.5美元/桶",
+      "signal": "9/22跌超3%失守97美元",
+      "direction": "down",
+      "source": "ICE 2026-09-22"
+    },
+    {
+      "name": "COMEX黄金",
+      "value": "跌破4300美元/盎司",
+      "signal": "FOMC鹰派+美债逼近5%压制金价，黄金股短期承压",
+      "direction": "down",
+      "source": "COMEX 2026-09-23"
+    },
+    {
+      "name": "LME铜",
+      "value": "14,661美元/吨",
+      "signal": "中国需求复苏乐观+技术性买盘，洋山溢价创近四年新高",
+      "direction": "up",
+      "source": "LME 2026-09-21"
+    },
+    {
+      "name": "人民币汇率",
+      "value": "中间价6.7459/在岸6.6955",
+      "signal": "中间价连升维持强势，跨境资金流入+谈判预期支撑",
+      "direction": "up",
+      "source": "外汇交易中心 2026-09-22"
+    },
+    {
+      "name": "FOMC 9月决议",
+      "value": "加息25bp至3.75%-4.00%",
+      "signal": "12:0通过，点阵图偏鹰；10月再加息概率55.4%，全球紧缩未结束",
+      "direction": "down",
+      "source": "美联储 2026-09-17"
+    },
+    {
+      "name": "美股风向标",
+      "value": "纳指+0.46%创新高/道指-0.37%",
+      "signal": "科技股领跑但走势分化，苹果创历史新高",
+      "direction": "up",
+      "source": "美股 2026-09-22"
+    },
+    {
+      "name": "格雷厄姆法案",
+      "value": "9/18签署成法",
+      "signal": "可对进口俄油气第三国加征最高100%次级关税，中美谈判关键筹码",
+      "direction": "down",
+      "source": "美国国会 2026-09-18"
+    }
   ]
 }
 </script>
@@ -3890,6 +4057,8 @@ Step 3: 市场情绪过滤 — 趋势 / 成交量 / 恐慌程度？辅助择时�
     }).join('');
   }
   renderMarketJudgement();
+  renderMetricGrid('china-policy-grid', dailyData.chinaPolicy);
+  renderMetricGrid('global-macro-grid', dailyData.globalMacro);
   renderMetricGrid('macro-credit-grid', dailyData.macroCredit);
   renderMetricGrid('fund-flows-grid', dailyData.fundFlows);
   renderMetricGrid('market-sentiment-grid', dailyData.marketSentiment);
