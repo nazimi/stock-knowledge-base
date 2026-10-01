@@ -2602,6 +2602,437 @@
         "信用评级/CDS/发债收益率",
         "数据中心交付MW数"
       ]
+    },
+    {
+      "company": "腾讯",
+      "code": "00700.HK",
+      "pool": "长期复利池",
+      "evalDate": "2026-10-01",
+      "totalScore": 84,
+      "fundamentalScore": 44,
+      "valuationScore": 25,
+      "sentimentScore": 15,
+      "decision": "进入观察池，逐步建仓",
+      "summary": "复评(76→84，+8)。26Q2营收2047.85亿(+10.99%)超预期、毛利率58%创阶段新高，但净利560.22亿不及预期、资本开支527.8亿致自由现金流转负。现价431.8港元(9/29)、PE14.65/PB3.18处近十年约20%分位，YTD-27.4%、52周411-677港元、距低点仅5%，深度悲观定价。AI投入压制短期现金流但估值安全边际厚。上调至T1，建议轻仓分批。",
+      "keyIndicators": [
+        "微信月活",
+        "游戏收入增速",
+        "视频号广告ARPU",
+        "资本开支与自由现金流拐点",
+        "混元AI商业化"
+      ]
+    },
+    {
+      "company": "海康威视",
+      "code": "002415.SZ",
+      "pool": "长期复利池",
+      "evalDate": "2026-10-01",
+      "totalScore": 82,
+      "fundamentalScore": 40,
+      "valuationScore": 28,
+      "sentimentScore": 14,
+      "decision": "进入观察池，逐步建仓",
+      "summary": "复评(77→82，+5)。26H1营收468.23亿(+11.97%)、归母净利78.96亿(+39.57%近十年最佳)，毛利率49.9%+且Q2单季破50%连续七季攀升；创新业务占比27.51%→32.4%(存储+88.18%/热成像+47.61%/机器人+28.34%)。PE(TTM)18.17处2.7%历史分位、PEG0.91，股价自8/3的37.95元回落至32.50元(-14%)。估值与情绪双重错配，上调至T1。",
+      "keyIndicators": [
+        "创新业务占比",
+        "毛利率(七连升)",
+        "AI落地订单",
+        "海外收入",
+        "中期分红"
+      ]
+    },
+    {
+      "company": "海天味业",
+      "code": "603288.SH",
+      "pool": "长期复利池",
+      "evalDate": "2026-10-01",
+      "totalScore": 80,
+      "fundamentalScore": 37,
+      "valuationScore": 28,
+      "sentimentScore": 15,
+      "decision": "进入观察池，逐步建仓",
+      "summary": "复评(78→80，+2)。26H1营收161.46亿(+6.01%)、归母41.90亿(+7.13%)、扣非39.60亿(+3.77%)；Q2营收71.17亿(+2.93%)、归母17.46亿(+2.17%)、扣非-3.38%，增长中枢降至个位数。毛利率41.04%连续3年回升，但加权ROE降至10.42%(半年)、经营现金流12.24亿(-18.52%)。PE(TTM)26.32处0.0%历史分位(历史最低)，股价自219元高点跌约85%、公司连续13天回购1.53亿港元。压线入T1，轻仓试探；风险：Q2扣非负增长指向增长中枢下移而非错杀。",
+      "keyIndicators": [
+        "酱油/蚝油销量与吨价",
+        "餐饮渠道",
+        "扣非增速能否转正",
+        "毛利率",
+        "回购与分红"
+      ]
+    },
+    {
+      "company": "紫金矿业",
+      "code": "601899.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-10-01",
+      "totalScore": 79,
+      "fundamentalScore": 41,
+      "valuationScore": 26,
+      "sentimentScore": 12,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(75→79，+4)。26H1营收1941.78亿(+15.78%)、归母391.70亿(+68.17%)、扣非380.35亿(+75.89%)、经营现金流554.72亿(+92.41%)，资产负债率降至49.55%(2012年以来首次破50%)，创纪录中期分红。PE-TTM12.69/动态PE10.66，机构预测2026归母889亿对应PE10.27。股价自高点39.55元回撤约20%。扣分：PB4.32对矿业不便宜、卡莫阿减产未解。维持T2。",
+      "keyIndicators": [
+        "铜价/金价",
+        "卡莫阿复产与产量",
+        "当量碳酸锂产量",
+        "资产负债率",
+        "分红率"
+      ]
+    },
+    {
+      "company": "宁德时代",
+      "code": "300750.SZ",
+      "pool": "长期复利池",
+      "evalDate": "2026-10-01",
+      "totalScore": 77,
+      "fundamentalScore": 41,
+      "valuationScore": 24,
+      "sentimentScore": 12,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(79→77，-2)。26H1营收2769.17亿(+54.80%)、归母432.84亿(+41.98%)，全球动力电池份额约39.9%，中期分红10派14.11元、启动200亿注销式回购。但毛利率降至23.9%、净利率17.0%，定价权正受考验。若全年归母1000-1100亿对应动态PE约16-18倍，对普通制造业属合理而非低估，估值档位由低估修正为合理。维持T2。",
+      "keyIndicators": [
+        "单Wh毛利与净利",
+        "动力/储能出货结构",
+        "产能利用率",
+        "回购执行",
+        "海外产能投产"
+      ]
+    },
+    {
+      "company": "台积电",
+      "code": "TSM",
+      "pool": "长期复利池",
+      "evalDate": "2026-10-01",
+      "totalScore": 76,
+      "fundamentalScore": 48,
+      "valuationScore": 20,
+      "sentimentScore": 8,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(72→76，+4)。Q1营收新台币1.13万亿(+35.13%)、毛利率突破66%、Q2指引65.5-67.5%，先进制程营收占比74%；N2良率约78%、月产能3.5万片目标年底14万片；先进制程市占>90%，护城河极强。现价约$452、市值$2.34万亿，PE(TTM)33.4、2026E约26.8倍、2027E约20.3倍、PEG约0.83。52周$263-479、年内涨约49%接近上沿，情绪偏热。T2。",
+      "keyIndicators": [
+        "N2良率与产能爬坡",
+        "先进制程营收占比",
+        "CoWoS扩产",
+        "月度营收增速",
+        "AI/HPC收入"
+      ]
+    },
+    {
+      "company": "中国海油",
+      "code": "600938.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-10-01",
+      "totalScore": 76,
+      "fundamentalScore": 39,
+      "valuationScore": 27,
+      "sentimentScore": 10,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(74→76，+2)。26H1净产量398.7百万桶油当量(+3.7%)、归母净利858亿(+23.4%)、派息约388亿，产量/收入/利润/分红四项创同期新高。隐忧：桶油主要成本由2025年27.9美元升至29.7美元(+10.2%)，因油价上行触发特别收益金阶梯上调。现价33.82元、市值1.607万亿，按全年归母约1700亿计PE约9.5倍、股息率高。T2，警惕周期顶低PE陷阱。",
+      "keyIndicators": [
+        "布伦特油价",
+        "油气产量目标780-800百万桶",
+        "桶油主要成本",
+        "股息率",
+        "特别收益金"
+      ]
+    },
+    {
+      "company": "中国平安",
+      "code": "601318.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-10-01",
+      "totalScore": 75,
+      "fundamentalScore": 36,
+      "valuationScore": 28,
+      "sentimentScore": 11,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(74→75，+1)。26H1营收5751.38亿(+15.01%)、归母925.85亿(+36.06%)，Q2营收3567.33亿(+33.47%)、归母675.63亿，经营现金流3680.37亿。但营运利润与归母净利差距达27.8pct，利润高增主要来自投资收益，可持续性存疑。机构预测2026 EPS8.29元(+7.94%)、净利1495.75亿；PE历史低位、P/EV低于1，估值明显低估。T2。",
+      "keyIndicators": [
+        "寿险NBV",
+        "营运利润",
+        "产险COR",
+        "10年期国债收益率",
+        "P/EV"
+      ]
+    },
+    {
+      "company": "亚马逊",
+      "code": "AMZN",
+      "pool": "长期复利池",
+      "evalDate": "2026-10-01",
+      "totalScore": 74,
+      "fundamentalScore": 45,
+      "valuationScore": 18,
+      "sentimentScore": 11,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(76→74，-2)。Q2 2026(7/30)净销售额+20%、营业利润275亿美元(+43%)、AWS+36.7%为18个季度最快，AI与自研芯片动能强。现价$249.15、市值$2.69万亿，PE(TTM)20.04显著低于市场均值38.75，但远期PE31.10、PEG1.91信号矛盾，取中性估值。YTD+7.9%、52周$196-287处中位偏上。T2。",
+      "keyIndicators": [
+        "AWS增速与利润率",
+        "北美零售利润率",
+        "广告收入增速",
+        "AI资本开支与Trainium",
+        "Prime会员数"
+      ]
+    },
+    {
+      "company": "微软",
+      "code": "MSFT",
+      "pool": "长期复利池",
+      "evalDate": "2026-10-01",
+      "totalScore": 74,
+      "fundamentalScore": 48,
+      "valuationScore": 15,
+      "sentimentScore": 11,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(72→74，+2)。FY26Q4(7/29)营收900.07亿美元(+17.75%)、净利357.66亿(+15.53%)、Azure+43%(超指引39.5%)、运营利润率45.1%、Azure全年首破千亿，毛利率67%/ROE34%，护城河极强。现价$512.90(YTD+6.1%)，PE(TTM)约30倍、远期约25倍、PEG约1.5，估值合理偏上。9/15宣布股息上调。T2。",
+      "keyIndicators": [
+        "Azure固定汇率增速",
+        "Copilot付费席位",
+        "AI资本开支与折旧",
+        "M365商业云ARPU"
+      ]
+    },
+    {
+      "company": "陕西煤业",
+      "code": "601225.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-10-01",
+      "totalScore": 74,
+      "fundamentalScore": 38,
+      "valuationScore": 26,
+      "sentimentScore": 10,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(75→74，-1)。26H1营收788.95亿(+1.17%)、归母112.72亿(+47.57%)，Q2归母70.62亿(+149.23%)；煤炭产量9117.45万吨(+4.32%)、售价483.96元/吨(+10.07%)，量价齐升。动力煤993.75元/吨(9/28，30天+13.51%)。现价25.85元、市值2506.2亿，按全年归母约220-230亿计PE约11倍，分红率60%。T2。",
+      "keyIndicators": [
+        "动力煤价格",
+        "自产煤产量与吨煤成本",
+        "长协比例",
+        "分红率/股息率",
+        "10/13业绩说明会"
+      ]
+    },
+    {
+      "company": "巨化股份",
+      "code": "600160.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-10-01",
+      "totalScore": 73,
+      "fundamentalScore": 40,
+      "valuationScore": 21,
+      "sentimentScore": 12,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(70→73，+3)。26H1归母26.50亿(+29.23%)、Q2 14.77亿(+18.94%/环比+25.94%)，年化ROE约24%；HFCs配额29.99万吨占全国37.58%，政策壁垒极强。26/9/18价格：R32 6.5万元/吨、R125 5.6万元/吨(较年初+15%)、R134 6.8万元/吨(+9%)。PE(TTM)20.39处24.5%历史分位，机构预测2026净利58.68亿(+55.1%)对应PE约18倍。T2。",
+      "keyIndicators": [
+        "制冷剂价格",
+        "10月配额调整公示",
+        "出口/补库",
+        "含氟聚合物放量",
+        "经营现金流"
+      ]
+    },
+    {
+      "company": "中国太保",
+      "code": "601601.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-10-01",
+      "totalScore": 72,
+      "fundamentalScore": 32,
+      "valuationScore": 30,
+      "sentimentScore": 10,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(70→72，+2)。26H1营运利润211亿(+6.2%)，其中寿险159亿(+5.9%)、占比75%，CSM余额较年初正增。PE(TTM)5.27处0.9%历史分位(历史极低)、PB0.99、PEG0.29，总市值3170.9亿，属明显低估。股价31.06元。T2。风险：长端利率下行侵蚀利差、投资收益波动。",
+      "keyIndicators": [
+        "寿险NBV",
+        "CSM余额",
+        "产险COR",
+        "营运利润",
+        "P/EV"
+      ]
+    },
+    {
+      "company": "双汇发展",
+      "code": "000895.SZ",
+      "pool": "周期增强池",
+      "evalDate": "2026-10-01",
+      "totalScore": 72,
+      "fundamentalScore": 32,
+      "valuationScore": 28,
+      "sentimentScore": 12,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(70→72，+2)。26H1营收281.84亿(-1.12%)、归母23.06亿(-0.76%)、扣非22.86亿(+3.22%)；Q2营收135.86亿(-4.38%)、归母10.14亿(-14.51%)；肉制品外销量约180万吨(+14.9%)；经营现金流16.17亿(-44.52%)；2025 ROE约24%。PE(TTM)16.05处19.7%历史分位，2025年度分红10派14.5元、按现价股息率约6%。注意2026年中期不实施利润分配(阶段性资金安排)。T2。",
+      "keyIndicators": [
+        "肉制品销量与吨利",
+        "猪价",
+        "经营现金流与库存",
+        "全年分红方案"
+      ]
+    },
+    {
+      "company": "江西铜业",
+      "code": "600362.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-10-01",
+      "totalScore": 71,
+      "fundamentalScore": 34,
+      "valuationScore": 26,
+      "sentimentScore": 11,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(71→71，持平)。26H1归母86.32亿(同比翻倍)、营收首破3000亿；机构预测2026 EPS4.50元(+117.39%)、净利155.95亿。PE(TTM)13.31处35.2%历史分位、PB分位低于15%，按2026E EPS对应PE约10倍，估值明显低估。现价46.88元(9/3)。T2。",
+      "keyIndicators": [
+        "LME/SHFE铜价",
+        "TC/RC加工费",
+        "自产铜精矿量",
+        "毛利率",
+        "海外矿产进展"
+      ]
+    },
+    {
+      "company": "Meta",
+      "code": "META",
+      "pool": "长期复利池",
+      "evalDate": "2026-10-01",
+      "totalScore": 71,
+      "fundamentalScore": 44,
+      "valuationScore": 17,
+      "sentimentScore": 10,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(74→71，-3)。Q2 2026(7/29)营收608.01亿美元(+28.0%)，但EPS $6.18大幅低于预期$7.19(差$1.01)，AI与元宇宙投入侵蚀利润。现价$726.91、市值$1.85万亿，PE(TTM)27.38、远期26.02，分析师平均目标价仅$787.86(+8.4%)，上行空间有限。YTD+10.1%、52周$520.26-779.82。估值略高。T2。",
+      "keyIndicators": [
+        "广告收入增速与ARPU",
+        "资本开支指引",
+        "Reality Labs亏损",
+        "AI推荐效率"
+      ]
+    },
+    {
+      "company": "中国铝业",
+      "code": "601600.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-10-01",
+      "totalScore": 70,
+      "fundamentalScore": 33,
+      "valuationScore": 26,
+      "sentimentScore": 11,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(71→70，-1)。26H1归母118.71亿(+67.91%)，但利润几乎全部由原铝贡献、氧化铝板块由盈转亏，为高度依赖铝价的单极结构。PE(TTM)8.95处近十年3.2%历史分位(中枢13.5倍)，动态PE约7倍。现价8.68元(9/28，-2.25%)、市值约1564亿。估值明显低估但须警惕周期顶低PE陷阱。T2。",
+      "keyIndicators": [
+        "电解铝/氧化铝价格",
+        "产量",
+        "氧化铝自给率",
+        "吨铝成本",
+        "分红率"
+      ]
+    },
+    {
+      "company": "伯克希尔",
+      "code": "BRK.B",
+      "pool": "长期复利池",
+      "evalDate": "2026-10-01",
+      "totalScore": 70,
+      "fundamentalScore": 38,
+      "valuationScore": 20,
+      "sentimentScore": 12,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(78→70，-8，本期最大下调)。Q2 2026(8/8)营收1018.08亿美元(+10.0%)、运营利润129.8亿(+16%)、回购45亿(较Q1的2.35亿大幅加速)。但现价$498.44(9/30)、市值$1.07万亿，P/B 1.49已处历史区间上沿、远期PE23.00、PEG1.93，原估30分(明显低估)口径有误；分析师共识仅「持有」、目标价+8.8%、新闻情绪0.36(板块0.72)、内部人净卖出约1970万美元。T2。",
+      "keyIndicators": [
+        "P/B与回购节奏",
+        "现金储备",
+        "保险浮存金与承保利润",
+        "BNSF运量/BHE利润率",
+        "Abel资本配置"
+      ]
+    },
+    {
+      "company": "中国船舶",
+      "code": "600150.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-10-01",
+      "totalScore": 69,
+      "fundamentalScore": 38,
+      "valuationScore": 21,
+      "sentimentScore": 10,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(75→69，-6)。26H1营收915.3亿(+7.92%)、归母99.5亿(+163.51%)、毛利率17.37%(+7.09pct)；船舶造修及海洋工程营收815.25亿(+30.39%)，江南造船净利20.96亿(+319.1%)。但利润+164%属周期兑现而非成长。现价38.08元、市值2865.8亿，PE(TTM)20.9处32.6%历史分位并非低估，静态PE37.85。年内+15.79%。降T3。",
+      "keyIndicators": [
+        "手持/新接订单",
+        "船价指数",
+        "单季毛利率",
+        "经营现金流",
+        "应收账款回款"
+      ]
+    },
+    {
+      "company": "中信特钢",
+      "code": "000708.SZ",
+      "pool": "周期增强池",
+      "evalDate": "2026-10-01",
+      "totalScore": 68,
+      "fundamentalScore": 33,
+      "valuationScore": 25,
+      "sentimentScore": 10,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(70→68，-2)。26H1营收536.72亿(-1.91%)、归母29.90亿(+6.85%)、扣非29.40亿(+6.18%)；Q2营收271.78亿(-2.5%)、归母14.78亿(+4.52%)，减收增利；负债率56.76%，ROE约13-14%。现价12.80元(9/29)、市值646亿，按年化净利58-60亿计PE约11倍。营收持续负增长且ROE偏低。降T3。",
+      "keyIndicators": [
+        "特钢销量与高端占比",
+        "毛利率",
+        "汽车/机械需求",
+        "单季营收能否转正"
+      ]
+    },
+    {
+      "company": "长江电力",
+      "code": "600900.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-10-01",
+      "totalScore": 67,
+      "fundamentalScore": 39,
+      "valuationScore": 18,
+      "sentimentScore": 10,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(77→67，-10，关键口径修正)。2025营收862.42亿(+2.07%)、归母345.03亿(+6.17%)；26H1营收379.29亿、来水偏丰带动发电量提升，六库蓄能比超86%。但现价28.36元、市值约6939亿，PE(TTM)19.17处56.7%历史分位(30%/70%分位17.2/20.52)、PB3.21、股息率3.53%——原估30分(明显低估)口径有误，实际属略高。年内+8.29%、近60日+8.41%，红利资产拥挤。降T3。",
+      "keyIndicators": [
+        "来水与发电量",
+        "电价",
+        "财务费用",
+        "股息率与分红率",
+        "PE分位"
+      ]
+    },
+    {
+      "company": "三一重工",
+      "code": "600031.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-10-01",
+      "totalScore": 66,
+      "fundamentalScore": 36,
+      "valuationScore": 20,
+      "sentimentScore": 10,
+      "decision": "持续跟踪，暂不买入",
+      "summary": "复评(73→66，-7)。26H1营收535亿(+19.49%)、归母约59.6亿(+9.1%)，但扣非净利-13.45%(汇率拖累)出现明显盈利背离。海外营收+21.82%、占比61.3%创新高、海外毛利率32%+；挖掘机械213.06亿(+21.77%)、桩工+63.1%。机构预测2026净利104.16亿、按9/1收盘PE17.8倍。降T3。",
+      "keyIndicators": [
+        "扣非净利能否转正",
+        "海外收入占比与毛利率",
+        "汇兑影响",
+        "挖掘机月度销量"
+      ]
+    },
+    {
+      "company": "中远海能",
+      "code": "600026.SH",
+      "pool": "周期增强池",
+      "evalDate": "2026-10-01",
+      "totalScore": 64,
+      "fundamentalScore": 33,
+      "valuationScore": 20,
+      "sentimentScore": 11,
+      "decision": "放弃",
+      "summary": "复评(71→64，-7)→归档。强周期油运，无护城河与定价权。克拉克森VLCC-TCE 61.4万美元/天(周环比-6%)、中东-中国144.9万美元/天(-7%)，运价处极端高位但边际下行。PE(TTM)17.3处45.1%历史分位(30%/70%分位14.21/24.46)，并非低估、缺乏保护。基本面过滤「未来5年赚钱能力是否更强」答案不明确即放弃。复活条件：运价企稳回升且PE分位回落至20-35%，或供给端结构性收缩证据。",
+      "keyIndicators": [
+        "VLCC-TCE运价",
+        "中东-中国航线运价",
+        "新船订单/拆解",
+        "LNG业务利润"
+      ]
     }
   ],
   "watchlist": [
@@ -2618,23 +3049,23 @@
         {
           "company": "腾讯",
           "code": "00700.HK",
-          "status": "跟踪",
-          "latestScore": 76,
-          "latestEvalDate": "2026-09-10"
+          "status": "建仓",
+          "latestScore": 84,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "微软",
           "code": "MSFT",
           "status": "跟踪",
-          "latestScore": 72,
-          "latestEvalDate": "2026-09-10"
+          "latestScore": 74,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "Meta",
           "code": "META",
           "status": "跟踪",
-          "latestScore": 74,
-          "latestEvalDate": "2026-09-10"
+          "latestScore": 71,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "Google",
@@ -2647,22 +3078,22 @@
           "company": "台积电",
           "code": "TSM",
           "status": "跟踪",
-          "latestScore": 72,
-          "latestEvalDate": "2026-09-10"
+          "latestScore": 76,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "亚马逊",
           "code": "AMZN",
           "status": "跟踪",
-          "latestScore": 76,
-          "latestEvalDate": "2026-09-10"
+          "latestScore": 74,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "伯克希尔",
           "code": "BRK.B",
           "status": "跟踪",
-          "latestScore": 78,
-          "latestEvalDate": "2026-09-10"
+          "latestScore": 70,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "英伟达",
@@ -2681,37 +3112,37 @@
         {
           "company": "海天味业",
           "code": "603288.SH",
-          "status": "跟踪",
-          "latestScore": 78,
-          "latestEvalDate": "2026-09-13"
+          "status": "建仓",
+          "latestScore": 80,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "长江电力",
           "code": "600900.SH",
           "status": "跟踪",
-          "latestScore": 77,
-          "latestEvalDate": "2026-09-13"
+          "latestScore": 67,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "海康威视",
           "code": "002415.SZ",
-          "status": "跟踪",
-          "latestScore": 77,
-          "latestEvalDate": "2026-09-13"
+          "status": "建仓",
+          "latestScore": 82,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "双汇发展",
           "code": "000895.SZ",
           "status": "跟踪",
-          "latestScore": 70,
-          "latestEvalDate": "2026-09-13"
+          "latestScore": 72,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "宁德时代",
           "code": "300750.SZ",
           "status": "跟踪",
-          "latestScore": 79,
-          "latestEvalDate": "2026-09-13"
+          "latestScore": 77,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "拼多多",
@@ -2750,43 +3181,36 @@
           "company": "巨化股份",
           "code": "600160.SH",
           "status": "跟踪",
-          "latestScore": 70,
-          "latestEvalDate": "2026-09-11"
+          "latestScore": 73,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "紫金矿业",
           "code": "601899.SH",
           "status": "建仓",
-          "latestScore": 75,
-          "latestEvalDate": "2026-09-17"
+          "latestScore": 79,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "江西铜业",
           "code": "600362.SH",
           "status": "跟踪",
           "latestScore": 71,
-          "latestEvalDate": "2026-09-10"
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "中国海油",
           "code": "600938.SH",
           "status": "跟踪",
-          "latestScore": 74,
-          "latestEvalDate": "2026-09-11"
+          "latestScore": 76,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "陕西煤业",
           "code": "601225.SH",
           "status": "跟踪",
-          "latestScore": 75,
-          "latestEvalDate": "2026-09-11"
-        },
-        {
-          "company": "中远海能",
-          "code": "600026.SH",
-          "status": "跟踪",
-          "latestScore": 71,
-          "latestEvalDate": "2026-09-11"
+          "latestScore": 74,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "万华化学",
@@ -2799,43 +3223,43 @@
           "company": "中国平安",
           "code": "601318.SH",
           "status": "跟踪",
-          "latestScore": 74,
-          "latestEvalDate": "2026-09-13"
+          "latestScore": 75,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "三一重工",
           "code": "600031.SH",
           "status": "跟踪",
-          "latestScore": 73,
-          "latestEvalDate": "2026-09-13"
+          "latestScore": 66,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "中国太保",
           "code": "601601.SH",
           "status": "跟踪",
-          "latestScore": 70,
-          "latestEvalDate": "2026-09-13"
+          "latestScore": 72,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "中信特钢",
           "code": "000708.SZ",
           "status": "跟踪",
-          "latestScore": 70,
-          "latestEvalDate": "2026-09-13"
+          "latestScore": 68,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "中国船舶",
           "code": "600150.SH",
           "status": "跟踪",
-          "latestScore": 75,
-          "latestEvalDate": "2026-09-15"
+          "latestScore": 69,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "中国铝业",
           "code": "601600.SH",
           "status": "跟踪",
-          "latestScore": 71,
-          "latestEvalDate": "2026-09-15"
+          "latestScore": 70,
+          "latestEvalDate": "2026-10-01"
         },
         {
           "company": "宝丰能源",
