@@ -3311,13 +3311,6 @@
           "latestEvalDate": "2026-10-01"
         },
         {
-          "company": "宁德时代",
-          "code": "300750.SZ",
-          "status": "跟踪",
-          "latestScore": 83,
-          "latestEvalDate": "2026-10-09"
-        },
-        {
           "company": "拼多多",
           "code": "PDD",
           "status": "跟踪",
@@ -3344,13 +3337,6 @@
           "status": "跟踪",
           "latestScore": 80,
           "latestEvalDate": "2026-09-16"
-        },
-        {
-          "company": "迈瑞医疗",
-          "code": "300760.SZ",
-          "status": "跟踪",
-          "latestScore": 82,
-          "latestEvalDate": "2026-10-09"
         },
         {
           "company": "恒瑞医药",
